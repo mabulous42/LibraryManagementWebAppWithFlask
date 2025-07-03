@@ -1,0 +1,29 @@
+{% extends "base.html"%}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for("static", filename="index.css" )}}">
+<title>Mustyl Library</title>
+{% endblock %}
+
+
+{% block body%}
+<main>
+    <div class="welcome-note-div">
+        <div class="inner-welcome">
+            <div class="welcome-note">
+                <h2>WELCOME TO MUSTYL LIBRARY</h2>
+                <p>Your gateway to knowledge, research, and limitless learning. Explore books, manage resources, and
+                    connect with a world of information, all in one place.</p>
+                <div class="continue-btn">
+                    <a href="signup.html">
+                        <button>GET STARTED</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <small>2025 © Mustyl Library</small>
+    </div>
+</main>
+{% endblock %}
