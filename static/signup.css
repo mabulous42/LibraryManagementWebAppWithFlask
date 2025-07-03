@@ -140,6 +140,25 @@ h5 {
 
 .terms-and-conditions-div {
     font-family: "Parastoo", serif;
+    font-size: 18px;
+}
+
+.already-have-acct-div{
+    font-family: "Parastoo", serif;
+    font-size: 20px;
+}
+
+.already-have-acct-div p b {
+    cursor: pointer;
+}
+
+.already-have-acct-div a {
+    text-decoration: none;
+    color: black;
+}
+
+.already-have-acct-div a:hover {
+    color: green;
 }
 
 .terms-and-conditions-div b {

@@ -3,9 +3,74 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for("static", filename="signup.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="icofont/icofont.min.css" )}}">
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&display=swap');
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Exile&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&family=WDXL+Lubrifont+SC&display=swap');
+</style>
 <title>Signup - Mustyl Library</title>
 {% endblock %}
 
 {% block body%}
-<h1>SIGN UP PAGE</h1>
+<main>
+    <div class="library-logo">
+        <img src="{{url_for("static", filename="images/Mustyl_library_logo-removebg-preview.png" )}}" alt=""
+            class="logo-img">
+    </div>
+    <div class="signup-modal-div">
+        <div class="signup">
+            <div class="signup-detals-space">
+                <div class="welcome-text">
+                    <h1>WELCOME ONBOARD!</h1>
+                    <h5>Where <b>READERS</b> becomes <b>LEADERS</b></h5>
+                </div>
+                <div class="inputs-div">
+                    <form action="" method="post" class="input-row">
+                        <div class="name-input-div">
+                            <i class="icofont-ui-user"></i>
+                            <input type="text" class="text" placeholder="First Name">
+                        </div>
+                        <div class="name-input-div">
+                            <i class="icofont-ui-user"></i>
+                            <input type="text" class="text" placeholder="Last Name">
+                        </div>
+                        <div class="email-input-div">
+                            <i class="icofont-email"></i>
+                            <input type="email" class="email" placeholder="Email">
+                        </div>
+                        <div class="password-input-div">
+                            <i class="icofont-ui-password"></i>
+                            <input type="password" class="password" placeholder="Password">
+                        </div>
+                        <div class="signup-btn">
+                            <a href="login.html">Sign Up</a>
+                        </div>
+                        <div class="terms-and-conditions-div">
+                            <small>By clicking the sign up button above, you agree to our <b>Terms of Service</b>
+                                and <b>Privacy Policy</b>.
+                            </small>
+                        </div>                        
+                    </form>
+                    <div class="already-have-acct-div">
+                        <p>
+                            Already have an account? 
+                            <b>
+                                <a href="{{url_for('login')}}">Login Here</a>
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <small>2025 © Mustyl Library</small>
+    </div>
+</main>
+{# <div class="loader-overlay">
+    <div class="spinner"></div>
+</div> #}
 {% endblock%}
