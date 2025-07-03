@@ -2,7 +2,7 @@
 
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for("static", filename="signup.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="login.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="icofont/icofont.min.css" )}}">
 <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
 <style>
@@ -16,5 +16,45 @@
 
 
 {% block body %}
-<h1>LOGIN PAGE</h1>
+<main>
+    <div class="library-logo">
+        <img src="{{url_for('static', filename='images/Mustyl_library_logo-removebg-preview.png')}}" alt="" class="logo-img">
+    </div>
+    <div class="login-modal">
+        <div class="login-div">
+            <div class="login-details-space">
+                <div class="welcome-text">
+                    <h1>KNOWLEDGE AWAITS</h1>
+                    <h5>Login and <b>unlock</b> your next <b>chapter</b></h5>
+                </div>
+                <div class="login-form-div">
+                    <form action="" method="">
+                        <div class="email-input-div">
+                            <i class="icofont-email"></i>
+                            <input type="email" class="email" placeholder="Email">
+                        </div>
+                        <div class="password-input-div">
+                            <i class="icofont-ui-password"></i>
+                            <input type="password" class="password" placeholder="Password">
+                        </div>
+                        <div class="login-btn">
+                            <a href="adminDashboard.html">Login</a>
+                        </div>
+                    </form>
+                    <div class="already-have-acct-div">
+                        <p>
+                            Don't have an account yet? 
+                            <b>
+                                <a href="{{url_for('signup')}}">Signup Here</a>
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <small>2025 © Mustyl Library</small>
+    </div>
+</main>
 {% endblock %}

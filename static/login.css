@@ -1,0 +1,142 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+main {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315)), url(images/1632764400-gn9104560d0.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+}
+
+.copyright {
+    /* background-color: red; */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* this pulls it back by half its own width to make it centered */
+    bottom: 5%;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.library-logo {
+    position: absolute;
+    color: white;
+    font-family: "WDXL Lubrifont SC", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgba(0, 0, 0, 0.288);
+    padding: 5px;
+}
+
+.logo-img {
+    width: 12rem;
+    filter: brightness(0) invert(1);
+}
+
+.login-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    /* background-color: black; */
+}
+
+.login-div {
+    background-color: rgb(240, 235, 235);
+    width: 40rem;
+    height: 22rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-detals-space {
+    width: 80%;
+}
+
+.welcome-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-text h1,
+h5 {
+    font-family: "Roboto Slab", serif;
+}
+
+.login-form-div {
+    /* background-color: red; */
+}
+
+.login-form-div input {
+    min-width: 150px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 15px 15px 15px 55px;
+    outline: none;
+}
+
+.email-input-div,
+.password-input-div {
+    position: relative;
+}
+
+.icofont-email,
+.icofont-ui-password {
+    position: absolute;
+    top: 0.7rem;
+    padding: 15px;
+    background-color: grey;
+    color: white;
+    border-radius: 10px 0 0 10px;
+    /* font-size: 15px; */
+}
+
+.login-btn {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.login-btn a {
+    font-family: "Roboto Slab", serif;
+    font-size: 15px;
+    background-color: green;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    padding: 0.9rem 7rem;
+    text-decoration: none;
+}
+
+.login-btn a:hover {
+    background-color: rgb(50, 173, 50);
+}
+
+.already-have-acct-div{
+    font-family: "Parastoo", serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.already-have-acct-div p b {
+    cursor: pointer;
+}
+
+.already-have-acct-div a {
+    text-decoration: none;
+    color: black;
+}
+
+.already-have-acct-div a:hover {
+    color: green;
+}
