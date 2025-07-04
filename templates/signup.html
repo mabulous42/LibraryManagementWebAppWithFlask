@@ -28,25 +28,26 @@
                     <h5>Where <b>READERS</b> becomes <b>LEADERS</b></h5>
                 </div>
                 <div class="inputs-div">
-                    <form action="" method="post" class="input-row">
+                    <form action="" method="POST" class="input-row">
+                        {{ form.hidden_tag()}}
                         <div class="name-input-div">
                             <i class="icofont-ui-user"></i>
-                            <input type="text" class="text" placeholder="First Name">
+                            {{ form.firstName(class="text") }}                 
                         </div>
                         <div class="name-input-div">
                             <i class="icofont-ui-user"></i>
-                            <input type="text" class="text" placeholder="Last Name">
+                            {{ form.lastName(class="text") }}                 
                         </div>
                         <div class="email-input-div">
                             <i class="icofont-email"></i>
-                            <input type="email" class="email" placeholder="Email">
+                            {{ form.email(class="email") }}                 
                         </div>
                         <div class="password-input-div">
                             <i class="icofont-ui-password"></i>
-                            <input type="password" class="password" placeholder="Password">
+                            {{ form.password(class="password") }}                 
                         </div>
                         <div class="signup-btn">
-                            <a href="login.html">Sign Up</a>
+                            {{ form.submit(class_="btn") }}
                         </div>
                         <div class="terms-and-conditions-div">
                             <small>By clicking the sign up button above, you agree to our <b>Terms of Service</b>

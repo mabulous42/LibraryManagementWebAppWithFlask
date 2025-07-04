@@ -1,3 +1,7 @@
+from datetime import datetime
+
+
+
 # defining classes
 class Book:
     # initialising the book attributes (title, author, isbn, available_copies)
@@ -28,13 +32,13 @@ class Book:
 
 class User:
     # initialising the User attributes (name, user_id, borrowed_books_ISBN)
-    def __init__(self, user_id, name, email, password, id):
+    def __init__(self, user_id, name, email, password):
         self.name = name
         self.user_id = user_id
         self.email = email
         self.password = password
-        self.id = id
         self.borrowed_books = []
+        self.registered_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # method to create a list of borrowed book(s) using the book isbn
     def borrow_book(self, isbn):
@@ -54,14 +58,18 @@ class User:
         return {
             "name": self.name,
             "user_id": self.user_id,
-            "borrowed_books": self.borrowed_books
+            "email": self.email,
+            "password": self.password,
+            "borrowed_books": self.borrowed_books,
+            "registered_at": self.registered_at
         }
 
     # function to convert user dictionary into object when saving into json file
     @staticmethod
     def from_dict(data):
-        user = User(data["name"], data["user_id"])
+        user = User(data["name"], data["user_id"], data["email"], data["password"])
         user.borrowed_books = data["borrowed_books"]
+        user.registered_at = data["registered_at"]
         return user
         
 class Library:

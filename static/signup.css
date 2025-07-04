@@ -123,7 +123,7 @@ h5 {
     margin: 10px;
 }
 
-.signup-btn a {
+.signup-btn .btn {
     font-family: "Roboto Slab", serif;
     font-size: 15px;
     background-color: green;
@@ -134,7 +134,7 @@ h5 {
     text-decoration: none;
 }
 
-.signup-btn a:hover {
+.signup-btn .btn:hover {
     background-color: rgb(50, 173, 50);
 }
 

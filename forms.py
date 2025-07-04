@@ -1,20 +1,21 @@
 import json
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms_validators import ValidationError, InputRequired, Length, DataRequired, EqualTo
+from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms.validators import ValidationError, InputRequired, Length, DataRequired, EqualTo
 
 
 class SignupForm(FlaskForm):
-    firstName = StringField(validators=[InputRequired(), Length(min=4, max=20)],
+    firstName = StringField(validators=[InputRequired(), Length(min=2, max=20)],
                            render_kw={"placeholder": "First Name"})
-    lastName = StringField(validators=[InputRequired(), Length(min=4, max=20)],
+    lastName = StringField(validators=[InputRequired(), Length(min=2, max=20)],
                            render_kw={"placeholder": "Last Name"})
-    email = StringField(validators=[InputRequired(), Length(min=8, max=30)],
+    email = EmailField(validators=[InputRequired(), Length(min=8, max=30)],
                            render_kw={"placeholder": "Email"})
-    password = StringField(validators=[InputRequired(), Length(min=4, max=20)],
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=30)],
                            render_kw={"placeholder": "Password"})
     submit = SubmitField('Sign Up')
-    def validate(self, email):
+    
+    def validate_email(self, email):
         try:
             with open('users.json', 'r') as file:
                 users = json.load(file)  # users should be a list of user dicts
