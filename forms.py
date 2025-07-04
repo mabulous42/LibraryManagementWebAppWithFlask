@@ -2,6 +2,10 @@ import json
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import ValidationError, InputRequired, Length, DataRequired, EqualTo
+from helpers import load_data, save_data
+from models import Library
+
+library = Library()
 
 
 class SignupForm(FlaskForm):
@@ -23,7 +27,7 @@ class SignupForm(FlaskForm):
             return False  # No users yet, so email cannot exist
 
         for user in users:
-            if user.get('email') == email:
+            if user.get('email') == email.data:
                 raise ValidationError('Email already exist. Please choose a different one')
             
     

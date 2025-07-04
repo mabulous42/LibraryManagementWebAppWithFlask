@@ -36,17 +36,24 @@ def delete_user(library, user_id):
 
 # function to save data into json
 def save_data(library):
-    # Writing to books.json which is the name of the json file storage to store all books
-    with open("books.json", "w") as book_file:
-        books = [book.to_dict() for book in library.books.values()]
-        json.dump(books, book_file, indent=4)
+    try:
+        # Writing to user.json
+        with open('users.json', 'w') as user_file:
+            users = [user.to_dict() for user in library.users.values()]
+            json.dump(users, user_file, indent=4)
+        
+        # Writing to books.json (if you have books)
+        with open('books.json', 'w') as book_file:
+            books = [book.to_dict() for book in library.books.values()]
+            json.dump(books, book_file, indent=4)
+            
+        print("--------- Library data saved successfully -----------")
+    except TypeError as e:
+        print(f"Serialization error: {e}")
+        print("Check your to_dict() methods for non-JSON serializable objects")
+    except Exception as e:
+        print(f"Error saving data: {e}")
 
-    # Writing to user.json which is the name of the json file storage to store all users
-    with open('users.json', 'w') as user_file:
-        users = [user.to_dict() for user in library.users.values()]
-        json.dump(users, user_file, indent=4)
-
-    print("--------- Library data saved successfully -----------")
 
 # function to load data from json
 def load_data(library):
@@ -69,5 +76,4 @@ def load_data(library):
 
     except FileNotFoundError:
         print("No saved data found")
-       
-    
+

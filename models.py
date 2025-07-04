@@ -59,7 +59,7 @@ class User:
             "name": self.name,
             "user_id": self.user_id,
             "email": self.email,
-            "password": self.password,
+            "password": self.password.decode('utf-8') if hasattr(self.password, 'decode') else self.password,
             "borrowed_books": self.borrowed_books,
             "registered_at": self.registered_at
         }

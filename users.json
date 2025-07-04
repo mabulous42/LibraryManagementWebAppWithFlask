@@ -1,2 +1,10 @@
-
-    
+[
+    {
+        "name": "Abbas Mustapha",
+        "user_id": "LU0008",
+        "email": "st20290921@outlook.cardiffmet",
+        "password": "$2b$12$DMnTqf4SwB6YRfktmnjMu.k91IEc7RZOJbul5IhlUmsRsK18xUpMy",
+        "borrowed_books": [],
+        "registered_at": "2025-07-04 03:14:15"
+    }
+]
