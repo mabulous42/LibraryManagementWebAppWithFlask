@@ -2,7 +2,7 @@ import json
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import ValidationError, InputRequired, Length, DataRequired, EqualTo
-from helpers import load_data, save_data
+from helpers import load_users, save_users
 from models import Library
 
 library = Library()
@@ -29,11 +29,3 @@ class SignupForm(FlaskForm):
         for user in users:
             if user.get('email') == email.data:
                 raise ValidationError('Email already exist. Please choose a different one')
-            
-    
-    # username = StringField('Username', validators=[DataRequired()])
-    # password = PasswordField('Password', validators=[DataRequired()])
-    # confirm_password = PasswordField('Confirm Password', validators=[
-    #     DataRequired(), EqualTo('password')
-    # ])
-    # submit = SubmitField('Sign Up')

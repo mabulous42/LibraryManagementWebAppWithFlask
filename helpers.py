@@ -34,46 +34,51 @@ def search_users(library, name):
 def delete_user(library, user_id):
     library.delete_user(user_id)
 
-# function to save data into json
-def save_data(library):
+# Save users to users.json
+def save_users(library):
     try:
-        # Writing to user.json
         with open('users.json', 'w') as user_file:
             users = [user.to_dict() for user in library.users.values()]
             json.dump(users, user_file, indent=4)
-        
-        # Writing to books.json (if you have books)
+        print("User data saved.")
+    except Exception as e:
+        print(f"Failed to save users: {e}")
+
+
+# Save books to books.json
+def save_books(library):
+    try:
         with open('books.json', 'w') as book_file:
             books = [book.to_dict() for book in library.books.values()]
             json.dump(books, book_file, indent=4)
-            
-        print("--------- Library data saved successfully -----------")
-    except TypeError as e:
-        print(f"Serialization error: {e}")
-        print("Check your to_dict() methods for non-JSON serializable objects")
+        print("Book data saved.")
     except Exception as e:
-        print(f"Error saving data: {e}")
+        print(f"Failed to save books: {e}")
 
 
-# function to load data from json
-def load_data(library):
+# Load users from users.json
+def load_users(library):
     try:
-        # loading book data from books.json storage into book
-        with open('books.json', 'r') as book_file:
-            books = json.load(book_file)
-            for book_data in books:
-                book = Book.from_dict(book_data)
-                library.books[book.isbn] = book
-
-        # loading book data from books.json storage into book
         with open('users.json', 'r') as user_file:
             users = json.load(user_file)
             for user_data in users:
                 user = User.from_dict(user_data)
                 library.users[user.user_id] = user
-
-        print("------Library data loaded successully-----")
-
+        print("User data loaded.")
     except FileNotFoundError:
-        print("No saved data found")
+        print("No user data found.")
+
+
+# Load books from books.json
+def load_books(library):
+    try:
+        with open('books.json', 'r') as book_file:
+            books = json.load(book_file)
+            for book_data in books:
+                book = Book.from_dict(book_data)
+                library.books[book.isbn] = book
+        print("Book data loaded.")
+    except FileNotFoundError:
+        print("No book data found.")
+
 

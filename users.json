@@ -6,5 +6,21 @@
         "password": "$2b$12$DMnTqf4SwB6YRfktmnjMu.k91IEc7RZOJbul5IhlUmsRsK18xUpMy",
         "borrowed_books": [],
         "registered_at": "2025-07-04 03:14:15"
+    },
+    {
+        "name": "LU04094",
+        "user_id": "Abbas Balogun",
+        "email": "mustaphaabbas243@gmail.com",
+        "password": "$2b$12$SQxTIXIUKd2xvgUE8Wxn.u2soY.e20c0aL6ZmVInj.mEHVQpNVvuW",
+        "borrowed_books": [],
+        "registered_at": "2025-07-04 03:18:42"
+    },
+    {
+        "name": "Hamzat Abidat",
+        "user_id": "LU07190",
+        "email": "hamzat@gmail.com",
+        "password": "$2b$12$2486zaMVVIjvlh5lpdoAVOMgmPBLsNY5wzjKE0sJTDR5.TwefWp5q",
+        "borrowed_books": [],
+        "registered_at": "2025-07-06 15:15:42"
     }
 ]

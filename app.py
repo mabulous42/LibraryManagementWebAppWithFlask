@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from forms import SignupForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library
-from helpers import register_user, load_data, save_data
+from helpers import register_user, load_books, load_users, save_books, save_users
 from datetime import datetime
 
 
@@ -16,7 +16,7 @@ BOOK_DB = 'books.json'
 
 bcrypt = Bcrypt(app)
 library = Library()
-load_data(library)
+load_users(library)
 
 
 
@@ -72,7 +72,7 @@ def signup():
 
         # users.append(new_user)
 
-        save_data(library)
+        save_users(library)
 
         # with open('users.json', 'w') as file:
         #     json.dump(users, file, indent=4)
