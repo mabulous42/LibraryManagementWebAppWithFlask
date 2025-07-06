@@ -31,14 +31,14 @@
                     <form action="" method="">
                         <div class="email-input-div">
                             <i class="icofont-email"></i>
-                            <input type="email" class="email" placeholder="Email">
+                            {{ form.email(class="email") }} 
                         </div>
                         <div class="password-input-div">
                             <i class="icofont-ui-password"></i>
-                            <input type="password" class="password" placeholder="Password">
+                            {{ form.password(class="password") }}  
                         </div>
                         <div class="login-btn">
-                            <a href="adminDashboard.html">Login</a>
+                        {{ form.submit(class_="btn") }}
                         </div>
                     </form>
                     <div class="already-have-acct-div">

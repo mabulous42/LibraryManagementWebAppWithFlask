@@ -1,26 +1,42 @@
 [
     {
-        "name": "Abbas Mustapha",
-        "user_id": "LU0008",
+        "name": "LU02926",
+        "user_id": "Ayoade Azeez",
+        "email": "ayo@gmail.com",
+        "password": "$2b$12$C1VDwgbMl0833Dhcd5SPHe8A2HARDa3kG9csIEgulCcuO4ANx2I6u",
+        "borrowed_books": [],
+        "registered_at": "2025-07-06 18:40:57"
+    },
+    {
+        "name": "LU05466",
+        "user_id": "Abbas Mustapha",
         "email": "st20290921@outlook.cardiffmet",
-        "password": "$2b$12$DMnTqf4SwB6YRfktmnjMu.k91IEc7RZOJbul5IhlUmsRsK18xUpMy",
+        "password": "$2b$12$4WRAKo2fT8DADeCb5R46mey.O55KXYSpi9ngLsWkJySiTLPWpJf52",
         "borrowed_books": [],
-        "registered_at": "2025-07-04 03:14:15"
+        "registered_at": "2025-07-06 18:41:21"
     },
     {
-        "name": "LU04094",
-        "user_id": "Abbas Balogun",
-        "email": "mustaphaabbas243@gmail.com",
-        "password": "$2b$12$SQxTIXIUKd2xvgUE8Wxn.u2soY.e20c0aL6ZmVInj.mEHVQpNVvuW",
+        "name": "LU04914",
+        "user_id": "Adewale Saibu",
+        "email": "adewale@gmail.com",
+        "password": "$2b$12$TUkX5e5nj/4AW0qRPa/s5uqZB6bQ1fAmf4MdoQw8vI4lVmVa97yV2",
         "borrowed_books": [],
-        "registered_at": "2025-07-04 03:18:42"
+        "registered_at": "2025-07-06 18:41:44"
     },
     {
-        "name": "Hamzat Abidat",
-        "user_id": "LU07190",
+        "name": "LU01214",
+        "user_id": "Hamzat Abidat",
         "email": "hamzat@gmail.com",
-        "password": "$2b$12$2486zaMVVIjvlh5lpdoAVOMgmPBLsNY5wzjKE0sJTDR5.TwefWp5q",
+        "password": "$2b$12$19znO7mLLQEdqB3YSNZ1RO2FgHOv4x4PInrUgdCLAzDYF4vXECbJy",
         "borrowed_books": [],
-        "registered_at": "2025-07-06 15:15:42"
+        "registered_at": "2025-07-06 18:42:03"
+    },
+    {
+        "name": "Jide Kosoko",
+        "user_id": "LU09567",
+        "email": "jide@gmail.com",
+        "password": "$2b$12$FXZ5MEZXEZtD9Dq/2PbdQ.5CzfdK83VPbrqS0ZEUpWfqbPEUDcQHm",
+        "borrowed_books": [],
+        "registered_at": "2025-07-06 18:54:59"
     }
 ]

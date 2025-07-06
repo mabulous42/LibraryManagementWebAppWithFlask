@@ -112,19 +112,27 @@ class Library:
             print(f"User {new_user.id} already exist")
         else:
             self.users[new_user.user_id] = new_user
-            print(f"Name: {new_user.name} user_id: | user_id: {new_user.user_id} has been added successfully.")
+            print(f"Name: {new_user.name} | user_id: {new_user.user_id} has been added successfully.")
 
     def get_user(self, user_id):
         if user_id in self.users:
             user = self.users[user_id]
             return user
+        else:
+            return "User not found"
+        
+    def get_user_email(self, email):
+        if email in self.users:
+            user = self.users[email]
+            return user
+        else:
+            return "User not found"
 
     def edit_user(self, user_id, new_name):
         if user_id in self.users:
             user = self.users[user_id]
             user.name = new_name
             print(f"User name for {user.user_id} has been successfully updated to {user.name}")
-            return old_name
 
     # methods to delete user using their user_id from the dictionary of users
     def delete_user(self, user_id):

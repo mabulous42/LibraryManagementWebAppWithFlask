@@ -8,7 +8,11 @@ def add_book(library, book):
 
 # function to register a new user
 def register_user(library, user):
-    library.register_user(user)    
+    library.register_user(user)
+
+# function to get a user by id
+def get_user_by_id(library, user_id):
+    library.get_user(user_id)    
 
 # function to edit or modify user name
 def edit_user(library, user_id, new_name):
@@ -65,6 +69,7 @@ def load_users(library):
                 user = User.from_dict(user_data)
                 library.users[user.user_id] = user
         print("User data loaded.")
+        return library.users
     except FileNotFoundError:
         print("No user data found.")
 
@@ -78,6 +83,7 @@ def load_books(library):
                 book = Book.from_dict(book_data)
                 library.books[book.isbn] = book
         print("Book data loaded.")
+        return library.books
     except FileNotFoundError:
         print("No book data found.")
 

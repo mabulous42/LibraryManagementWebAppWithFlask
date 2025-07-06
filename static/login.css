@@ -103,11 +103,11 @@ h5 {
 }
 
 .login-btn {
-    margin: 30px 0;
+    /* margin: 30px 0; */
     text-align: center;
 }
 
-.login-btn a {
+.login-btn .btn {
     font-family: "Roboto Slab", serif;
     font-size: 15px;
     background-color: green;
@@ -118,7 +118,7 @@ h5 {
     text-decoration: none;
 }
 
-.login-btn a:hover {
+.login-btn .btn:hover {
     background-color: rgb(50, 173, 50);
 }
 
