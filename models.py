@@ -1,4 +1,5 @@
 from datetime import datetime
+from flask_login import UserMixin
 
 
 
@@ -30,15 +31,18 @@ class Book:
     def from_dict(data):
         return Book(data["title"], data["author"], data["isbn"], data["available_copies"])
 
-class User:
+class User(UserMixin):
     # initialising the User attributes (name, user_id, borrowed_books_ISBN)
-    def __init__(self, user_id, name, email, password):
+    def __init__(self, name, user_id, email, password):
         self.name = name
         self.user_id = user_id
         self.email = email
         self.password = password
         self.borrowed_books = []
         self.registered_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    def get_id(self):
+        return self.user_id
 
     # method to create a list of borrowed book(s) using the book isbn
     def borrow_book(self, isbn):
@@ -51,7 +55,7 @@ class User:
 
     # string method to display a User's information 
     def __str__(self):
-        return f"Name: {self.name} | ID: {self.user_id} | Borrowed: {self.borrowed_books}"
+        return f"Name: {self.name} | ID: {self.user_id} | {self.email} | Borrowed: {self.borrowed_books}"
 
     # function to convert user object into dictionary data when loading from json file
     def to_dict(self):
@@ -114,7 +118,7 @@ class Library:
             self.users[new_user.user_id] = new_user
             print(f"Name: {new_user.name} | user_id: {new_user.user_id} has been added successfully.")
 
-    def get_user(self, user_id):
+    def get_user_by_id (self, user_id):
         if user_id in self.users:
             user = self.users[user_id]
             return user
@@ -122,11 +126,10 @@ class Library:
             return "User not found"
         
     def get_user_email(self, email):
-        if email in self.users:
-            user = self.users[email]
-            return user
-        else:
-            return "User not found"
+        for user in self.users.values():
+            if user.email == email:
+                return user
+        return None
 
     def edit_user(self, user_id, new_name):
         if user_id in self.users:

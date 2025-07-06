@@ -28,7 +28,8 @@
                     <h5>Login and <b>unlock</b> your next <b>chapter</b></h5>
                 </div>
                 <div class="login-form-div">
-                    <form action="" method="">
+                    <form action="" method="POST">
+                        {{ form.hidden_tag()}}
                         <div class="email-input-div">
                             <i class="icofont-email"></i>
                             {{ form.email(class="email") }} 

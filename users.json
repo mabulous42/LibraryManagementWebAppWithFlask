@@ -1,42 +1,50 @@
-[
-    {
-        "name": "LU02926",
-        "user_id": "Ayoade Azeez",
-        "email": "ayo@gmail.com",
-        "password": "$2b$12$C1VDwgbMl0833Dhcd5SPHe8A2HARDa3kG9csIEgulCcuO4ANx2I6u",
-        "borrowed_books": [],
-        "registered_at": "2025-07-06 18:40:57"
-    },
-    {
-        "name": "LU05466",
-        "user_id": "Abbas Mustapha",
+{
+    "LU05932": {
+        "name": "Abbas Mustapha",
+        "user_id": "LU05932",
         "email": "st20290921@outlook.cardiffmet",
-        "password": "$2b$12$4WRAKo2fT8DADeCb5R46mey.O55KXYSpi9ngLsWkJySiTLPWpJf52",
+        "password": "$2b$12$gRi52N7CJ.E9n1J1Arteku4FcX/d/KyieRKD7XPLNJFvkZUYz8ls2",
         "borrowed_books": [],
-        "registered_at": "2025-07-06 18:41:21"
+        "registered_at": "2025-07-06 23:10:52"
     },
-    {
-        "name": "LU04914",
-        "user_id": "Adewale Saibu",
-        "email": "adewale@gmail.com",
-        "password": "$2b$12$TUkX5e5nj/4AW0qRPa/s5uqZB6bQ1fAmf4MdoQw8vI4lVmVa97yV2",
+    "LU01660": {
+        "name": "Ayoade Azeez",
+        "user_id": "LU01660",
+        "email": "ayo@gmail.com",
+        "password": "$2b$12$cwjhqlMplGidhnZ6LmX7VOUoayjyUPzMS.R4ikSoId4miy9QX2HZS",
         "borrowed_books": [],
-        "registered_at": "2025-07-06 18:41:44"
+        "registered_at": "2025-07-06 23:11:39"
     },
-    {
-        "name": "LU01214",
-        "user_id": "Hamzat Abidat",
-        "email": "hamzat@gmail.com",
-        "password": "$2b$12$19znO7mLLQEdqB3YSNZ1RO2FgHOv4x4PInrUgdCLAzDYF4vXECbJy",
+    "LU0840": {
+        "name": "Jack Daniel",
+        "user_id": "LU0840",
+        "email": "jack@gmail.com",
+        "password": "$2b$12$/2ZeN4jHAhwoViXVt95hlutCzVTrXqtso0LfU4C4i3vFrNjKqXN3O",
         "borrowed_books": [],
-        "registered_at": "2025-07-06 18:42:03"
+        "registered_at": "2025-07-06 23:11:56"
     },
-    {
+    "LU08847": {
         "name": "Jide Kosoko",
-        "user_id": "LU09567",
+        "user_id": "LU08847",
         "email": "jide@gmail.com",
-        "password": "$2b$12$FXZ5MEZXEZtD9Dq/2PbdQ.5CzfdK83VPbrqS0ZEUpWfqbPEUDcQHm",
+        "password": "$2b$12$lQ.r8piTQ3awOkGIQ/jRwe.1l3VxjjFKw8AElW5J7K5R/kkYdexau",
         "borrowed_books": [],
-        "registered_at": "2025-07-06 18:54:59"
+        "registered_at": "2025-07-06 23:12:10"
+    },
+    "LU01627": {
+        "name": "Hamzat Abidat",
+        "user_id": "LU01627",
+        "email": "hamzat@gmail.com",
+        "password": "$2b$12$E4KAr7C.ogFR4XRJYAJi.eZx5Vdo5h1fs59Yu7/0NZPgNmuX6yb8m",
+        "borrowed_books": [],
+        "registered_at": "2025-07-06 23:12:25"
+    },
+    "LU0179": {
+        "name": "Adewale Sunday",
+        "user_id": "LU0179",
+        "email": "adewale@gmail.com",
+        "password": "$2b$12$FHO01tYXzCmpsDxJmVpreeRDyy2dwbBuXqtLR28r.SaPGVvZw1bjO",
+        "borrowed_books": [],
+        "registered_at": "2025-07-06 23:12:41"
     }
-]
+}

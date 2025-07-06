@@ -42,8 +42,10 @@ def delete_user(library, user_id):
 def save_users(library):
     try:
         with open('users.json', 'w') as user_file:
-            users = [user.to_dict() for user in library.users.values()]
-            json.dump(users, user_file, indent=4)
+            users_dict = {}
+            for user_id, user in library.users.items():
+                users_dict[user_id] = user.to_dict()
+            json.dump(users_dict, user_file, indent=4)
         print("User data saved.")
     except Exception as e:
         print(f"Failed to save users: {e}")
@@ -64,14 +66,24 @@ def save_books(library):
 def load_users(library):
     try:
         with open('users.json', 'r') as user_file:
-            users = json.load(user_file)
-            for user_data in users:
+            users_dict = json.load(user_file)
+            
+            # Clear existing users
+            library.users = {}
+            
+            # Load from dictionary structure
+            for user_id, user_data in users_dict.items():
                 user = User.from_dict(user_data)
-                library.users[user.user_id] = user
+                library.users[user_id] = user
+                
         print("User data loaded.")
         return library.users
     except FileNotFoundError:
         print("No user data found.")
+        return {}
+    except Exception as e:
+        print(f"Failed to load users: {e}")
+        return {}
 
 
 # Load books from books.json

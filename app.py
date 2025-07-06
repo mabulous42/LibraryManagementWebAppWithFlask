@@ -50,7 +50,7 @@ def signup():
         lastName = form.lastName.data
         name = firstName + " " + lastName
 
-        new_user = User(user_id, name, form.email.data, hashed_password, ) #called the class User() constructor to create a new library user
+        new_user = User(name, user_id, form.email.data, hashed_password) #called the class User() constructor to create a new library user
         register_user(library, new_user) #called the register function from the helpers.py to register a new user
 
         save_users(library) #saving the new user into json storage
@@ -67,23 +67,25 @@ def signup():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-
-    if form.validate_on_submit():
-        
-
-
-
-    return redirect(url_for('userDashboard'))
-
     
+    if form.validate_on_submit():
+        user = library.get_user_email(form.email.data)
+
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect(url_for('userDashboard'))    
     
     return render_template("login.html", form=form)
 
 
 @app.route('/userDashboard', methods=['GET', 'POST'])
+@login_required
 def userDashboard():
+    user = current_user
+    print(user)
 
-    return render_template('userdashboard.html')
+    return render_template('userdashboard.html', user = user)
 
 
 
