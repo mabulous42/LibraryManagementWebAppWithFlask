@@ -17,4 +17,5 @@
 
 {% block body %}
 <h1>Welcome to user Dashboard, {{ user.name }}</h1> 
+<a href="{{url_for('logout')}}">Log Out</a>
 {% endblock body %}

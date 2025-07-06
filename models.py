@@ -43,6 +43,10 @@ class User(UserMixin):
 
     def get_id(self):
         return self.user_id
+    
+    @property
+    def id(self):
+        return self.user_id 
 
     # method to create a list of borrowed book(s) using the book isbn
     def borrow_book(self, isbn):

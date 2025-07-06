@@ -83,9 +83,21 @@ def login():
 @login_required
 def userDashboard():
     user = current_user
-    print(user)
+    print(f"User authenticated: {user.is_authenticated}")
+    print(f"User ID: {user.id}")
+    print(f"User object: {user}")
 
     return render_template('userdashboard.html', user = user)
+
+
+@app.route("/logout", methods=['GET', 'POST'])
+@login_required
+def logout():
+    print(f"Logging out user: {current_user.id}")
+    logout_user()  # Fixed - no parameter
+    print("User logged out")
+    return redirect(url_for('login'))
+
 
 
 
