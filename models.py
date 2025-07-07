@@ -79,6 +79,17 @@ class User(UserMixin):
         user.borrowed_books = data["borrowed_books"]
         user.registered_at = data["registered_at"]
         return user
+    
+class AdminUser(UserMixin):
+    def __init__(self):
+        self.id = 'admin'
+        self.email = 'admin@mustyllibrary.com'
+        self.username = 'Admin'
+        self.is_admin = True
+    
+    def get_id(self):
+        return self.id
+
         
 class Library:
     # initialising the library attributes (books and users)

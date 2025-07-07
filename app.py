@@ -3,7 +3,7 @@ from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash
 from forms import SignupForm, LoginForm
 from flask_bcrypt import Bcrypt
-from models import User, Book, Library
+from models import User, Book, Library, AdminUser
 from helpers import register_user, load_books, load_users, save_books, save_users, get_user_by_id
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
@@ -17,15 +17,22 @@ bcrypt = Bcrypt(app)
 library = Library()
 load_users(library)
 
+# Hard-coded admin credentials
+ADMIN_EMAIL = "admin@mustyllibrary.com"
+ADMIN_PASSWORD = "admin101"
+
 
 # flask-login parameters
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-@login_manager.user_loader
+@login_manager.user_loader # this keeps track of the logged in user (current_user)
 def load_user(user_id):
-    user = library.get_user_by_id(user_id)
+    if user_id == 'admin':      # checks if the user_id is admin then load user to be admin instead of the normal library users
+        return AdminUser()
+    
+    user = library.get_user_by_id(user_id)  # this is where the actual library users is been loaded after the id is been fetched successfully
     return user
 
 
@@ -57,6 +64,7 @@ def signup():
 
         flash('Account created successfully!', 'success')
         return redirect(url_for('login'))
+    flash('User Already Exist', 'fail')
 
     return render_template("signup.html", form=form)
 
@@ -70,11 +78,20 @@ def login():
     
     if form.validate_on_submit():
         user = library.get_user_email(form.email.data)
+        admin_email = form.email.data
+        admin_password = form.password.data
+
+        if admin_email == ADMIN_EMAIL and admin_password == ADMIN_PASSWORD:
+            admin_user = AdminUser()
+            login_user(admin_user)
+            flash('Admin login successful!', 'success')
+            return redirect(url_for('adminDashboard'))
 
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('userDashboard'))    
+                return redirect(url_for('userDashboard'))
+        
     
     return render_template("login.html", form=form)
 
@@ -88,6 +105,16 @@ def userDashboard():
     print(f"User object: {user}")
 
     return render_template('userdashboard.html', user = user)
+
+@app.route('/adminDashboard', methods=['GET', 'POST'])
+@login_required
+def adminDashboard():
+    admin_user = current_user
+    print(f"User authenticated: {admin_user.is_authenticated}")
+    print(f"User ID: {admin_user.id}")
+    print(f"User object: {admin_user}")
+
+    return render_template('adminDashboard.html', admin_user = admin_user)
 
 
 @app.route("/logout", methods=['GET', 'POST'])
