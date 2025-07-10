@@ -11,6 +11,7 @@ class Book:
         self.author = author
         self.isbn = isbn
         self.available_copies = available_copies
+        self.added_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
 
     # string method to display the book information
@@ -23,13 +24,16 @@ class Book:
             "title": self.title,
             "author": self.author,
             "isbn": self.isbn,
-            "available_copies": self.available_copies
+            "available_copies": self.available_copies,
+            "added_at": self.added_at
         }
 
     # function to convert book dictionary into object when saving into json file
     @staticmethod
     def from_dict(data):
-        return Book(data["title"], data["author"], data["isbn"], data["available_copies"])
+        book = Book(data["title"], data["author"], data["isbn"], data["available_copies"])
+        book.added_at = data['added_at']
+        return book
 
 class User(UserMixin):
     # initialising the User attributes (name, user_id, borrowed_books_ISBN)
@@ -83,8 +87,9 @@ class User(UserMixin):
 class AdminUser(UserMixin):
     def __init__(self):
         self.id = 'admin'
-        self.email = 'admin@mustyllibrary.com'
+        self.email = 'admin@mustyl-library.com'
         self.username = 'Admin'
+        self.password = 'admin101'
         self.is_admin = True
     
     def get_id(self):

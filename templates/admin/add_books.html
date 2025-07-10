@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for("static", filename="add_books.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="icofont/icofont.min.css" )}}">
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&display=swap');
+</style>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Exile&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&family=WDXL+Lubrifont+SC&display=swap');
+</style>
+<title>Add Book</title>
+{% endblock head %}
+
+{% block body %}
+<main>
+        <div class="library-logo">
+            <img src="images/Mustyl_library_logo-removebg-preview.png" alt="" class="logo-img">
+        </div>
+        <div class="dashboard-parent-div">
+            <div class="side-bar">
+                <div class="display-user-section">
+                    <div class="display-user-div">
+                        <i class="icofont-ui-user"></i>
+                        <h2>admin</h2>
+                    </div>
+                </div>
+                <div class="library-features-section">
+                    <div class="features-wrap-div">
+                        <div class="each-feature-dashboard">
+                            <div class="icon-div">
+                                <i class="icofont-dashboard-web"></i>
+                            </div>
+                            <p>Dashboard</p>
+                        </div>
+                        <a href="addbook.html" class="addbook-button">
+                            <div class="each-feature">
+                                <div class="icon-div">
+                                    <i class="icofont-plus-circle"></i>
+                                </div>
+                                <p>Add Book</p>
+                            </div>
+                        </a>
+                        <div class="each-feature">
+                            <div class="icon-div">
+                                <i class="icofont-triangle"></i>
+                            </div>
+                            <p>Lend Approvals</p>
+                        </div>
+                        <div class="each-feature">
+                            <div class="icon-div">
+                                <i class="icofont-user-alt-3"></i>
+                            </div>
+                            <p>Manage Users</p>
+                        </div>
+                        <div class="each-feature">
+                            <div class="icon-div">
+                                <i class="icofont-ebook"></i>
+                            </div>
+                            <p>Manage Books</p>
+                        </div>
+                        <div class="each-feature">
+                            <div class="icon-div">
+                                <i class="icofont-book"></i>
+                            </div>
+                            <p>Borrowed Books</p>
+                        </div>
+                        <a href="login.html" class="sign-out">
+                            <div class="each-feature">
+                                <div class="icon-div">
+                                    <i class="icofont-sign-out"></i>
+                                </div>
+                                <p>Sign Out</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="header-div">
+                    <div class="navbar-text-div">
+                        <h1>Add Book</h1>
+                    </div>
+                </div>
+                <div class="content-div">
+                    <div class="inner-content-div">
+                        <div class="inner-left">
+                            <div class="add-book-modal">
+                                <div class="add-book-form-div">
+                                    <form action="" method="POST">
+                                        <div class="each-input-div">
+                                            <label for="isbn">
+                                                <h3>TITLE</h3>
+                                            </label>
+                                            <div class="input-field-div">
+                                                <input type="text" name="title" id=""
+                                                    placeholder="Enter the Book Title">
+                                            </div>
+                                        </div>
+                                        <div class="each-input-div">
+                                            <label for="isbn">
+                                                <h3>AUTHOR</h3>
+                                            </label>
+                                            <div class="input-field-div">
+                                                <input type="text" name="title" id=""
+                                                    placeholder="Enter the Book Author">
+                                            </div>
+                                        </div>
+                                        <div class="each-input-div">
+                                            <label for="isbn">
+                                                <h3>ISBN</h3>
+                                            </label>
+                                            <div class="input-field-div">
+                                                <input type="text" name="title" id=""
+                                                    placeholder="Enter the Book 13-digits ISBN">
+                                            </div>
+                                        </div>
+                                        <div class="each-input-div">
+                                            <label for="isbn">
+                                                <h3>COPIES</h3>
+                                            </label>
+                                            <div class="input-field-div">
+                                                <input type="number" name="title" id=""
+                                                    placeholder="Enter the Book Number of Copies">
+                                            </div>
+                                        </div>
+                                        <div class="add-book-btn-div">
+                                            <button class="btn">Add Book</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inner-right">
+                            <div class="inner-right-down">
+                                <div class="search-book-div">
+                                    <div class="search-div">
+                                        <h3>Search Books</h3>
+                                        <div class="inp-div">
+                                            <input type="text" placeholder="Search Books">
+                                        </div>
+                                        <div class="search-btn-div">
+                                            <div class="search-btn">
+                                                <button>Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="search-user-div">
+                                    <div class="search-div">
+                                        <h3>Search Users</h3>
+                                        <div class="inp-div">
+                                            <input type="text" placeholder="Search Users">
+                                        </div>
+                                        <div class="search-btn-div">
+                                            <div class="search-btn">
+                                                <button>Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock body %}

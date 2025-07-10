@@ -1,12 +1,13 @@
 import json, os
 from numpy import random
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, url_for, request, redirect, flash, abort
 from forms import SignupForm, LoginForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser
 from helpers import register_user, load_books, load_users, save_books, save_users, get_user_by_id
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+from functools import wraps
 
 
 app = Flask(__name__)
@@ -17,9 +18,11 @@ bcrypt = Bcrypt(app)
 library = Library()
 load_users(library)
 
+admin_user = AdminUser()
+
 # Hard-coded admin credentials
-ADMIN_EMAIL = "admin@mustyllibrary.com"
-ADMIN_PASSWORD = "admin101"
+ADMIN_EMAIL = admin_user.email
+ADMIN_PASSWORD = admin_user.password
 
 
 # flask-login parameters
@@ -34,6 +37,22 @@ def load_user(user_id):
     
     user = library.get_user_by_id(user_id)  # this is where the actual library users is been loaded after the id is been fetched successfully
     return user
+
+
+
+# admin decorator to make sure any user cannot have access to the admin features
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        
+        # Check if current user is admin
+        if not isinstance(current_user, AdminUser):
+            abort(403)  # Forbidden
+        
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 
@@ -82,7 +101,6 @@ def login():
         admin_password = form.password.data
 
         if admin_email == ADMIN_EMAIL and admin_password == ADMIN_PASSWORD:
-            admin_user = AdminUser()
             login_user(admin_user)
             flash('Admin login successful!', 'success')
             return redirect(url_for('adminDashboard'))
@@ -104,7 +122,7 @@ def userDashboard():
     print(f"User ID: {user.id}")
     print(f"User object: {user}")
 
-    return render_template('userdashboard.html', user = user)
+    return render_template('user/userdashboard.html', user = user)
 
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 @login_required
@@ -114,7 +132,20 @@ def adminDashboard():
     print(f"User ID: {admin_user.id}")
     print(f"User object: {admin_user}")
 
-    return render_template('adminDashboard.html', admin_user = admin_user)
+    library_users = load_users(library)
+    # library_users = [user.to_dict() for user in library_users.values()]
+    print((library_users))
+
+    return render_template('admin/adminDashboard.html', 
+                           admin_user = admin_user,
+                           library_users = library_users                           
+                           )
+
+@app.route('/admin/add_books', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_books():
+    return render_template("admin/add_books.html")
 
 
 @app.route("/logout", methods=['GET', 'POST'])
