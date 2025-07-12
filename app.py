@@ -1,10 +1,10 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm
+from forms import SignupForm, LoginForm, AddBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser
-from helpers import register_user, load_books, load_users, save_books, save_users, get_user_by_id
+from helpers import register_user, load_books, load_users, save_books, save_users, get_user_by_id, add_book
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -133,19 +133,45 @@ def adminDashboard():
     print(f"User object: {admin_user}")
 
     library_users = load_users(library)
+    library_books = load_books(library)
     # library_users = [user.to_dict() for user in library_users.values()]
     print((library_users))
+    print((library_books))
 
     return render_template('admin/adminDashboard.html', 
                            admin_user = admin_user,
-                           library_users = library_users                           
+                           library_users = library_users,
+                           library_books = library_books                           
                            )
 
 @app.route('/admin/add_books', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def add_books():
-    return render_template("admin/add_books.html")
+    form = AddBookForm()
+
+    if form.validate_on_submit():
+        title = form.title.data
+        author = form.author.data
+        isbn = form.isbn.data
+        available_copies = form.copies.data
+
+        # creating and instance of class Book to add new book
+        new_book = Book(title, author, isbn, available_copies)
+        
+
+        # adding a new book, using the add_book function from helper.py
+        add_book(library, new_book)
+
+        # saving the added book to json storage   
+        save_books(library) 
+
+        flash('Book added successfully!', 'success')
+        return redirect(url_for('adminDashboard'))
+    flash('Book ISBN Already Exist', 'fail')
+
+
+    return render_template("admin/add_books.html", form=form)
 
 
 @app.route("/logout", methods=['GET', 'POST'])

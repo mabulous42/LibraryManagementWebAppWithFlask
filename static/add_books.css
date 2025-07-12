@@ -66,13 +66,13 @@ main {
 
 }
 
-.add-book-form-div form input {
+/* .add-book-form-div form input {
     width: 95%;
     outline: none;
     border: 1px solid grey;
     border-radius: 10px;
     padding: 12px 0 12px 15px;
-}
+} */
 
 .each-input-div {
     margin: 20px 0;
@@ -80,6 +80,14 @@ main {
 
 .input-field-div {
     margin: 10px 0;
+}
+
+.input-field-div input {
+    width: 95%;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 12px 0 12px 15px;
 }
 
 .add-book-btn-div {

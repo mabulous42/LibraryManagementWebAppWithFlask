@@ -90,22 +90,21 @@
                             <div class="add-book-modal">
                                 <div class="add-book-form-div">
                                     <form action="" method="POST">
+                                    {{ form.hidden_tag()}}
                                         <div class="each-input-div">
-                                            <label for="isbn">
+                                            <label for="title">
                                                 <h3>TITLE</h3>
                                             </label>
                                             <div class="input-field-div">
-                                                <input type="text" name="title" id=""
-                                                    placeholder="Enter the Book Title">
+                                                {{ form.title(class="input") }}
                                             </div>
                                         </div>
                                         <div class="each-input-div">
-                                            <label for="isbn">
+                                            <label for="author">
                                                 <h3>AUTHOR</h3>
                                             </label>
                                             <div class="input-field-div">
-                                                <input type="text" name="title" id=""
-                                                    placeholder="Enter the Book Author">
+                                                {{ form.author(class="input") }}
                                             </div>
                                         </div>
                                         <div class="each-input-div">
@@ -113,21 +112,19 @@
                                                 <h3>ISBN</h3>
                                             </label>
                                             <div class="input-field-div">
-                                                <input type="text" name="title" id=""
-                                                    placeholder="Enter the Book 13-digits ISBN">
+                                                {{ form.isbn(class="input") }}
                                             </div>
                                         </div>
                                         <div class="each-input-div">
-                                            <label for="isbn">
+                                            <label for="copies">
                                                 <h3>COPIES</h3>
                                             </label>
                                             <div class="input-field-div">
-                                                <input type="number" name="title" id=""
-                                                    placeholder="Enter the Book Number of Copies">
+                                                {{ form.copies(class="input") }}
                                             </div>
                                         </div>
                                         <div class="add-book-btn-div">
-                                            <button class="btn">Add Book</button>
+                                            {{ form.submit(class_="btn") }}
                                         </div>
                                     </form>
                                 </div>

@@ -1,7 +1,7 @@
 import json
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms import StringField, PasswordField, SubmitField, EmailField, TextAreaField, IntegerField
 from wtforms.validators import ValidationError, InputRequired, Length, DataRequired, EqualTo
 from helpers import load_users, save_users
 from models import Library, User
@@ -39,3 +39,14 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=30)],
                            render_kw={"placeholder": "Password"})
     submit = SubmitField('Login')
+
+class AddBookForm(FlaskForm):
+    title = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the Book Title"})
+    author = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the Book Author"})
+    isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
+                           render_kw={"placeholder": "Enter the Book 13-digits ISBN"})
+    copies = IntegerField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the Book Number of Copies"})
+    submit = SubmitField('Add Book')

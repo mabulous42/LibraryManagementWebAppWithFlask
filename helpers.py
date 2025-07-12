@@ -55,8 +55,10 @@ def save_users(library):
 def save_books(library):
     try:
         with open('books.json', 'w') as book_file:
-            books = [book.to_dict() for book in library.books.values()]
-            json.dump(books, book_file, indent=4)
+            books_dict = {}
+            for isbn, book in library.books.items():
+                books_dict[isbn] = book.to_dict()
+            json.dump(books_dict, book_file, indent=4)
         print("Book data saved.")
     except Exception as e:
         print(f"Failed to save books: {e}")
@@ -90,13 +92,23 @@ def load_users(library):
 def load_books(library):
     try:
         with open('books.json', 'r') as book_file:
-            books = json.load(book_file)
-            for book_data in books:
+            books_dict = json.load(book_file)
+            
+            # Clear existing users
+            library.books = {}
+            
+            # Load from dictionary structure
+            for isbn, book_data in books_dict.items():
                 book = Book.from_dict(book_data)
-                library.books[book.isbn] = book
+                library.books[isbn] = book
+                
         print("Book data loaded.")
         return library.books
     except FileNotFoundError:
         print("No book data found.")
+        return {}
+    except Exception as e:
+        print(f"Failed to load books: {e}")
+        return {}
 
 
