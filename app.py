@@ -17,6 +17,7 @@ app.config['SECRET_KEY'] = 'your_secret_key_here' #This will make flashing messa
 bcrypt = Bcrypt(app)
 library = Library()
 load_users(library)
+load_books(library)
 
 admin_user = AdminUser()
 

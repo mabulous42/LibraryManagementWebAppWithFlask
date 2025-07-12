@@ -5,5 +5,26 @@
         "isbn": "9781616202415",
         "available_copies": 5,
         "added_at": "2025-07-12 01:20:55"
+    },
+    "9780061122415": {
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "isbn": "9780061122415",
+        "available_copies": 3,
+        "added_at": "2025-07-12 01:30:06"
+    },
+    "5463789023456": {
+        "title": "Akin Goes to school",
+        "author": "Dele Giwa",
+        "isbn": "5463789023456",
+        "available_copies": 6,
+        "added_at": "2025-07-12 02:09:44"
+    },
+    "9780316548182": {
+        "title": "Long Walk to Freedom",
+        "author": "Nelson Mandela",
+        "isbn": "9780316548182",
+        "available_copies": 10,
+        "added_at": "2025-07-12 02:33:27"
     }
 }

@@ -142,7 +142,7 @@ main {
 }
 
 .each-feature,
-.each-feature-dashboard {
+.each-feature-addbook {
     /* background-color: blue; */
     display: flex;
     align-items: center;
@@ -152,12 +152,13 @@ main {
 }
 
 .sign-out,
-.addbook-button {
+.addbook-button,
+.dashboard-button {
     text-decoration: none;
     color: white;
 }
 
-.each-feature-dashboard {
+.each-feature-addbook {
     background-color: rgb(22, 160, 125);
     cursor: pointer;
 }

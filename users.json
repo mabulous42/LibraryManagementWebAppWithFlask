@@ -54,5 +54,29 @@
         "password": "$2b$12$tBRkyat9tRMjwiPswfhtK.YglFpZD1/oRJVH.iE8kIyMqbQojJaAW",
         "borrowed_books": [],
         "registered_at": "2025-07-07 01:30:35"
+    },
+    "LU04112": {
+        "name": "Testing first Testing Last",
+        "user_id": "LU04112",
+        "email": "testing@email.com",
+        "password": "$2b$12$rbI56el.fWZzSQnPkeyrye5qlfizac5mgJ9NLsBoWySRcgkEPP81q",
+        "borrowed_books": [],
+        "registered_at": "2025-07-12 01:52:13"
+    },
+    "LU09922": {
+        "name": "Testing First Testing Last",
+        "user_id": "LU09922",
+        "email": "testing@email.com",
+        "password": "$2b$12$WCQDDFwHUbeiNLDy2T5l.uYyQn57g6R2/wFrimjlLj135KlyENeDe",
+        "borrowed_books": [],
+        "registered_at": "2025-07-12 02:03:56"
+    },
+    "LU02609": {
+        "name": "John Olawale",
+        "user_id": "LU02609",
+        "email": "olawale@gmail.com",
+        "password": "$2b$12$8BDAFZPqnbhNF.kznJhbBugSZHp32ftZi2SQpG7mEJKArI4D2d1MW",
+        "borrowed_books": [],
+        "registered_at": "2025-07-12 02:27:30"
     }
 }
