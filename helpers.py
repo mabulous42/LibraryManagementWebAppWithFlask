@@ -110,5 +110,40 @@ def load_books(library):
     except Exception as e:
         print(f"Failed to load books: {e}")
         return {}
+    
+# Save books to books.json
+def save_ebooks(digitalLibrary):
+    try:
+        with open('books.json', 'w') as book_file:
+            books_dict = {}
+            for isbn, book in digitalLibrary.books.items():
+                books_dict[isbn] = book.to_dict()
+            json.dump(books_dict, book_file, indent=4)
+        print("Book data saved.")
+    except Exception as e:
+        print(f"Failed to save books: {e}")
+
+# Load books from books.json
+def load_books(digitalLibrary):
+    try:
+        with open('books.json', 'r') as book_file:
+            books_dict = json.load(book_file)
+            
+            # Clear existing users
+            digitalLibrary.books = {}
+            
+            # Load from dictionary structure
+            for isbn, book_data in books_dict.items():
+                book = Book.from_dict(book_data)
+                digitalLibrary.books[isbn] = book
+                
+        print("Book data loaded.")
+        return digitalLibrary.books
+    except FileNotFoundError:
+        print("No book data found.")
+        return {}
+    except Exception as e:
+        print(f"Failed to load books: {e}")
+        return {}
 
 

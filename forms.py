@@ -4,9 +4,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField, TextAreaField, IntegerField
 from wtforms.validators import ValidationError, InputRequired, Length, DataRequired, EqualTo
 from helpers import load_users, save_users
-from models import Library, User
+from models import Library, digitalLibrary
 
 library = Library()
+dglibrary = digitalLibrary()
 
 
 class SignupForm(FlaskForm):
@@ -50,3 +51,16 @@ class AddBookForm(FlaskForm):
     copies = IntegerField(validators=[InputRequired()],
                            render_kw={"placeholder": "Enter the Book Number of Copies"})
     submit = SubmitField('Add Book')
+
+class AddeBookForm(FlaskForm):
+    title = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook Title"})
+    author = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook Author"})
+    isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
+                           render_kw={"placeholder": "Enter the eBook 13-digits ISBN"})
+    format = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook format"})
+    file_path = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook file path"})
+    submit = SubmitField('Add eBook')
