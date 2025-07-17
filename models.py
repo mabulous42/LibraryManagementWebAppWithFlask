@@ -235,6 +235,41 @@ class Library:
             print("\nAll users in the Library:")
             for user in self.users.values():
                 print(user)
+
+class EBook:
+    def __init__(self, title, author, isbn, format, file_path):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+        self.format = format
+        self.file_path = file_path
+        self.added_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    def __str__(self):
+        return f"EBook: '{self.title}' by {self.author} | Format: {self.format} | ISBN: {self.isbn}"
+
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "author": self.author,
+            "isbn": self.isbn,
+            "format": self.format,
+            "file_path": self.file_path,
+            "added_at": self.added_at
+        }
+
+    @staticmethod
+    def from_dict(data):
+        ebook = EBook(
+            title=data["title"],
+            author=data["author"],
+            isbn=data["isbn"],
+            format=data["format"],
+            file_path=data["file_path"]
+        )
+        ebook.added_at = data.get("added_at", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return ebook
+
                 
 class digitalLibrary(Library):
     def __init__(self):
@@ -243,10 +278,12 @@ class digitalLibrary(Library):
         
     # digitalLibrary methods
     # additional methods to add ebook to the diitalLibrary
-    def add_book(self, isbn, file_path):
-        self.ebooks[isbn] = file_path
-        print(f"Book with ISBN: {isbn} has been addedd successfully.")
-        print(self.ebooks)
+    def add_ebook(self, ebook):
+        if ebook.isbn in self.ebooks:
+            print(f"EBook with ISBN {ebook.isbn} already exists.")
+        else:
+            self.ebooks[ebook.isbn] = ebook
+            print(f"EBook '{ebook.title}' added successfully.")
 
     def read_ebook(self, isbn):
         # Checks if the given `isbn` exists in the `ebooks` dictionary

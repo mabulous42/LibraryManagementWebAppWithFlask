@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+
+{% block title %}{% endblock title %}
+{% endblock head %}
+
+
+{% block body %}
+<main>
+    <div class="library-logo">
+        <img src="{{url_for("static", filename="images/Mustyl_library_logo-removebg-preview.png" )}}"
+            alt="Library Logo" class="logo-img">
+    </div>
+    <div class="dashboard-parent-div">
+        <div class="side-bar">
+            <div class="display-user-section">
+                <div class="display-user-div">
+                    <i class="icofont-ui-user"></i>
+                    <h2>Hello, {{admin_user.username}}</h2>
+                </div>
+            </div>
+            <div class="library-features-section">
+                <div class="features-wrap-div">
+                    <a href="{{ url_for('adminDashboard') }}">
+                        <div class="each-feature {{ 'active' if active_page == 'adminDashboard' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-dashboard-web"></i>
+                            </div>
+                            <p>Dashboard</p>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('add_books') }}">
+                        <div class="each-feature {{ 'active' if active_page == 'add_books' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-plus-circle"></i>
+                            </div>
+                            <p>Add Book</p>
+                        </div>
+                    </a>
+                    <div class="each-feature {{ 'active' if active_page == 'lend_approval' else '' }}">
+                        <div class="icon-div">
+                            <i class="icofont-triangle"></i>
+                        </div>
+                        <p>Lend Approvals</p>
+                    </div>
+                    <a href="{{ url_for('manage_users') }}">
+                    <div class="each-feature {{ 'active' if active_page == 'manage_users' else '' }}">
+                        <div class="icon-div">
+                            <i class="icofont-user-alt-3"></i>
+                        </div>
+                        <p>Manage Users</p>
+                    </div>
+                    </a>
+                    <div class="each-feature">
+                        <div class="icon-div">
+                            <i class="icofont-ebook"></i>
+                        </div>
+                        <p>Manage Books</p>
+                    </div>
+                    <div class="each-feature">
+                        <div class="icon-div">
+                            <i class="icofont-book"></i>
+                        </div>
+                        <p>Borrowed Books</p>
+                    </div>
+                    <a href="{{url_for('logout')}}" class="sign-out">
+                        <div class="each-feature">
+                            <div class="icon-div">
+                                <i class="icofont-sign-out"></i>
+                            </div>
+                            <p>Sign Out</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="header-div">
+                {% block page_head %}
+
+                {% endblock page_head %}
+            </div>
+            <div class="content-div">
+                <div class="inner-content-div">
+                    {% block content %}
+
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <small>2025 © Mustyl Library</small>
+    </div>
+</main>
+{% endblock body %}

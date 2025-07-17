@@ -4,26 +4,12 @@
     border: 0;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-}
-
 main {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.315)), url(images/1632764400-gn9104560d0.jpg);
     background-size: cover;
     background-position: center;
     height: 100vh;
     position: relative;
-}
-
-.copyright {
-    /* background-color: red; */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%); /* this pulls it back by half its own width to make it centered */
-    bottom: 5%;
-    color: white;
-    font-size: 0.9rem;
 }
 
 .library-logo {
@@ -43,66 +29,16 @@ main {
     filter: brightness(0) invert(1);
 }
 
-.add-book-modal {
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    /* box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25); */
-    font-family: "Roboto Slab", serif;
-    position: relative;
-}
-
-.add-book-form-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* padding: 0 20px; */
-    /* background-color: yellow; */
-}
-
-.add-book-form-div form {
-    width: 80%;
-    /* background-color: green; */
-
-}
-
-.add-book-form-div form input {
-    width: 95%;
-    outline: none;
-    border: 1px solid grey;
-    border-radius: 10px;
-    padding: 12px 0 12px 15px;
-}
-
-.each-input-div {
-    margin: 20px 0;
-}
-
-.input-field-div {
-    margin: 10px 0;
-}
-
-.add-book-btn-div {
-    text-align: center;
-    margin-top: 25px;
-}
-
-.btn{
-    font-family: "Roboto Slab", serif;
-    font-size: 15px;
-    background-color: green;
-    border-radius: 5px;
-    cursor: pointer;
+.copyright {
+    /* background-color: red; */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    /* this pulls it back by half its own width to make it centered */
+    bottom: 5%;
     color: white;
-    padding: 0.9rem 7rem;
-    text-decoration: none;
+    font-size: 0.9rem;
 }
-
-.btn:hover {
-    background-color: rgb(50, 173, 50);
-}
-
-/* ----------------------------------------------------------------- */
 
 .dashboard-parent-div {
     display: flex;
@@ -133,8 +69,8 @@ main {
     padding: 15px 0;
 }
 
-.each-feature,
-.each-feature-dashboard {
+.each-feature.active,
+.each-feature {
     /* background-color: blue; */
     display: flex;
     align-items: center;
@@ -144,12 +80,12 @@ main {
 }
 
 .sign-out,
-.addbook-button {
+a {
     text-decoration: none;
     color: white;
 }
 
-.each-feature-dashboard {
+.each-feature.active {
     background-color: rgb(22, 160, 125);
     cursor: pointer;
 }
@@ -225,6 +161,16 @@ main {
     width: 100%;
 }
 
+.navbar-text-div {
+    padding: 2rem;
+    /* background-color: red; */
+    width: 100%;
+}
+
+.navbar-text-div h1 {
+    font-family: "Roboto Slab", serif;
+}
+
 .content-div {
     /* background-color: blue; */
     width: 100%;
@@ -244,98 +190,3 @@ main {
     display: flex;
     justify-content: space-between;
 }
-
-.inner-left {
-    /* background-color: yellow; */
-    width: 65%;
-}
-
-
-
-.inner-content-up {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 10px 0 0 0;
-    /* background-color: green; */
-}
-
-.inner-right {
-    /* background-color: orange; */
-    width: 32%;
-    margin-left: auto;
-}
-
-.inner-right-up {
-    padding: 10px 0 0 0;
-    /* background-color: green; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lend-request-div {
-    width: 100%;
-}
-
-.inner-right-down {
-    /* background-color: red; */
-    width: 100%;
-}
-
-.search-book-div,
-.search-user-div {
-    width: 100%;
-}
-
-.search-book-div {
-    margin-bottom: 20px;
-}
-
-.search-div {
-    padding: 10px 20px;
-    box-shadow: 2px 1px 1px 0 0 rgba(0, 0, 0, 0.521);
-    background-color: white;
-    border-radius: 5px;
-}
-
-.inp-div {
-    display: flex;
-    justify-content: center;
-}
-
-.search-book-div input,
-.search-user-div input {
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    outline: none;
-    margin-top: 15px;
-}
-
-.search-btn-div {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    margin-top: 10px;
-}
-
-.search-book-div button,
-.search-user-div button {
-    background-color: rgb(19, 129, 102);
-    padding: 10px 15px;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    font-family: "Roboto Slab", serif;
-}
-
-.search-book-div button:hover,
-.search-user-div button:hover {
-    background-color: rgb(18, 173, 134);
-    cursor: pointer;
-}
-
-

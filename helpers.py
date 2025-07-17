@@ -124,7 +124,7 @@ def save_ebooks(digitalLibrary):
         print(f"Failed to save books: {e}")
 
 # Load books from books.json
-def load_books(digitalLibrary):
+def load_ebooks(digitalLibrary):
     try:
         with open('books.json', 'r') as book_file:
             books_dict = json.load(book_file)

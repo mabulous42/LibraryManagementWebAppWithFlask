@@ -1,243 +1,174 @@
-{% extends "base.html" %}
+{% extends "admin_base.html" %}
 
 
 {% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="adminDashboard.css" )}}">
-<link rel="stylesheet" href="{{url_for("static", filename="icofont/icofont.min.css" )}}">
-<link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&display=swap');
-</style>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Exile&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&family=WDXL+Lubrifont+SC&display=swap');
-</style>
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
 <title>Admin-Dashboard</title>
+{% endblock title %}
+
 {% endblock head %}
 
 
-{% block body %}
-<main>
-        <div class="library-logo">
-            <img src="images/Mustyl_library_logo-removebg-preview.png" alt="" class="logo-img">
-        </div>
-        <div class="dashboard-parent-div">
-            <div class="side-bar">
-                <div class="display-user-section">
-                    <div class="display-user-div">
-                        <i class="icofont-ui-user"></i>
-                        <h2>Welcome, {{admin_user.username}}</h2>
-                    </div>
-                </div>
-                <div class="library-features-section">
-                    <div class="features-wrap-div">
-                        <div class="each-feature-dashboard">
-                            <div class="icon-div">
-                                <i class="icofont-dashboard-web"></i>
-                            </div>
-                            <p>Dashboard</p>
-                        </div>
-                        <a href="{{ url_for('add_books') }}" class="addbook-button">
-                            <div class="each-feature">
-                                <div class="icon-div">
-                                    <i class="icofont-plus-circle"></i>
-                                </div>
-                                <p>Add Book</p>
-                            </div>
-                        </a>
-                        <div class="each-feature">
-                            <div class="icon-div">
-                                <i class="icofont-triangle"></i>
-                            </div>
-                            <p>Lend Approvals</p>
-                        </div>
-                        <div class="each-feature">
-                            <div class="icon-div">
-                                <i class="icofont-user-alt-3"></i>
-                            </div>
-                            <p>Manage Users</p>
-                        </div>
-                        <div class="each-feature">
-                            <div class="icon-div">
-                                <i class="icofont-ebook"></i>
-                            </div>
-                            <p>Manage Books</p>
-                        </div>
-                        <div class="each-feature">
-                            <div class="icon-div">
-                                <i class="icofont-book"></i>
-                            </div>
-                            <p>Borrowed Books</p>                            
-                        </div>
-                        <a href="{{url_for('logout')}}" class="sign-out">
-                            <div class="each-feature">
-                                <div class="icon-div">
-                                    <i class="icofont-sign-out"></i>
-                                </div>
-                                <p>Sign Out</p>                            
-                            </div>
-                        </a>
-                    </div>
-                </div>
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Dashboard</h1>
+</div>
+{% endblock page_head %}
+
+{# Admin main content container #}
+{% block content %}
+<div class="inner-left">
+    <div class="inner-content-up">
+        <div class="book">
+            <i class="icofont-book-alt"></i>
+            <div class="x">
+                <h3>Physical <br> Books</h3>
+                <p>{{ library_books|length }}</p>
             </div>
-            <div class="main-content">
-                <div class="header-div">
-                    <div class="dashboard-text-div">
-                        <h1>Dashboard</h1>
-                    </div>
-                </div>
-                <div class="content-div">
-                    <div class="inner-content-div">
-                        <div class="inner-left">
-                            <div class="inner-content-up">
-                                <div class="book">
-                                    <i class="icofont-book-alt"></i>
-                                    <div class="x">
-                                        <h3>Physical <br> Books</h3>
-                                        <p>{{ library_books|length }}</p>
-                                    </div>
-                                </div>
-                                <div class="book">
-                                    <i class="icofont-ebook"></i>
-                                    <div class="x">
-                                        <h3>eBooks</h3>
-                                        <p>0</p>
-                                    </div>
-                                </div>
-                                <div class="book">
-                                    <i class="icofont-read-book-alt"></i>
-                                    <div class="x">
-                                        <h3>Library <br> Users</h3>
-                                        <p>{{ library_users|length }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inner-content-down">
-                                <div class="wrap-inner-content-down">
-                                    <div class="borrowed-header">
-                                        <h2>Borrowed Books</h2>
-                                    </div>
-                                    <div class="borrowed-book-details-div">
-                                        <div class="table-head-wrapper">
-                                            <table>
-                                                 <thead>
-                                                    <tr>
-                                                        <td>
-                                                            <h3>S/N</h3>
-                                                        </td>
-                                                        <td>
-                                                            <h3>Book Title</h3>
-                                                        </td>
-                                                        <td>
-                                                            <h3>Book ISBN</h3>
-                                                        </td>
-                                                        <td>
-                                                            <h3>User id</h3>
-                                                        </td>
-                                                        <td>
-                                                            <h3>Return Date</h3>
-                                                        </td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lord of the rings</td>
-                                                        <td>1534678390763</td>
-                                                        <td>LU07354</td>
-                                                        <td>30/07/2025</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lord of the rings</td>
-                                                        <td>1534678390763</td>
-                                                        <td>LU07354</td>
-                                                        <td>30/07/2025</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lord of the rings</td>
-                                                        <td>1534678390763</td>
-                                                        <td>LU07354</td>
-                                                        <td>30/07/2025</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lord of the rings</td>
-                                                        <td>1534678390763</td>
-                                                        <td>LU07354</td>
-                                                        <td>30/07/2025</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lord of the rings</td>
-                                                        <td>1534678390763</td>
-                                                        <td>LU07354</td>
-                                                        <td>30/07/2025</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Lord of the rings</td>
-                                                        <td>1534678390763</td>
-                                                        <td>LU07354</td>
-                                                        <td>30/07/2025</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="view-more-div">
-                                                <div class="view-more-btn">
-                                                    <button>View All</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="inner-right">
-                            <div class="inner-right-up">
-                                <div class="lend-request-div">
-                                    <i class="icofont-address-book"></i>
-                                    <div class="x">
-                                        <h3>Lend <br>Requests</h3>
-                                        <p>2,500</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inner-right-down">
-                                <div class="search-book-div">
-                                    <div class="search-div">
-                                        <h3>Search Books</h3>
-                                        <div class="inp-div">
-                                            <input type="text" placeholder="Search Books">
-                                        </div>
-                                        <div class="search-btn-div">
-                                            <div class="search-btn">
-                                                <button>Search</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="search-user-div">
-                                    <div class="search-div">
-                                        <h3>Search Users</h3>
-                                        <div class="inp-div">
-                                            <input type="text" placeholder="Search Users">
-                                        </div>
-                                        <div class="search-btn-div">
-                                            <div class="search-btn">
-                                                <button>Search</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        </div>
+        <div class="book">
+            <i class="icofont-ebook"></i>
+            <div class="x">
+                <h3>eBooks</h3>
+                <p>0</p>
+            </div>
+        </div>
+        <div class="book">
+            <i class="icofont-read-book-alt"></i>
+            <div class="x">
+                <h3>Library <br> Users</h3>
+                <p>{{ library_users|length }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="inner-content-down">
+        <div class="wrap-inner-content-down">
+            <div class="borrowed-header">
+                <h2>Borrowed Books</h2>
+            </div>
+            <div class="borrowed-book-details-div">
+                <div class="table-head-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <h3>S/N</h3>
+                                </td>
+                                <td>
+                                    <h3>Book Title</h3>
+                                </td>
+                                <td>
+                                    <h3>Book ISBN</h3>
+                                </td>
+                                <td>
+                                    <h3>User id</h3>
+                                </td>
+                                <td>
+                                    <h3>Return Date</h3>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="view-more-div">
+                        <div class="view-more-btn">
+                            <button>View All</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <small>2025 © Mustyl Library</small>
+    </div>
+</div>
+<div class="inner-right">
+    <div class="inner-right-up">
+        <div class="lend-request-div">
+            <i class="icofont-address-book"></i>
+            <div class="x">
+                <h3>Lend <br>Requests</h3>
+                <p>2,500</p>
+            </div>
         </div>
-    </main>
-{% endblock body %}
+    </div>
+    <div class="inner-right-down">
+        <div class="search-book-div">
+            <div class="search-div">
+                <h3>Search Books</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Books">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-user-div">
+            <div class="search-div">
+                <h3>Search Users</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Users">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

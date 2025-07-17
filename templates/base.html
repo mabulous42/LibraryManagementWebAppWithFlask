@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for("static", filename="base.css" )}}">
+    <link rel="stylesheet" href="{{url_for("static", filename="icofont/icofont.min.css" )}}">
+    {# {% block other_css %}{% endblock other_css %} #}
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Exile&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&family=WDXL+Lubrifont+SC&display=swap');
+    </style>
     {% block head %}{% endblock %}
 </head>
+
 <body>
-     
+
 
     {% block body %}{% endblock %}
 </body>
+
 </html>
