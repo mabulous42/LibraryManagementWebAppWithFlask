@@ -185,6 +185,9 @@ def add_books():
 @admin_required
 def manage_users():
     library_users = load_users(library)
+    library_users = [user.to_dict() for user in library_users.values()]
+    
+
 
     return render_template("admin/manage_users.html", 
                            library_users = library_users,

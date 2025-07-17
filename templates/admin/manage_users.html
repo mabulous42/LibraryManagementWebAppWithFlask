@@ -6,12 +6,12 @@
 
 {% block other_css %}
 <link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
-<link rel="stylesheet" href="{{url_for("static", filename="add_books.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="manage_users.css" )}}">
 {% endblock other_css %}
 
 {# Page Title #}
 {% block title %}
-<title>Add Book</title>
+<title>Manage Users</title>
 {% endblock title %}
 
 {% endblock head %}
@@ -26,36 +26,63 @@
 
 {% block content %}
 <div class="inner-left">
-                        
+    <div class="display-all-users-div">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in library_users %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.user_id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="#" class="custom-btn custom-btn-primary">Edit User</a>
+                        <a href="#" class="custom-btn custom-btn-danger">Delete User</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="inner-right">
+
+    <div class="inner-right-down">
+        <div class="search-book-div">
+            <div class="search-div">
+                <h3>Search Books</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Books">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
                     </div>
-                    <div class="inner-right">
-                        <div class="inner-right-down">
-                            <div class="search-book-div">
-                                <div class="search-div">
-                                    <h3>Search Books</h3>
-                                    <div class="inp-div">
-                                        <input type="text" placeholder="Search Books">
-                                    </div>
-                                    <div class="search-btn-div">
-                                        <div class="search-btn">
-                                            <button>Search</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="search-user-div">
-                                <div class="search-div">
-                                    <h3>Search Users</h3>
-                                    <div class="inp-div">
-                                        <input type="text" placeholder="Search Users">
-                                    </div>
-                                    <div class="search-btn-div">
-                                        <div class="search-btn">
-                                            <button>Search</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-user-div">
+            <div class="search-div">
+                <h3>Search Users</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Users">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

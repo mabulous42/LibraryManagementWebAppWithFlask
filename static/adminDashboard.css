@@ -3,13 +3,6 @@
     cursor: pointer;
 }
 
-.inner-left {
-    /* background-color: yellow; */
-    width: 65%;
-}
-
-
-
 .inner-content-up {
     display: flex;
     align-items: center;
@@ -45,6 +38,11 @@
 .book .x p,
 .lend-request-div .x p {
     font-size: 18px;
+}
+
+.view-link {
+    text-decoration: none;
+    color: black;
 }
 
 .inner-content-down {
