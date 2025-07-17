@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, abo
 from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -195,6 +195,26 @@ def manage_users():
                            active_page = "manage_users"
                            )
 
+@app.route('/admin/delete/<user_id>')
+@login_required
+@admin_required
+def delete_users(user_id):
+    load_user(library)
+    delete_user(library, user_id)
+    save_users(library)
+
+    return redirect(url_for("manage_users"))
+
+@app.route('/admin/edit/<user_id>', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def edit_users(user_id):
+    load_user(library)
+    user = get_user_by_id(library, user_id)
+    print(user)
+    
+
+    return render_template("/admin/edit_user.html", user = user)
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required

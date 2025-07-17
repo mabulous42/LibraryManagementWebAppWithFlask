@@ -12,7 +12,7 @@ def register_user(library, user):
 
 # function to get a user by id
 def get_user_by_id(library, user_id):
-    library.get_user(user_id)    
+    return library.get_user_by_id(user_id)    
 
 # function to edit or modify user name
 def edit_user(library, user_id, new_name):
