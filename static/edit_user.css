@@ -29,6 +29,22 @@
     margin: 10px 0;
 }
 
-.btn-div {
+.update-user-btn-div {
     text-align: center;
+    margin: 25px 0;
+}
+
+.update-btn{
+    font-family: "Roboto Slab", serif;
+    font-size: 15px;
+    background-color: green;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    padding: 0.9rem 7rem;
+    text-decoration: none;
+}
+
+.update-btn:hover {
+    background-color: rgb(50, 173, 50);
 }
