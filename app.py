@@ -1,10 +1,10 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -212,9 +212,36 @@ def edit_users(user_id):
     load_user(library)
     user = get_user_by_id(library, user_id)
     print(user)
+
+    full_name = user.name.strip()
+    name_parts = full_name.split()
+
+    first_name = name_parts[0]
+    last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""  # handle middle names or no last name
+
+
+    form = UpdateUserForm()
+
+    if form.validate_on_submit():
+        firstName = form.firstName.data
+        lastName = form.lastName.data
+        new_email = form.email.data
+
+        new_name = firstName + " " + lastName
+
+        edit_user(library, user.user_id, new_name, new_email)
+
+        save_users(library)
+
+        flash('User Details Updated successfully!', 'success')
+        return redirect(url_for('manage_users'))
+    flash('Email Already Exist', 'fail')
+
+
+    
     
 
-    return render_template("/admin/edit_user.html", user = user, admin_user = admin_user)
+    return render_template("/admin/edit_user.html", user = user, admin_user = admin_user, form = form, firstName = first_name, lastName = last_name)
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required

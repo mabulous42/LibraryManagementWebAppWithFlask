@@ -151,10 +151,11 @@ class Library:
                 return user
         return None
 
-    def edit_user(self, user_id, new_name):
+    def edit_user(self, user_id, new_name, new_email):
         if user_id in self.users:
             user = self.users[user_id]
             user.name = new_name
+            user.email = new_email
             print(f"User name for {user.user_id} has been successfully updated to {user.name}")
 
     # methods to delete user using their user_id from the dictionary of users

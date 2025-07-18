@@ -15,8 +15,8 @@ def get_user_by_id(library, user_id):
     return library.get_user_by_id(user_id)    
 
 # function to edit or modify user name
-def edit_user(library, user_id, new_name):
-    library.edit_user(user_id, new_name)
+def edit_user(library, user_id, new_name, new_email):
+    library.edit_user(user_id, new_name, new_email)
 
 # function to borrow a book from the library
 def borrow_book(library, user_id, isbn):

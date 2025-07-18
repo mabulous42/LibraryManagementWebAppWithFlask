@@ -64,3 +64,12 @@ class AddeBookForm(FlaskForm):
     file_path = StringField(validators=[InputRequired()],
                            render_kw={"placeholder": "Enter the eBook file path"})
     submit = SubmitField('Add eBook')
+
+class UpdateUserForm(FlaskForm):
+    firstName = StringField(validators=[InputRequired(), Length(min=2, max=20)],
+                           render_kw={"placeholder": "First Name"})
+    lastName = StringField(validators=[InputRequired(), Length(min=2, max=20)],
+                           render_kw={"placeholder": "Last Name"})
+    email = EmailField(validators=[InputRequired(), Length(min=8, max=30)],
+                           render_kw={"placeholder": "Email"})
+    submit = SubmitField('Update User')

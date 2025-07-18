@@ -27,27 +27,39 @@
 {% block content %}
 <div class="inner-left">
     <div class="edit-user-modal">
+        <a href="{{ url_for('manage_users') }}" class="close-modal-a">
+            <div class="close-modal">
+                <i class="icofont-close-squared-alt"></i>
+            </div>
+        </a>
         <form action="" method="post">
+            {{ form.hidden_tag()}}
             <div class="each-input-div">
-                <label for="firstName"><h3>First Name</h3></label>
+                <label for="firstName">
+                    <h3>First Name</h3>
+                </label>
                 <div class="input-field-div">
-                    <input type="text" name="" id="" placeholder="First Name">
+                    {{ form.firstName(class="input", value= firstName) }}
                 </div>
             </div>
             <div class="each-input-div">
-                <label for="firstName"><h3>Last Name</h3></label>
+                <label for="firstName">
+                    <h3>Last Name</h3>
+                </label>
                 <div class="input-field-div">
-                    <input type="text" name="" id="" placeholder="First Name">
+                    {{ form.lastName(class="input", value= lastName) }}
                 </div>
             </div>
             <div class="each-input-div">
-                <label for="firstName"><h3>Email</h3></label>
+                <label for="firstName">
+                    <h3>Email</h3>
+                </label>
                 <div class="input-field-div">
-                    <input type="text" name="" id="" placeholder="First Name">
+                    {{ form.email(class="input", value= user.email) }}
                 </div>
             </div>
             <div class="update-user-btn-div">
-                <input type="button" value="Update User" class="update-btn">
+                {{ form.submit(class_="update-btn") }}
             </div>
         </form>
     </div>
