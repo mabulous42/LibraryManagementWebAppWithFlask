@@ -1,13 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>User to be editted</h1>
-    {{ user.name}}
-    {{ user.user_id}}
-</body>
-</html>
+{% extends "admin_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="edit_user.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Manage Users</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Edit User</h1>
+</div>
+{% endblock page_head %}
+
+{% block content %}
+<div class="inner-left">
+    <div class="edit-user-modal">
+        <form action="" method="post">
+            <div class="each-input-div">
+                <label for="firstName"><h3>First Name</h3></label>
+                <div class="input-field-div">
+                    <input type="text" name="" id="" placeholder="First Name">
+                </div>
+            </div>
+            <div class="each-input-div">
+                <label for="firstName"><h3>Last Name</h3></label>
+                <div class="input-field-div">
+                    <input type="text" name="" id="" placeholder="First Name">
+                </div>
+            </div>
+            <div class="each-input-div">
+                <label for="firstName"><h3>Email</h3></label>
+                <div class="input-field-div">
+                    <input type="text" name="" id="" placeholder="First Name">
+                </div>
+            </div>
+            <div class="btn-div">
+                <input type="button" value="Update User">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="inner-right">
+
+    <div class="inner-right-down">
+        <div class="search-book-div">
+            <div class="search-div">
+                <h3>Search Books</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Books">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-user-div">
+            <div class="search-div">
+                <h3>Search Users</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Users">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

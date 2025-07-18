@@ -214,7 +214,7 @@ def edit_users(user_id):
     print(user)
     
 
-    return render_template("/admin/edit_user.html", user = user)
+    return render_template("/admin/edit_user.html", user = user, admin_user = admin_user)
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required
