@@ -73,3 +73,14 @@ class UpdateUserForm(FlaskForm):
     email = EmailField(validators=[InputRequired(), Length(min=8, max=30)],
                            render_kw={"placeholder": "Email"})
     submit = SubmitField('Update User')
+
+class UpdateBookForm(FlaskForm):
+    isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
+                           render_kw={"placeholder": "Enter the Book 13-digits ISBN"})
+    title = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the Book Title"})
+    author = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the Book Author"})
+    copies = IntegerField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the Book Number of Copies"})
+    submit = SubmitField('Update Book')

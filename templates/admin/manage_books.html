@@ -20,7 +20,7 @@
 {# admin page title #}
 {% block page_head %}
 <div class="navbar-text-div">
-    <h1>Manage Books</h1>
+    <h1>All Books</h1>
 </div>
 {% endblock page_head %}
 
@@ -47,8 +47,8 @@
                     <td>{{ book.author }}</td>
                     <td>{{ book.available_copies }}</td>
                     <td>
-                        <a href="#" class="custom-btn custom-btn-primary">Edit User</a>
-                        <a href="#" class="custom-btn custom-btn-danger">Delete User</a>
+                        <a href="/admin/edit_book/{{ book.isbn }}" class="custom-btn custom-btn-primary">Edit Book</a>
+                        <a href="/admin/remove_book/{{ book.isbn }}" class="custom-btn custom-btn-danger">Remove Book</a>
                     </td>
                 </tr>
                 {% endfor %}

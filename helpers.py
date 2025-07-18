@@ -12,11 +12,19 @@ def register_user(library, user):
 
 # function to get a user by id
 def get_user_by_id(library, user_id):
-    return library.get_user_by_id(user_id)    
+    return library.get_user_by_id(user_id)
+
+# function to get a book by isbn
+def get_book_by_isbn(library, isbn):
+    return library.get_book_by_isbn(isbn)
 
 # function to edit or modify user name
 def edit_user(library, user_id, new_name, new_email):
     library.edit_user(user_id, new_name, new_email)
+
+# function to edit or modify user name
+def edit_book(library, isbn, new_isbn, new_title, new_author, update_available_copies):
+    library.edit_book(isbn, new_isbn, new_title, new_author, update_available_copies)
 
 # function to borrow a book from the library
 def borrow_book(library, user_id, isbn):
@@ -33,6 +41,10 @@ def search_books(library, title):
 # function to search for a library users
 def search_users(library, name):
     return library.search_users(name)
+
+# function to remove book from the library
+def remove_book(library, isbn):
+    library.remove_book(isbn)
 
 # function to delete a user
 def delete_user(library, user_id):

@@ -276,3 +276,7 @@ main {
     cursor: pointer;
 }
 /* end of styling */
+
+::-webkit-scrollbar {
+    display: none;
+}

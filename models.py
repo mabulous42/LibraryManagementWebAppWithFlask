@@ -145,6 +145,13 @@ class Library:
         else:
             return "User not found"
         
+    def get_book_by_isbn(self, isbn):
+        if isbn in self.books:
+            book = self.books[isbn]
+            return book
+        else:
+            return "Book not found"
+        
     def get_user_email(self, email):
         for user in self.users.values():
             if user.email == email:
@@ -156,7 +163,14 @@ class Library:
             user = self.users[user_id]
             user.name = new_name
             user.email = new_email
-            print(f"User name for {user.user_id} has been successfully updated to {user.name}")
+
+    def edit_book(self, isbn, new_isbn, new_title, new_author, update_available_copies):
+        if isbn in self.books:
+            book = self.books[isbn]
+            book.isbn = new_isbn
+            book.title = new_title
+            book.author = new_author
+            book.available_copies = update_available_copies
 
     # methods to delete user using their user_id from the dictionary of users
     def delete_user(self, user_id):
@@ -225,7 +239,7 @@ class Library:
         else:
             print("\nAll Books in the Library:")
             for book in self.books.values():
-                print(book)
+                return book
 
     # additional function to view all users in the library
     def view_all_users(self):

@@ -1,10 +1,10 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -199,6 +199,7 @@ def manage_users():
 @login_required
 @admin_required
 def delete_users(user_id):
+
     load_user(library)
     delete_user(library, user_id)
     save_users(library)
@@ -246,8 +247,7 @@ def edit_users(user_id):
 @admin_required
 def manage_books():
     library_books = load_books(library)
-    library_books = [user.to_dict() for user in library_books.values()]
-    
+    library_books = [book.to_dict() for book in library_books.values()]
 
 
     return render_template("admin/manage_books.html", 
@@ -255,6 +255,47 @@ def manage_books():
                            admin_user = admin_user,
                            active_page = "manage_books"
                            )
+
+@app.route('/admin/remove_book/<isbn>')
+@login_required
+@admin_required
+def remove_books(isbn):
+    
+    load_books(library)
+    remove_book(library, isbn)
+    save_books(library)
+
+    return redirect(url_for("manage_books"))
+
+@app.route('/admin/edit_book/<isbn>', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def edit_books(isbn):
+    load_books(library)
+    book = get_book_by_isbn(library, isbn)
+    print(book)
+
+    form = UpdateBookForm()
+
+    if form.validate_on_submit():
+        new_isbn = form.isbn.data
+        new_title = form.title.data
+        new_author = form.author.data
+        new_copies = form.copies.data
+
+
+        edit_book(library, book.isbn, new_isbn, new_title, new_author, new_copies)
+
+        save_books(library)
+
+        flash('Book Details Updated successfully!', 'success')
+        return redirect(url_for('manage_books'))
+    flash('Book Details Already Exist', 'fail')
+    
+    return render_template("/admin/edit_book.html", book = book, admin_user = admin_user, 
+                           form = form
+                           )
+
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required
