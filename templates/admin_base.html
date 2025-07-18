@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block head %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQ2W+o3a3U5w3UJz3zU+45p1w+MZtYYzR+g49dRF6S/jr+4U26lJP9aG6" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQ2W+o3a3U5w3UJz3zU+45p1w+MZtYYzR+g49dRF6S/jr+4U26lJP9aG6" crossorigin="anonymous">
 <link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
 
 {% block title %}{% endblock title %}
@@ -47,19 +48,21 @@
                         <p>Lend Approvals</p>
                     </div>
                     <a href="{{ url_for('manage_users') }}" class="a-link">
-                    <div class="each-feature {{ 'active' if active_page == 'manage_users' else '' }}">
-                        <div class="icon-div">
-                            <i class="icofont-user-alt-3"></i>
+                        <div class="each-feature {{ 'active' if active_page == 'manage_users' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-user-alt-3"></i>
+                            </div>
+                            <p>Manage Users</p>
                         </div>
-                        <p>Manage Users</p>
-                    </div>
                     </a>
-                    <div class="each-feature">
-                        <div class="icon-div">
-                            <i class="icofont-ebook"></i>
+                    <a href="{{ url_for('manage_books') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'manage_books' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-ebook"></i>
+                            </div>
+                            <p>Manage Books</p>
                         </div>
-                        <p>Manage Books</p>
-                    </div>
+                    </a>
                     <div class="each-feature">
                         <div class="icon-div">
                             <i class="icofont-book"></i>

@@ -236,12 +236,25 @@ def edit_users(user_id):
         flash('User Details Updated successfully!', 'success')
         return redirect(url_for('manage_users'))
     flash('Email Already Exist', 'fail')
-
-
     
+    return render_template("/admin/edit_user.html", user = user, admin_user = admin_user, 
+                           form = form, firstName = first_name, lastName = last_name
+                           )
+
+@app.route('/admin/manage_books', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def manage_books():
+    library_books = load_books(library)
+    library_books = [user.to_dict() for user in library_books.values()]
     
 
-    return render_template("/admin/edit_user.html", user = user, admin_user = admin_user, form = form, firstName = first_name, lastName = last_name)
+
+    return render_template("admin/manage_books.html", 
+                           library_books = library_books,
+                           admin_user = admin_user,
+                           active_page = "manage_books"
+                           )
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required

@@ -1,0 +1,90 @@
+{% extends "admin_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="manage_books.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Manage Books</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Manage Books</h1>
+</div>
+{% endblock page_head %}
+
+{% block content %}
+<div class="inner-left">
+    <div class="display-all-books-div">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>ISBN</th>
+                    <th>TITLE</th>
+                    <th>AUTHOR</th>
+                    <th>AVAILABLE COPIES</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in library_books %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.available_copies }}</td>
+                    <td>
+                        <a href="#" class="custom-btn custom-btn-primary">Edit User</a>
+                        <a href="#" class="custom-btn custom-btn-danger">Delete User</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="inner-right">
+
+    <div class="inner-right-down">
+        <div class="search-book-div">
+            <div class="search-div">
+                <h3>Search Books</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Books">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-user-div">
+            <div class="search-div">
+                <h3>Search Users</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Users">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
