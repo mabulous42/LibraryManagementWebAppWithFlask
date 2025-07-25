@@ -39,7 +39,8 @@
         </form>
         <div class="display-search-result-parent">
             <div class="display-search-div">
-                {% if users | length < 1 %} <h3>No users found matching your search criteria</h3>
+                {% if users | length < 1 %} 
+                <!-- <h3>No users found matching your search criteria</h3> -->
                     {% else %}
                     {% for user in users %}
                     <a href="#">
@@ -58,7 +59,7 @@
                                     <p>{{ user.email }}</p>
                                 </div>
                             </div>
-                            <div class="separator"></div>
+                            {# <div class="separator"></div> #}
                             <div>
                                 <h4>Borrowed Books</h4>
                                 {% if user.borrowed_books %}
@@ -81,20 +82,10 @@
 <div class="inner-right">
 
     <div class="inner-right-down">
-        <div class="search-book-div">
-            <div class="search-div">
-                <h3>Search Books</h3>
-                <div class="inp-div">
-                    <input type="text" placeholder="Search Books">
-                </div>
-                <div class="search-btn-div">
-                    <div class="search-btn">
-                        <button>Search</button>
-                    </div>
-                </div>
-            </div>
+        <div class="image-banner-div">
+            <img src="{{url_for("static", filename="images/2-SPL-Book-Club-Ad.jpg" )}}" alt="Library Logo"
+                class="banner">
         </div>
-
     </div>
 </div>
 {% endblock content %}

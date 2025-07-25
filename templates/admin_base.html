@@ -55,6 +55,22 @@
                             <p>Manage Users</p>
                         </div>
                     </a>
+                    <a href="{{ url_for('search_user') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'add_books' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-search-job"></i>
+                            </div>
+                            <p>Search User</p>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('add_books') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'add_books' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-search-document"></i>
+                            </div>
+                            <p>Search Book</p>
+                        </div>
+                    </a>
                     <a href="{{ url_for('manage_books') }}" class="a-link">
                         <div class="each-feature {{ 'active' if active_page == 'manage_books' else '' }}">
                             <div class="icon-div">

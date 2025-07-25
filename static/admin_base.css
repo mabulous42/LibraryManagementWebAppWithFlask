@@ -213,6 +213,11 @@ main {
     justify-content: center;
 }
 
+.banner {
+    width: 100%;
+    height: 100%;
+}
+
 .lend-request-div {
     width: 100%;
 }
