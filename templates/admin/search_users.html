@@ -1,0 +1,100 @@
+{% extends "admin_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="search_users.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Search Users</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Search Users</h1>
+</div>
+{% endblock page_head %}
+
+{% block content %}
+<div class="inner-left">
+    <div class="search-div-modal">
+        <form action="" method="post">
+            {{ form.hidden_tag()}}
+            <div class="search-input-div">
+                <i class="icofont-search-1"></i>
+                {{ form.name(class="input") }}
+            </div>
+            <div class="search-button-parent">
+                {{ form.submit(class_="search-button") }}
+            </div>
+        </form>
+        <div class="display-search-result-parent">
+            <div class="display-search-div">
+                {% if users | length < 1 %} <h3>No users found matching your search criteria</h3>
+                    {% else %}
+                    {% for user in users %}
+                    <a href="#">
+                        <div class="display-result-div">
+                            <div>
+                                <div>
+                                    <h4>Name: </h4>
+                                    <p>{{ user.name }}</p>
+                                </div>
+                                <div>
+                                    <h4>user ID: </h4>
+                                    <p>{{ user.user_id }}</p>
+                                </div>
+                                <div>
+                                    <h4>Email: </h4>
+                                    <p>{{ user.email }}</p>
+                                </div>
+                            </div>
+                            <div class="separator"></div>
+                            <div>
+                                <h4>Borrowed Books</h4>
+                                {% if user.borrowed_books %}
+                                {% for book in user.borrowed_books %}
+                                <p>{{ book }}</p>
+                                {% endfor %}
+                                {% else %}
+                                <p>No borrowed books</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    <div class="separator-line"></div>
+                    {% endfor %}
+                    {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="inner-right">
+
+    <div class="inner-right-down">
+        <div class="search-book-div">
+            <div class="search-div">
+                <h3>Search Books</h3>
+                <div class="inp-div">
+                    <input type="text" placeholder="Search Books">
+                </div>
+                <div class="search-btn-div">
+                    <div class="search-btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

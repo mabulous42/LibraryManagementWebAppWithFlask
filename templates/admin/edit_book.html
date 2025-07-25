@@ -27,6 +27,11 @@
 {% block content %}
 <div class="inner-left">
     <div class="add-book-modal">
+        <a href="{{ url_for('manage_books') }}" class="close-modal-a">
+            <div class="close-modal">
+                <i class="icofont-close-squared-alt"></i>
+            </div>
+        </a>
         <div class="add-book-form-div">
             <form action="" method="POST">
                 {{ form.hidden_tag()}}

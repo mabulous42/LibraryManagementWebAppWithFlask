@@ -190,11 +190,11 @@ class Library:
 
      # method to search for a user from the dictionary of users using the user's name
     def search_users(self, name):
-        search_user = None
+        result = [] # just incase there are more than one user matching the search
         for user in self.users.values():
             if name.lower() in user.name.lower():
-                return user
-        print("User not found")
+                result.append(user) # this saves the matching user(s)
+        return result # this returned all the matching users
 
     # method to borrow book from the library
     def borrow_book(self, user_id, isbn):

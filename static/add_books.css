@@ -6,6 +6,25 @@
     position: relative;
 }
 
+.close-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal i {
+    font-size: 30px;
+}
+
+.close-modal-a {
+    color: green;
+}
+
 .add-book-form-div {
     display: flex;
     align-items: center;

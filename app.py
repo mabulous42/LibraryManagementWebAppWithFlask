@@ -1,10 +1,10 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -296,6 +296,25 @@ def edit_books(isbn):
                            form = form
                            )
 
+@app.route('/admin/search_user', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def search_user():
+    form = SearchUserForm()
+    users = []
+
+    if form.validate_on_submit():
+        name = form.name.data
+        users = search_users(library, name)
+        # print(users)
+
+        for user in users:
+            print(user)
+
+        return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users) 
+
+
+    return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users)
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required

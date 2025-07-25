@@ -84,3 +84,8 @@ class UpdateBookForm(FlaskForm):
     copies = IntegerField(validators=[InputRequired()],
                            render_kw={"placeholder": "Enter the Book Number of Copies"})
     submit = SubmitField('Update Book')
+
+class SearchUserForm(FlaskForm):
+    name = StringField(validators=[InputRequired(), Length(min=1, max=30)],
+                           render_kw={"placeholder": "Search Users..."})
+    submit = SubmitField('Search User')
