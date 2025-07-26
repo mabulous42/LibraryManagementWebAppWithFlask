@@ -1,21 +1,115 @@
-{% extends "base.html" %}
+{% extends "user_base.html" %}
 
 
 {% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="adminDashboard.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="userDashboard.css" )}}">
-<link rel="stylesheet" href="{{url_for("static", filename="icofont/icofont.min.css" )}}">
-<link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&display=swap');
-</style>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:ital,wght@0,200..900;1,200..900&family=Exile&family=Outfit:wght@100..900&family=Parastoo:wght@400..700&family=Roboto+Slab:wght@100..900&family=WDXL+Lubrifont+SC&display=swap');
-</style>
-<title>Dashboard - Mustyl Library</title>
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>{{ user_first_name}} - Mustyl Library</title>
+{% endblock title %}
+
 {% endblock head %}
 
 
-{% block body %}
-<h1>Welcome to user Dashboard, {{ user.name }}</h1> 
-<a href="{{url_for('logout')}}">Log Out</a>
-{% endblock body %}
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Dashboard</h1>
+</div>
+{% endblock page_head %}
+
+{# User main content container #}
+{% block content %}
+<div class="inner-left">
+    <div class="inner-content-up">
+        <a href="{{ url_for('manage_books')}}" class="view-link">
+            <div class="borrow-book">
+                <i class="icofont-book"></i>
+                <div class="x">
+                    <h3>Borrow <br> Book</h3>
+                    <!-- <p>{{ library_books|length }}</p> -->
+                </div>
+            </div>
+        </a>
+        <a href="#" class="view-link">
+            <div class="return-book">
+                <i class="icofont-book-alt"></i>
+                <div class="x">
+                    <h3>Return <br> Book</h3>
+                    <p>0</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ url_for('manage_users')}}" class="view-link">
+            <div class="read-ebook">
+                <i class="icofont-read-book-alt"></i>
+                <div class="x">
+                    <h3>Read <br> Ebook</h3>
+                    <!-- <p>{{ library_users|length }}</p> -->
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="inner-content-down">
+        <div class="wrap-inner-content-down">
+            <div class="borrowed-header">
+                <h2>Borrowed Books</h2>
+            </div>
+            <div class="borrowed-book-details-div">
+                <div class="table-head-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <h3>S/N</h3>
+                                </td>
+                                <td>
+                                    <h3>Book Title</h3>
+                                </td>
+                                <td>
+                                    <h3>Book ISBN</h3>
+                                </td>
+                                <td>
+                                    <h3>Borrowed Date</h3>
+                                </td>
+                                <td>
+                                    <h3>Return Date</h3>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Lord of the rings</td>
+                                <td>1534678390763</td>
+                                <td>LU07354</td>
+                                <td>30/07/2025</td>
+                            </tr>  
+                        </tbody>
+                    </table>
+                    <div class="view-more-div">
+                        <div class="view-more-btn">
+                            <button>View All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="inner-right">
+    <div class="inner-right-down">
+        <div class="image-banner-div">
+            <img src="{{url_for("static", filename="images/b12d934a7dbd1431f73145ece3924ac2.webp" )}}" alt="Library Logo"
+                class="banner">
+        </div>
+    </div>
+</div>
+{% endblock content %}

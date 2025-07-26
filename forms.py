@@ -89,3 +89,8 @@ class SearchUserForm(FlaskForm):
     name = StringField(validators=[InputRequired(), Length(min=1, max=30)],
                            render_kw={"placeholder": "Search Users..."})
     submit = SubmitField('Search User')
+
+class SearchBookForm(FlaskForm):
+    title = StringField(validators=[InputRequired(), Length(min=1, max=30)],
+                           render_kw={"placeholder": "Search Books..."})
+    submit = SubmitField('Search Book')

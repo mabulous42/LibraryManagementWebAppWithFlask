@@ -1,10 +1,10 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -117,7 +117,7 @@ def login():
     
     return render_template("login.html", form=form)
 
-
+# User Features
 @app.route('/userDashboard', methods=['GET', 'POST'])
 @login_required
 def userDashboard():
@@ -126,8 +126,20 @@ def userDashboard():
     print(f"User ID: {user.id}")
     print(f"User object: {user}")
 
-    return render_template('user/userdashboard.html', user = user)
+    full_name = user.name.strip()
+    name_parts = full_name.split()
 
+    user_first_name = name_parts[0]
+    last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""  # handle middle names or no last name
+
+    return render_template('user/userDashboard.html', 
+                           user = user, 
+                           user_first_name = user_first_name, 
+                           active_page = 'userDashboard'
+                           )
+
+
+# Admin Features
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 @login_required
 def adminDashboard():
@@ -311,10 +323,29 @@ def search_user():
         for user in users:
             print(user)
 
-        return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users) 
+        return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users, active_page = 'search_user') 
 
 
-    return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users)
+    return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users, active_page = 'search_user')
+
+@app.route('/admin/search_book', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def search_book():
+    form = SearchBookForm()
+    books = []
+
+    if form.validate_on_submit():
+        title = form.title.data
+        books = search_books(library, title)
+
+        for book in books:
+            print(book)
+
+        return render_template('admin/search_book.html', admin_user=admin_user, form=form, books=books, active_page = 'search_book') 
+
+
+    return render_template('admin/search_book.html', admin_user=admin_user, form=form, books=books, active_page = 'search_book')
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required

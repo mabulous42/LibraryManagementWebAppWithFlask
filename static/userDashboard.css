@@ -1,0 +1,66 @@
+.borrow-book,
+.return-book,
+.read-ebook {
+    display: flex;
+    background-color: white;
+    width: 10rem;
+    height: 5rem;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 1px 1px 0 0 rgba(0, 0, 0, 0.521);
+    margin-bottom: 20px;
+
+}
+
+.borrow-book {
+    background-color: rgba(0, 128, 0, 0.226);
+}
+
+.return-book {
+    background-color: rgba(255, 166, 0, 0.349);
+}
+.read-ebook {
+    background-color: rgba(0, 0, 255, 0.274);
+}
+
+.borrow-book i {
+    color: green;
+}
+
+.return-book i {
+    color: orangered;
+}
+
+.read-ebook i {
+    color: blue;
+}
+
+.borrow-book i,
+.return-book i,
+.read-ebook i {
+    font-size: 50px;
+}
+
+.borrow-book .x,
+.return-book .x,
+.read-ebook .x {
+    padding: 0 0 0 10px;
+}
+
+.borrow-book .x p {
+    font-size: 18px;
+}
+
+.inner-right-down {
+    height: 100%;
+}
+
+.image-banner-div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.banner {
+    height: 80%;
+}
