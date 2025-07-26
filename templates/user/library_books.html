@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{url_for("static", filename="adminDashboard.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="userDashboard.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="search_users.css" )}}">
-<link rel="stylesheet" href="{{url_for("static", filename="borrow_book.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="library_books.css" )}}">
 {% endblock other_css %}
 
 {# Page Title #}
@@ -71,7 +71,7 @@
                                     {% if book.available_copies == 0 %}
                                     <input type="button" value="Out of Stock" class="btn btn-disabled" disabled>
                                     {% else %}
-                                    <a href="{{ url_for('borrow_book', isbn=book.isbn, user_id=user.user_id) }}">
+                                    <a href="{{ url_for('borrow_books', isbn=book.isbn, user_id=user.user_id) }}">
                                         <input type="button" value="Borrow Book" class="btn">
                                     </a>
                                     {% endif %}

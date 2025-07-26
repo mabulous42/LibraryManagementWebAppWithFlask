@@ -138,9 +138,9 @@ def userDashboard():
                            active_page = 'userDashboard'
                            )
 
-@app.route('/user/borrow_book', methods=['GET', 'POST'])
+@app.route('/user/library_books', methods=['GET', 'POST'])
 @login_required
-def borrow_book():
+def library_books():
     user = current_user
     form = SearchBookForm()
 
@@ -156,26 +156,35 @@ def borrow_book():
         for book in books:
             print(book)
 
-        return render_template('user/borrow_book.html', 
-                               active_page = 'borrow_book',  
+        return render_template('user/library_books.html', 
+                               active_page = 'library_books',  
                                form=form, 
                                books = books,
                                user = user,
                                user_first_name = user_first_name
                                ) 
 
-    borrow_book(library, user_id, isbn)
-    save_books()
-    save_users()
-
-    return render_template("user/borrow_book.html", 
-                           active_page = 'borrow_book', 
+    return render_template("user/library_books.html", 
+                           active_page = 'library_books', 
                            user = user, 
                            user_first_name = user_first_name,
                            form = form,
                            books = books
                            )
 
+
+@app.route('/user/borrow_books/<user_id>/<isbn>', methods=['GET', 'POST'])
+@login_required
+def borrow_books(user_id, isbn):
+    try:
+        borrow_book(library, user_id, isbn)
+        save_books(library)
+        save_users(library)
+        flash("Book borrowed successfully!", "success")
+    except Exception as e:
+        flash(f"Error borrowing book: {str(e)}", "error")
+
+    return redirect(url_for("library_books"))
 
 # Admin Features
 @app.route('/adminDashboard', methods=['GET', 'POST'])

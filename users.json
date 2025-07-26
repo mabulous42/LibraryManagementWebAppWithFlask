@@ -4,7 +4,11 @@
         "user_id": "LU05932",
         "email": "st20290921@outlook.cardiffmet",
         "password": "$2b$12$gRi52N7CJ.E9n1J1Arteku4FcX/d/KyieRKD7XPLNJFvkZUYz8ls2",
-        "borrowed_books": [],
+        "borrowed_books": [
+            "9781616202415",
+            "9781616202415",
+            "9780316548182"
+        ],
         "registered_at": "2025-07-06 23:10:52"
     },
     "LU01660": {
