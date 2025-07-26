@@ -1,0 +1,17 @@
+.borrow-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.right-flex {
+    position: relative;
+}
+
+.borrow-btn .btn{
+    background-color: orange;
+    padding: 12px 8px;
+    border-radius: 5px;
+    font-family: inherit;
+    cursor: pointer;
+}

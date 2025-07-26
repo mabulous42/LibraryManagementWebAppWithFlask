@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, abo
 from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -138,6 +138,44 @@ def userDashboard():
                            active_page = 'userDashboard'
                            )
 
+@app.route('/user/borrow_book', methods=['GET', 'POST'])
+@login_required
+def borrow_book():
+    user = current_user
+    form = SearchBookForm()
+
+    user_name = user.name.split()
+    user_first_name = user_name[0]
+
+    books = []
+
+    if form.validate_on_submit():
+        title = form.title.data
+        books = search_books(library, title)
+
+        for book in books:
+            print(book)
+
+        return render_template('user/borrow_book.html', 
+                               active_page = 'borrow_book',  
+                               form=form, 
+                               books = books,
+                               user = user,
+                               user_first_name = user_first_name
+                               ) 
+
+    borrow_book(library, user_id, isbn)
+    save_books()
+    save_users()
+
+    return render_template("user/borrow_book.html", 
+                           active_page = 'borrow_book', 
+                           user = user, 
+                           user_first_name = user_first_name,
+                           form = form,
+                           books = books
+                           )
+
 
 # Admin Features
 @app.route('/adminDashboard', methods=['GET', 'POST'])
@@ -188,7 +226,7 @@ def add_books():
     flash('Book ISBN Already Exist', 'fail')
 
 
-    return render_template("admin/add_books.html", form=form,
+    return render_template("/admin/add_books.html", form=form,
                            admin_user = admin_user, active_page='add_books')
 
 
