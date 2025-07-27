@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask_login import UserMixin
 
 
@@ -54,12 +54,39 @@ class User(UserMixin):
 
     # method to create a list of borrowed book(s) using the book isbn
     def borrow_book(self, isbn):
-        self.borrowed_books.append(isbn)
+        borrowed_date = datetime.now().strftime("%Y-%m-%d")
+    
+        # Default: 2 weeks from borrow date
+        borrow_dt = datetime.strptime(borrowed_date, "%Y-%m-%d")
+        return_dt = borrow_dt + timedelta(days=14)
+        return_date = return_dt.strftime("%Y-%m-%d")
+    
+        borrowed_book_record = {
+            'isbn': isbn,
+            'borrowed_date': borrowed_date,
+            'return_date': return_date,
+            'returned': False  # Track if book has been returned
+        }
+        
+        self.borrowed_books.append(borrowed_book_record)
 
     # method to remove a book from the list of borrowed books using the book isbn
     def return_book(self, isbn):
         if isbn in self.borrowed_books:
             self.borrowed_books.remove(isbn)
+
+    def return_book(self, isbn):
+        """Mark a book as returned"""
+        for book in self.borrowed_books:
+            if book['isbn'] == isbn and not book['returned']:
+                book['returned'] = True
+                book['actual_return_date'] = datetime.now().strftime("%Y-%m-%d")
+                return True
+        return False
+
+    def get_active_borrowed_books(self):
+        """Get only books that haven't been returned"""
+        return [book for book in self.borrowed_books if not book['returned']]
 
     # string method to display a User's information 
     def __str__(self):
