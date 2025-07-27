@@ -204,17 +204,19 @@ class Library:
             user = self.users[user_id] # getting the user details into user
             if len(user.borrowed_books) == 5:
                 print(f"This user {user_id} have reached the maximum number of books that he/she can borrow (5)")
+            elif isbn in user.borrowed_books:
+                return "You cannot borrow the same book that you have already borrowed"
             else:
                 book = self.books[isbn] # getting the book details into book
                 if book.available_copies > 0: # checking if there is at least a copy or more copies of book available to borrow
                     book.available_copies -= 1
                     user.borrow_book(isbn)
                     print(f'{user.name}, your request to borrow book title: {book.title} is successful')
-                    print(user)
+                    return user
                 else:
-                    print('No copies available')
+                    return 'No copies available'
         else:
-            print(f"User {user_id} or book not found")
+            return f"User {user_id} or book not found"
 
     # method to return borrowed book back to the library
     def return_book(self, user_id, isbn):

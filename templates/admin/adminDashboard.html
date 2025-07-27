@@ -62,7 +62,7 @@
                 <h2>Borrowed Books</h2>
             </div>
             <div class="borrowed-book-details-div">
-                <div class="table-head-wrapper">
+                <div class="table-head-wrapper">                    
                     <table>
                         <thead>
                             <tr>
@@ -84,48 +84,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for data in borrowed_books_data[:5] %}
                             <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ data.book.title }}</td>
+                                <td>{{ data.book.isbn }}</td>
+                                <td>{{ data.user.user_id }}</td>
                                 <td>30/07/2025</td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
-                                <td>30/07/2025</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
-                                <td>30/07/2025</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
-                                <td>30/07/2025</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
-                                <td>30/07/2025</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
-                                <td>30/07/2025</td>
-                            </tr>
+                        {% endfor %}  
                         </tbody>
                     </table>
                     <div class="view-more-div">

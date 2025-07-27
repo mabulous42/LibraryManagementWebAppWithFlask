@@ -28,7 +28,7 @@ def edit_book(library, isbn, new_isbn, new_title, new_author, update_available_c
 
 # function to borrow a book from the library
 def borrow_book(library, user_id, isbn):
-    library.borrow_book(user_id, isbn)
+    return library.borrow_book(user_id, isbn)
 
 #function to return a borrowed book back to the library
 def return_book(library, user_id, isbn):
