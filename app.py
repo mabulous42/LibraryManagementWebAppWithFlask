@@ -213,8 +213,7 @@ def adminDashboard():
                 if book:  # Book exists
                     borrowed_books_data.append({
                         'user': user,
-                        'book': book,
-                        'due_date': '30/07/2025'  # Calculate actual due date
+                        'book': book
                     })
     print (borrowed_books_data)
 
@@ -454,5 +453,10 @@ def logout():
 
 
 
-if __name__ == '__main__' :
+if __name__ == '__main__':
+    # For development
     app.run(debug=True)
+else:
+    # For production (Render)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)

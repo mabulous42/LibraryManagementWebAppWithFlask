@@ -62,7 +62,7 @@
                 <h2>Borrowed Books</h2>
             </div>
             <div class="borrowed-book-details-div">
-                <div class="table-head-wrapper">                    
+                <div class="table-head-wrapper">
                     <table>
                         <thead>
                             <tr>
@@ -90,9 +90,11 @@
                                 <td>{{ data.book.title }}</td>
                                 <td>{{ data.book.isbn }}</td>
                                 <td>{{ data.user.user_id }}</td>
-                                <td>30/07/2025</td>
+                                {% for borrow in data.user.borrowed_books %}
+                                <td>{{ borrow.return_date }}</td>
+                                {% endfor %}
                             </tr>
-                        {% endfor %}  
+                            {% endfor %}
                         </tbody>
                     </table>
                     <div class="view-more-div">
@@ -117,8 +119,8 @@
     </div>
     <div class="inner-right-down">
         <div class="image-banner-div">
-            <img src="{{url_for("static", filename="images/b12d934a7dbd1431f73145ece3924ac2.webp" )}}" alt="Library Logo"
-                class="banner">
+            <img src="{{url_for("static", filename="images/b12d934a7dbd1431f73145ece3924ac2.webp" )}}"
+                alt="Library Logo" class="banner">
         </div>
     </div>
 </div>
