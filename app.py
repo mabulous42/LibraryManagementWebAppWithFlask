@@ -147,7 +147,8 @@ def userDashboard():
                     'isbn': borrowed['isbn'],
                     'user_id': user.user_id,
                     'borrowed_date': borrowed['borrowed_date'],
-                    'return_date': borrowed['return_date']
+                    'return_date': borrowed['return_date'],
+                    'return_status': borrowed['returned']
                 }
                 borrowed_books_data.append(data)
         
@@ -237,7 +238,8 @@ def adminDashboard():
                         'isbn': borrowed['isbn'],
                         'user_id': user['user_id'],
                         'borrowed_date': borrowed['borrowed_date'],
-                        'return_date': borrowed['return_date']
+                        'return_date': borrowed['return_date'],
+                        'return_status': borrowed['returned']
                     }
                     borrowed_books_data.append(data)
         
