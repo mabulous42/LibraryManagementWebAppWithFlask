@@ -43,7 +43,7 @@ class User(UserMixin):
         self.email = email
         self.password = password
         self.borrowed_books = []
-        self.registered_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.registered_at = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
     def get_id(self):
         return self.user_id
@@ -54,12 +54,12 @@ class User(UserMixin):
 
     # method to create a list of borrowed book(s) using the book isbn
     def borrow_book(self, isbn):
-        borrowed_date = datetime.now().strftime("%Y-%m-%d")
+        borrowed_date = datetime.now().strftime("%d-%m-%Y")
     
         # Default: 2 weeks from borrow date
-        borrow_dt = datetime.strptime(borrowed_date, "%Y-%m-%d")
+        borrow_dt = datetime.strptime(borrowed_date, "%d-%m-%Y")
         return_dt = borrow_dt + timedelta(days=14)
-        return_date = return_dt.strftime("%Y-%m-%d")
+        return_date = return_dt.strftime("%d-%m-%Y")
     
         borrowed_book_record = {
             'isbn': isbn,
@@ -71,10 +71,6 @@ class User(UserMixin):
         self.borrowed_books.append(borrowed_book_record)
 
     # method to remove a book from the list of borrowed books using the book isbn
-    def return_book(self, isbn):
-        if isbn in self.borrowed_books:
-            self.borrowed_books.remove(isbn)
-
     def return_book(self, isbn):
         """Mark a book as returned"""
         for book in self.borrowed_books:
@@ -229,21 +225,20 @@ class Library:
         # the user_id is used to check if the user exist and the book isbn to check if the book exist in the User and Book collection respectively
         if user_id in self.users and isbn in self.books:
             user = self.users[user_id] # getting the user details into user
-            if len(user.borrowed_books) == 5:
+            if len(user.borrowed_books) > 5:
                 print(f"This user {user_id} have reached the maximum number of books that he/she can borrow (5)")
-            elif isbn in user.borrowed_books:
-                return "You cannot borrow the same book that you have already borrowed"
+            elif any(b['isbn'] == isbn for b in user.borrowed_books):
+                print("You cannot borrow the same book that you have already borrowed")
             else:
                 book = self.books[isbn] # getting the book details into book
                 if book.available_copies > 0: # checking if there is at least a copy or more copies of book available to borrow
                     book.available_copies -= 1
                     user.borrow_book(isbn)
                     print(f'{user.name}, your request to borrow book title: {book.title} is successful')
-                    return user
                 else:
-                    return 'No copies available'
+                    print('No copies available')
         else:
-            return f"User {user_id} or book not found"
+            print(f"User {user_id} or book not found")
 
     # method to return borrowed book back to the library
     def return_book(self, user_id, isbn):

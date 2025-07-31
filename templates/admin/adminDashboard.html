@@ -63,11 +63,14 @@
             </div>
             <div class="borrowed-book-details-div">
                 <div class="table-head-wrapper">
-                    <table>
+                    <table class="custom-table">
                         <thead>
                             <tr>
                                 <td>
                                     <h3>S/N</h3>
+                                </td>
+                                <td>
+                                    <h3>User ID</h3>
                                 </td>
                                 <td>
                                     <h3>Book Title</h3>
@@ -76,23 +79,18 @@
                                     <h3>Book ISBN</h3>
                                 </td>
                                 <td>
-                                    <h3>User id</h3>
-                                </td>
-                                <td>
                                     <h3>Return Date</h3>
                                 </td>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for data in borrowed_books_data[:5] %}
+                            {% for borrow in borrowed_books_data %}
                             <tr>
-                                <td>{{ loop.index }}</td>
-                                <td>{{ data.book.title }}</td>
-                                <td>{{ data.book.isbn }}</td>
-                                <td>{{ data.user.user_id }}</td>
-                                {% for borrow in data.user.borrowed_books %}
-                                <td>{{ borrow.return_date }}</td>
-                                {% endfor %}
+                                <td>{{loop.index}}</td>
+                                <td>{{borrow.user_id}}</td>
+                                <td>{{borrow.title}}</td>
+                                <td>{{borrow.isbn}}</td>
+                                <td>{{borrow.return_date}}</td>                               
                             </tr>
                             {% endfor %}
                         </tbody>

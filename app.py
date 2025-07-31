@@ -177,7 +177,7 @@ def library_books():
 @login_required
 def borrow_books(user_id, isbn):
     try:
-        result = borrow_book(library, user_id, isbn)
+        borrow_book(library, user_id, isbn)
         save_books(library)
         save_users(library)
         flash("Book borrowed successfully!", "success")
@@ -198,24 +198,28 @@ def adminDashboard():
     library_users = load_users(library)
     library_books = load_books(library)
 
-    # library_users = library_users.values()
     library_users = [user.to_dict() for user in library_users.values()]
     library_books = [book.to_dict() for book in library_books.values()]
-    print(library_users)
-    print(library_books)
+    # print(library_users)
+    # print(library_books)
 
     borrowed_books_data = []
-    
+
     for user in library_users:
-        if user['borrowed_books']:  # User has borrowed books
-            for isbn in user['borrowed_books']:
-                book = next((b for b in library_books if b['isbn'] == isbn), None)
-                if book:  # Book exists
-                    borrowed_books_data.append({
-                        'user': user,
-                        'book': book
-                    })
-    print (borrowed_books_data)
+        for borrowed in user['borrowed_books']:
+            for book in library_books:
+                if borrowed['isbn'] == book['isbn']:
+                    data = {
+                        'name': user['name'],
+                        'title': book['title'],
+                        'isbn': borrowed['isbn'],
+                        'user_id': user['user_id'],
+                        'borrowed_date': borrowed['borrowed_date'],
+                        'return_date': borrowed['return_date']
+                    }
+                    borrowed_books_data.append(data)
+        
+    print ('borrowed_book: ', borrowed_books_data)
 
     return render_template('admin/adminDashboard.html', 
                            admin_user = admin_user,
