@@ -84,7 +84,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for borrow in borrowed_books_data %}
+                            {% for borrow in borrowed_books_data[:3] %}
                             <tr>
                                 <td>{{loop.index}}</td>
                                 <td>{{borrow.user_id}}</td>
@@ -97,7 +97,7 @@
                     </table>
                     <div class="view-more-div">
                         <div class="view-more-btn">
-                            <button>View All</button>
+                            <button class="">View All</button>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
             <i class="icofont-address-book"></i>
             <div class="x">
                 <h3>Lend <br>Requests</h3>
-                <p>2,500</p>
+                <p>0</p>
             </div>
         </div>
     </div>

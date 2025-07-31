@@ -121,6 +121,12 @@ def login():
 @app.route('/userDashboard', methods=['GET', 'POST'])
 @login_required
 def userDashboard():
+    library_books = load_books(library)
+    # library_users = [user.to_dict() for user in library_users.values()]
+    library_books = [book.to_dict() for book in library_books.values()]
+
+    borrowed_books_data = []
+
     user = current_user
     print(f"User authenticated: {user.is_authenticated}")
     print(f"User ID: {user.id}")
@@ -132,10 +138,26 @@ def userDashboard():
     user_first_name = name_parts[0]
     last_name = " ".join(name_parts[1:]) if len(name_parts) > 1 else ""  # handle middle names or no last name
 
+    for borrowed in user.borrowed_books:
+        for book in library_books:
+            if borrowed['isbn'] == book['isbn']:
+                data = {
+                    'name': user.name,
+                    'title': book['title'],
+                    'isbn': borrowed['isbn'],
+                    'user_id': user.user_id,
+                    'borrowed_date': borrowed['borrowed_date'],
+                    'return_date': borrowed['return_date']
+                }
+                borrowed_books_data.append(data)
+        
+    print ('borrowed_book: ', borrowed_books_data)
+
     return render_template('user/userDashboard.html', 
                            user = user, 
                            user_first_name = user_first_name, 
-                           active_page = 'userDashboard'
+                           active_page = 'userDashboard',
+                           borrowed_books_data = borrowed_books_data
                            )
 
 @app.route('/user/library_books', methods=['GET', 'POST'])

@@ -6,31 +6,13 @@
         "password": "$2b$12$gRi52N7CJ.E9n1J1Arteku4FcX/d/KyieRKD7XPLNJFvkZUYz8ls2",
         "borrowed_books": [
             {
-                "isbn": "9780061120084",
-                "borrowed_date": "2025-07-29",
-                "return_date": "2025-08-12",
+                "isbn": "9780061122415",
+                "borrowed_date": "31-07-2025",
+                "return_date": "14-08-2025",
                 "returned": false
             },
             {
-                "isbn": "9781616202415",
-                "borrowed_date": "2025-07-30",
-                "return_date": "2025-08-13",
-                "returned": false
-            },
-            {
-                "isbn": "9781616202415",
-                "borrowed_date": "2025-07-30",
-                "return_date": "2025-08-13",
-                "returned": false
-            },
-            {
-                "isbn": "9780061120084",
-                "borrowed_date": "2025-07-30",
-                "return_date": "2025-08-13",
-                "returned": false
-            },
-            {
-                "isbn": "9780316548182",
+                "isbn": "9780590353427",
                 "borrowed_date": "31-07-2025",
                 "return_date": "14-08-2025",
                 "returned": false
@@ -43,14 +25,7 @@
         "user_id": "LU01660",
         "email": "ayo@gmail.com",
         "password": "$2b$12$cwjhqlMplGidhnZ6LmX7VOUoayjyUPzMS.R4ikSoId4miy9QX2HZS",
-        "borrowed_books": [
-            {
-                "isbn": "9780590353427",
-                "borrowed_date": "2025-07-30",
-                "return_date": "2025-08-13",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-06 23:11:39"
     },
     "LU0840": {
@@ -58,14 +33,7 @@
         "user_id": "LU0840",
         "email": "jack@gmail.com",
         "password": "$2b$12$/2ZeN4jHAhwoViXVt95hlutCzVTrXqtso0LfU4C4i3vFrNjKqXN3O",
-        "borrowed_books": [
-            {
-                "isbn": "9780590353427",
-                "borrowed_date": "2025-07-30",
-                "return_date": "2025-08-13",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-06 23:11:56"
     },
     "LU01627": {
@@ -76,8 +44,14 @@
         "borrowed_books": [
             {
                 "isbn": "9780061120084",
-                "borrowed_date": "2025-07-27",
-                "return_date": "2025-08-10",
+                "borrowed_date": "31-07-2025",
+                "return_date": "14-08-2025",
+                "returned": false
+            },
+            {
+                "isbn": "9781616202415",
+                "borrowed_date": "31-07-2025",
+                "return_date": "14-08-2025",
                 "returned": false
             }
         ],
@@ -98,19 +72,7 @@
         "password": "$2b$12$tBRkyat9tRMjwiPswfhtK.YglFpZD1/oRJVH.iE8kIyMqbQojJaAW",
         "borrowed_books": [
             {
-                "isbn": "9780316548182",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780316548182",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "3745890123467",
+                "isbn": "9780061120084",
                 "borrowed_date": "31-07-2025",
                 "return_date": "14-08-2025",
                 "returned": false

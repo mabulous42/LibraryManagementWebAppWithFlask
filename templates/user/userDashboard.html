@@ -62,53 +62,58 @@
             <div class="borrowed-header">
                 <h2>Borrowed Books</h2>
             </div>
+            {% if borrowed_books_data | length < 1 %} <h4 class="no-borrow-book-text">You don't have any borrowed book(s)</h4>
+                {% else %}
             <div class="borrowed-book-details-div">
                 <div class="table-head-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>
-                                    <h3>S/N</h3>
-                                </td>
-                                <td>
-                                    <h3>Book Title</h3>
-                                </td>
-                                <td>
-                                    <h3>Book ISBN</h3>
-                                </td>
-                                <td>
-                                    <h3>Borrowed Date</h3>
-                                </td>
-                                <td>
-                                    <h3>Return Date</h3>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Lord of the rings</td>
-                                <td>1534678390763</td>
-                                <td>LU07354</td>
-                                <td>30/07/2025</td>
-                            </tr>  
-                        </tbody>
-                    </table>
-                    <div class="view-more-div">
-                        <div class="view-more-btn">
-                            <button>View All</button>
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <h3>S/N</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Book Title</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Book ISBN</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Borrowed Date</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Return Date</h3>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for borrow in borrowed_books_data %}
+                                <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td>{{borrow.title}}</td>
+                                    <td>{{borrow.isbn}}</td>
+                                    <td>{{borrow.borrowed_date}}</td>
+                                    <td>{{borrow.return_date}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="view-more-div">
+                            <div class="view-more-btn">
+                                <button>View All</button>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
 <div class="inner-right">
     <div class="inner-right-down">
         <div class="image-banner-div">
-            <img src="{{url_for("static", filename="images/b12d934a7dbd1431f73145ece3924ac2.webp" )}}" alt="Library Logo"
-                class="banner">
+            <img src="{{url_for("static", filename="images/b12d934a7dbd1431f73145ece3924ac2.webp" )}}"
+                alt="Library Logo" class="banner">
         </div>
     </div>
 </div>

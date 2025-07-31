@@ -3,14 +3,14 @@
         "title": "Purple Hibiscus",
         "author": "Chimamanda Ngozi Amanda",
         "isbn": "9781616202415",
-        "available_copies": 5,
+        "available_copies": 4,
         "added_at": "2025-07-12 01:20:55"
     },
     "9780061122415": {
         "title": "The Alchemist",
         "author": "Paulo Coelho",
         "isbn": "9780061122415",
-        "available_copies": 0,
+        "available_copies": 9,
         "added_at": "2025-07-12 01:30:06"
     },
     "9780316548182": {
@@ -31,14 +31,14 @@
         "title": "To Kill a Mockingbird",
         "author": "Harper Lee",
         "isbn": "9780061120084",
-        "available_copies": 9,
+        "available_copies": 7,
         "added_at": "2025-07-18 21:24:30"
     },
     "9780590353427": {
         "title": "Harry Potter and the Sorcerer\u2019s Stone",
         "author": "J.K. Rowling",
         "isbn": "9780590353427",
-        "available_copies": 3,
+        "available_copies": 2,
         "added_at": "2025-07-18 21:25:00"
     },
     "9780547928227": {
