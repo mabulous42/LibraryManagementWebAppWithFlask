@@ -53,6 +53,18 @@
                 "borrowed_date": "31-07-2025",
                 "return_date": "14-08-2025",
                 "returned": false
+            },
+            {
+                "isbn": "9780316548182",
+                "borrowed_date": "31-07-2025",
+                "return_date": "14-08-2025",
+                "returned": false
+            },
+            {
+                "isbn": "9780590353427",
+                "borrowed_date": "31-07-2025",
+                "return_date": "14-08-2025",
+                "returned": false
             }
         ],
         "registered_at": "2025-07-06 23:12:25"

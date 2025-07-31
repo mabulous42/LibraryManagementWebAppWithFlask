@@ -87,7 +87,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for borrow in borrowed_books_data %}
+                                {% for borrow in borrowed_books_data[:3] %}
                                 {% if borrow.return_status == False %}
                                 <tr>
                                     <td>{{loop.index}}</td>
