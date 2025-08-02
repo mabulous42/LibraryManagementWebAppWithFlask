@@ -35,6 +35,7 @@
                     <th>TITLE</th>
                     <th>AUTHOR</th>
                     <th>AVAILABLE COPIES</th>
+                    <th>TOTAL COPIES</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
@@ -46,6 +47,7 @@
                     <td>{{ book.title }}</td>
                     <td>{{ book.author }}</td>
                     <td>{{ book.available_copies }}</td>
+                    <td>{{ book.total_copies }}</td>
                     <td>
                         <a href="/admin/edit_book/{{ book.isbn }}" class="custom-btn custom-btn-primary">Edit Book</a>
                         <a href="/admin/remove_book/{{ book.isbn }}" class="custom-btn custom-btn-danger">Remove Book</a>

@@ -1,8 +1,12 @@
 .inner-left {
     /* background-color: green; */
-    width: 65%;
+    width: 75%;
     height: 100%;
     overflow: auto;
+}
+
+.inner-right {
+    width: 24%;
 }
 
 

@@ -6,11 +6,12 @@ from flask_login import UserMixin
 # defining classes
 class Book:
     # initialising the book attributes (title, author, isbn, available_copies)
-    def __init__(self, title, author, isbn, available_copies = 0):
+    def __init__(self, title, author, isbn, available_copies, total_copies):
         self.title = title
         self.author = author
         self.isbn = isbn
         self.available_copies = available_copies
+        self.total_copies = total_copies
         self.added_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
 
@@ -25,13 +26,14 @@ class Book:
             "author": self.author,
             "isbn": self.isbn,
             "available_copies": self.available_copies,
+            "total_copies": self.total_copies,
             "added_at": self.added_at
         }
 
     # function to convert book dictionary into object when saving into json file
     @staticmethod
     def from_dict(data):
-        book = Book(data["title"], data["author"], data["isbn"], data["available_copies"])
+        book = Book(data["title"], data["author"], data["isbn"], data["available_copies"], data["total_copies"])
         book.added_at = data['added_at']
         return book
 
@@ -187,13 +189,14 @@ class Library:
             user.name = new_name
             user.email = new_email
 
-    def edit_book(self, isbn, new_isbn, new_title, new_author, update_available_copies):
+    def edit_book(self, isbn, new_isbn, new_title, new_author, update_available_copies, update_total_copies):
         if isbn in self.books:
             book = self.books[isbn]
             book.isbn = new_isbn
             book.title = new_title
             book.author = new_author
             book.available_copies = update_available_copies
+            book.total_copies = update_total_copies
 
     # methods to delete user using their user_id from the dictionary of users
     def delete_user(self, user_id):

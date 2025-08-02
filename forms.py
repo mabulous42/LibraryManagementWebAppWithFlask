@@ -82,7 +82,7 @@ class UpdateBookForm(FlaskForm):
     author = StringField(validators=[InputRequired()],
                            render_kw={"placeholder": "Enter the Book Author"})
     copies = IntegerField(validators=[InputRequired()],
-                           render_kw={"placeholder": "Enter the Book Number of Copies"})
+                           render_kw={"placeholder": "Enter the number of additional copies to add to this book's inventory"})
     submit = SubmitField('Update Book')
 
 class SearchUserForm(FlaskForm):

@@ -262,9 +262,10 @@ def add_books():
         author = form.author.data
         isbn = form.isbn.data
         available_copies = form.copies.data
+        total_copies = available_copies
 
         # creating and instance of class Book to add new book
-        new_book = Book(title, author, isbn, available_copies)
+        new_book = Book(title, author, isbn, available_copies, total_copies)
         
 
         # adding a new book, using the add_book function from helper.py
@@ -383,10 +384,13 @@ def edit_books(isbn):
         new_isbn = form.isbn.data
         new_title = form.title.data
         new_author = form.author.data
-        new_copies = form.copies.data
+        updated_copies = form.copies.data
+
+        new_available_copies = book.available_copies + updated_copies
+        new_total_copies = book.total_copies + updated_copies
 
 
-        edit_book(library, book.isbn, new_isbn, new_title, new_author, new_copies)
+        edit_book(library, book.isbn, new_isbn, new_title, new_author, new_available_copies, new_total_copies)
 
         save_books(library)
 

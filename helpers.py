@@ -23,8 +23,8 @@ def edit_user(library, user_id, new_name, new_email):
     library.edit_user(user_id, new_name, new_email)
 
 # function to edit or modify user name
-def edit_book(library, isbn, new_isbn, new_title, new_author, update_available_copies):
-    library.edit_book(isbn, new_isbn, new_title, new_author, update_available_copies)
+def edit_book(library, isbn, new_isbn, new_title, new_author, new_available_copies, new_total_copies):
+    library.edit_book(isbn, new_isbn, new_title, new_author, new_available_copies, new_total_copies)
 
 # function to borrow a book from the library
 def borrow_book(library, user_id, isbn):
