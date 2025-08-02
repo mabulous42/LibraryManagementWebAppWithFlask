@@ -223,8 +223,6 @@ def adminDashboard():
 
     library_users = [user.to_dict() for user in library_users.values()]
     library_books = [book.to_dict() for book in library_books.values()]
-    # print(library_users)
-    # print(library_books)
 
     borrowed_books_data = []
 
@@ -420,6 +418,16 @@ def search_user():
 
     return render_template('admin/search_users.html', admin_user=admin_user, form=form, users=users, active_page = 'search_user')
 
+@app.route('/admin/user_details/<user_id>', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def user_details(user_id):
+    load_user(library)
+    user = get_user_by_id(library, user_id)
+    print(user)
+
+    return render_template('/admin/user_details.html', user = user, admin_user=admin_user)
+
 @app.route('/admin/search_book', methods = ['GET', 'POST'])
 @login_required
 @admin_required
@@ -438,6 +446,54 @@ def search_book():
 
 
     return render_template('admin/search_book.html', admin_user=admin_user, form=form, books=books, active_page = 'search_book')
+
+@app.route('/admin/book_details/<isbn>', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def book_details(isbn):
+    load_books(library)
+    book = get_book_by_isbn(library, isbn)
+    print(book)
+
+    return render_template('/admin/book_details.html', book = book, admin_user=admin_user)
+
+@app.route('/admin/borrowed_books_history', methods = ['GET', 'POST'])
+@login_required
+@admin_required
+def borrowed_books_history():
+
+    library_users = load_users(library)
+    library_books = load_books(library)
+
+    library_users = [user.to_dict() for user in library_users.values()]
+    library_books = [book.to_dict() for book in library_books.values()]
+
+    borrowed_books_data = []
+
+    for user in library_users:
+        for borrowed in user['borrowed_books']:
+            for book in library_books:
+                if borrowed['isbn'] == book['isbn']:
+                    data = {
+                        'name': user['name'],
+                        'title': book['title'],
+                        'isbn': borrowed['isbn'],
+                        'user_id': user['user_id'],
+                        'borrowed_date': borrowed['borrowed_date'],
+                        'return_date': borrowed['return_date'],
+                        'return_status': borrowed['returned']
+                    }
+                    borrowed_books_data.append(data)
+        
+    print ('borrowed_book: ', borrowed_books_data)
+
+    return render_template('/admin/borrowed_books_history.html', 
+                           admin_user = admin_user,
+                           library_users = library_users,
+                           library_books = library_books,
+                           active_page='borrowed_books_history',
+                           borrowed_books_data = borrowed_books_data                          
+                           )
 
 @app.route('/admin/add_ebooks', methods=['GET', 'POST'])
 @login_required

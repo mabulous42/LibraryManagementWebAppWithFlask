@@ -43,7 +43,7 @@
                 <!-- <h3>No users found matching your search criteria</h3> -->
                     {% else %}
                     {% for user in users %}
-                    <a href="#">
+                    <a href="{{url_for('user_details', user_id=user.user_id)}}">
                         <div class="display-result-div">
                             <div>
                                 <div>

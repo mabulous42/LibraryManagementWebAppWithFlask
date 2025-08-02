@@ -79,12 +79,14 @@
                             <p>Manage Books</p>
                         </div>
                     </a>
-                    <div class="each-feature">
-                        <div class="icon-div">
-                            <i class="icofont-book"></i>
+                    <a href="{{ url_for('borrowed_books_history') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'borrowed_books_history' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-book"></i>
+                            </div>
+                            <p>Borrowed Books</p>
                         </div>
-                        <p>Borrowed Books</p>
-                    </div>
+                    </a>
                     <a href="{{url_for('logout')}}" class="sign-out">
                         <div class="each-feature">
                             <div class="icon-div">

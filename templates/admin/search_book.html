@@ -43,7 +43,7 @@
                 <!-- <h3>No users found matching your search criteria</h3> -->
                     {% else %}
                     {% for book in books %}
-                    <a href="#">
+                    <a href="{{url_for('book_details', isbn=book.isbn)}}">
                         <div class="display-result-div">
                             <div>
                                 <div>

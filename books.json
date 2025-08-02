@@ -3,7 +3,7 @@
         "title": "Purple Hibiscus",
         "author": "Chimamanda Ngozi Amanda",
         "isbn": "9781616202415",
-        "available_copies": 4,
+        "available_copies": 3,
         "added_at": "2025-07-12 01:20:55"
     },
     "9780061122415": {
@@ -17,14 +17,14 @@
         "title": "Long Walk to Freedom",
         "author": "Nelson Mandela",
         "isbn": "9780316548182",
-        "available_copies": 4,
+        "available_copies": 3,
         "added_at": "2025-07-12 02:33:27"
     },
     "3745890123467": {
         "title": "Akin Goes to Schhol",
         "author": "Dele Giwa",
         "isbn": "3745890123467",
-        "available_copies": 8,
+        "available_copies": 7,
         "added_at": "2025-07-18 21:22:21"
     },
     "9780061120084": {
@@ -38,14 +38,14 @@
         "title": "Harry Potter and the Sorcerer\u2019s Stone",
         "author": "J.K. Rowling",
         "isbn": "9780590353427",
-        "available_copies": 1,
+        "available_copies": 0,
         "added_at": "2025-07-18 21:25:00"
     },
     "9780547928227": {
         "title": "The Hobbit",
         "author": "J.R.R. Tolkien",
         "isbn": "9780547928227",
-        "available_copies": 10,
+        "available_copies": 9,
         "added_at": "2025-07-18 21:25:38"
     }
 }
