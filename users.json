@@ -4,20 +4,7 @@
         "user_id": "LU05932",
         "email": "st20290921@outlook.cardiffmet",
         "password": "$2b$12$gRi52N7CJ.E9n1J1Arteku4FcX/d/KyieRKD7XPLNJFvkZUYz8ls2",
-        "borrowed_books": [
-            {
-                "isbn": "9780061122415",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780590353427",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-06 23:10:52"
     },
     "LU01660": {
@@ -25,26 +12,7 @@
         "user_id": "LU01660",
         "email": "ayo@gmail.com",
         "password": "$2b$12$cwjhqlMplGidhnZ6LmX7VOUoayjyUPzMS.R4ikSoId4miy9QX2HZS",
-        "borrowed_books": [
-            {
-                "isbn": "3745890123467",
-                "borrowed_date": "02-08-2025",
-                "return_date": "16-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780547928227",
-                "borrowed_date": "02-08-2025",
-                "return_date": "16-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780590353427",
-                "borrowed_date": "02-08-2025",
-                "return_date": "16-08-2025",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-06 23:11:39"
     },
     "LU0840": {
@@ -60,32 +28,7 @@
         "user_id": "LU01627",
         "email": "hamzat@gmail.com",
         "password": "$2b$12$E4KAr7C.ogFR4XRJYAJi.eZx5Vdo5h1fs59Yu7/0NZPgNmuX6yb8m",
-        "borrowed_books": [
-            {
-                "isbn": "9780061120084",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9781616202415",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780316548182",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780590353427",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-06 23:12:25"
     },
     "LU0179": {
@@ -93,20 +36,7 @@
         "user_id": "LU0179",
         "email": "adewale@gmail.com",
         "password": "$2b$12$FHO01tYXzCmpsDxJmVpreeRDyy2dwbBuXqtLR28r.SaPGVvZw1bjO",
-        "borrowed_books": [
-            {
-                "isbn": "9781616202415",
-                "borrowed_date": "02-08-2025",
-                "return_date": "16-08-2025",
-                "returned": false
-            },
-            {
-                "isbn": "9780316548182",
-                "borrowed_date": "02-08-2025",
-                "return_date": "16-08-2025",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-06 23:12:41"
     },
     "LU06685": {
@@ -114,14 +44,7 @@
         "user_id": "LU06685",
         "email": "razak@gmail.com",
         "password": "$2b$12$tBRkyat9tRMjwiPswfhtK.YglFpZD1/oRJVH.iE8kIyMqbQojJaAW",
-        "borrowed_books": [
-            {
-                "isbn": "9780061120084",
-                "borrowed_date": "31-07-2025",
-                "return_date": "14-08-2025",
-                "returned": false
-            }
-        ],
+        "borrowed_books": [],
         "registered_at": "2025-07-07 01:30:35"
     },
     "LU02609": {

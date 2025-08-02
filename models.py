@@ -54,12 +54,12 @@ class User(UserMixin):
 
     # method to create a list of borrowed book(s) using the book isbn
     def borrow_book(self, isbn):
-        borrowed_date = datetime.now().strftime("%d-%m-%Y")
+        borrowed_date = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     
         # Default: 2 weeks from borrow date
-        borrow_dt = datetime.strptime(borrowed_date, "%d-%m-%Y")
+        borrow_dt = datetime.strptime(borrowed_date, "%d-%m-%Y %H:%M:%S")
         return_dt = borrow_dt + timedelta(days=14)
-        return_date = return_dt.strftime("%d-%m-%Y")
+        return_date = return_dt.strftime("%d-%m-%Y %H:%M:%S")
     
         borrowed_book_record = {
             'isbn': isbn,
@@ -76,7 +76,7 @@ class User(UserMixin):
         for book in self.borrowed_books:
             if book['isbn'] == isbn and not book['returned']:
                 book['returned'] = True
-                book['actual_return_date'] = datetime.now().strftime("%Y-%m-%d")
+                book['actual_return_date'] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
                 return True
         return False
 

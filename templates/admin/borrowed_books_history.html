@@ -27,6 +27,9 @@
 {% block content %}
 <div class="inner-left">
     <div class="inner-left-a">
+        {% if borrowed_books_data | length < 1 %}
+        <h3 class="no-borrow-book-text">No book(s) borrowed from the library</h3>
+        {% else %}
         <div class="borrowed-book-details-div">
                 <div class="table-head-wrapper">
                     <table class="custom-table">
@@ -61,7 +64,8 @@
                     </table>
                 </div>
             </div>
-    </div>
+        </div>
+        {% endif %}
     <!-- <div class="inner-left-b">B</div> -->
 </div>
 <!-- <div class="inner-right">

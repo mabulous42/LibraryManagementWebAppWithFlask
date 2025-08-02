@@ -487,6 +487,10 @@ def borrowed_books_history():
         
     print ('borrowed_book: ', borrowed_books_data)
 
+    # sorting the borrowed book using borrowed_date in descending order
+    borrowed_books_data.sort(key=lambda x: datetime.strptime(x['borrowed_date'], "%d-%m-%Y %H:%M:%S"), reverse=True)
+
+
     return render_template('/admin/borrowed_books_history.html', 
                            admin_user = admin_user,
                            library_users = library_users,

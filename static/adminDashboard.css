@@ -171,6 +171,10 @@
     cursor: pointer;
 }
 
+.no-borrow-book-text {
+    text-align: center;
+}
+
 /* Custom table styles that look like Bootstrap but won't affect other elements  */
 .custom-table {
     width: 100%;
