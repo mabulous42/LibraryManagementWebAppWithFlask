@@ -245,12 +245,17 @@ class Library:
 
     # method to return borrowed book back to the library
     def return_book(self, user_id, isbn):
+        borrowed_book_found = False
         # checking for two conditions which needs to be met; 
         # the user_id is used to check if the user exist and the book isbn to check if the book exist in the User and Book collection respectively
         if user_id in self.users and isbn in self.books:
             user = self.users[user_id] # getting the user details into user
             book = self.books[isbn] # getting the book details into book
-            if isbn in user.borrowed_books:
+            for borrowed in user.borrowed_books:
+                if borrowed['isbn'] == isbn and not borrowed['returned']:
+                    borrowed_book_found = True
+                    break
+            if borrowed_book_found:
                 user.return_book(isbn)
                 book.available_copies += 1
                 print(f'{user.name} returned {book.title}')

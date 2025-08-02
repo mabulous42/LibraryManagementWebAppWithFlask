@@ -88,7 +88,6 @@
                         </thead>
                         <tbody>
                             {% for borrow in borrowed_books_data[:3] %}
-                            {% if borrow.return_status == False %}
                             <tr>
                                 <td>{{loop.index}}</td>
                                 <td>{{borrow.user_id}}</td>
@@ -96,7 +95,6 @@
                                 <td>{{borrow.isbn}}</td>
                                 <td>{{borrow.return_date}}</td>                               
                             </tr>
-                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

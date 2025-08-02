@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, abo
 from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -122,7 +122,6 @@ def login():
 @login_required
 def userDashboard():
     library_books = load_books(library)
-    # library_users = [user.to_dict() for user in library_users.values()]
     library_books = [book.to_dict() for book in library_books.values()]
 
     borrowed_books_data = []
@@ -142,15 +141,25 @@ def userDashboard():
         for book in library_books:
             if borrowed['isbn'] == book['isbn']:
                 data = {
-                    'name': user.name,
                     'title': book['title'],
                     'isbn': borrowed['isbn'],
-                    'user_id': user.user_id,
                     'borrowed_date': borrowed['borrowed_date'],
-                    'return_date': borrowed['return_date'],
+                    'return_date': borrowed['return_date'][:10],
                     'return_status': borrowed['returned']
                 }
                 borrowed_books_data.append(data)
+
+    # # Sorting by the datetime (most recent first)
+    borrowed_books_data.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in borrowed_books_data:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+
+    # borrowed_books_data.sort(key=lambda book: book['borrowed_date'])
         
     print ('borrowed_book: ', borrowed_books_data)
 
@@ -158,6 +167,53 @@ def userDashboard():
                            user = user, 
                            user_first_name = user_first_name, 
                            active_page = 'userDashboard',
+                           borrowed_books_data = borrowed_books_data
+                           )
+
+
+@app.route('/user/borrowed_books', methods=['GET', 'POST'])
+@login_required
+def user_borrowed_books():
+    user = current_user
+    library_books = load_books(library)
+    library_books = [book.to_dict() for book in library_books.values()]
+
+    borrowed_books_data = []
+
+    user_name = user.name.split()
+    user_first_name = user_name[0]
+
+    for borrowed in user.borrowed_books:
+        for book in library_books:
+            if borrowed['isbn'] == book['isbn']:
+                data = {
+                    'title': book['title'],
+                    'isbn': borrowed['isbn'],
+                    'borrowed_date': borrowed['borrowed_date'],
+                    'return_date': borrowed['return_date'][:10],
+                    'return_status': borrowed['returned'],
+                    'actual_return_date': borrowed['actual_return_date']
+                }
+                borrowed_books_data.append(data)
+
+    # # Sorting by the datetime (most recent first)
+    borrowed_books_data.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in borrowed_books_data:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+
+    # borrowed_books_data.sort(key=lambda book: book['borrowed_date'])
+        
+    # print ('borrowed_book: ', borrowed_books_data)
+
+    return render_template('user/view_borrowed_books.html', 
+                           user = user, 
+                           user_first_name = user_first_name, 
+                           active_page = 'view_borrowed_books',
                            borrowed_books_data = borrowed_books_data
                            )
 
@@ -209,6 +265,19 @@ def borrow_books(user_id, isbn):
 
     return redirect(url_for("library_books"))
 
+@app.route('/user/return_book/<user_id>/<isbn>')
+@login_required
+def user_return_book(user_id, isbn):
+
+    print(user_id, isbn)
+
+
+    return_book(library, user_id, isbn)
+    save_books(library)
+    save_users(library)
+
+    return redirect(url_for('user_borrowed_books'))
+
 # Admin Features
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 @login_required
@@ -236,12 +305,22 @@ def adminDashboard():
                         'isbn': borrowed['isbn'],
                         'user_id': user['user_id'],
                         'borrowed_date': borrowed['borrowed_date'],
-                        'return_date': borrowed['return_date'],
+                        'return_date': borrowed['return_date'][:10],
                         'return_status': borrowed['returned']
                     }
                     borrowed_books_data.append(data)
+
+    # # Sorting by the datetime (most recent first)
+    borrowed_books_data.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
         
-    print ('borrowed_book: ', borrowed_books_data)
+    # Now converting to "time ago" format
+    for book in borrowed_books_data:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+
+    # borrowed_books_data.sort(key=lambda book: book['borrowed_date']) 
 
     return render_template('admin/adminDashboard.html', 
                            admin_user = admin_user,
@@ -289,6 +368,8 @@ def add_books():
 def manage_users():
     library_users = load_users(library)
     library_users = [user.to_dict() for user in library_users.values()]
+
+    library_users.sort(key=lambda user: user['name'])
     
 
 
@@ -351,6 +432,8 @@ def edit_users(user_id):
 def manage_books():
     library_books = load_books(library)
     library_books = [book.to_dict() for book in library_books.values()]
+
+    library_books.sort(key=lambda book: book['title'])
 
 
     return render_template("admin/manage_books.html", 
@@ -484,15 +567,22 @@ def borrowed_books_history():
                         'isbn': borrowed['isbn'],
                         'user_id': user['user_id'],
                         'borrowed_date': borrowed['borrowed_date'],
-                        'return_date': borrowed['return_date'],
+                        'return_date': borrowed['return_date'][:10],
                         'return_status': borrowed['returned']
                     }
                     borrowed_books_data.append(data)
-        
-    print ('borrowed_book: ', borrowed_books_data)
 
-    # sorting the borrowed book using borrowed_date in descending order
-    borrowed_books_data.sort(key=lambda x: datetime.strptime(x['borrowed_date'], "%d-%m-%Y %H:%M:%S"), reverse=True)
+    # Sorting by the datetime (most recent first)
+    borrowed_books_data.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in borrowed_books_data:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+
+    print ('borrowed_book: ', borrowed_books_data)
 
 
     return render_template('/admin/borrowed_books_history.html', 

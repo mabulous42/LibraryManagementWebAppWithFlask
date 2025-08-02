@@ -1,6 +1,7 @@
 # functions
 import json
 from models import Book, Library, User, digitalLibrary
+from datetime import datetime
 
 # function to add a book to the library
 def add_book(library, book):
@@ -157,5 +158,34 @@ def load_ebooks(digitalLibrary):
     except Exception as e:
         print(f"Failed to load books: {e}")
         return {}
+
+def time_ago(date_string):
+    # Parse the date string
+    past_date = datetime.strptime(date_string, '%d-%m-%Y %H:%M:%S')
+    now = datetime.now()
+    
+    # Calculate the difference
+    diff = now - past_date
+    
+    # Get total seconds for calculations
+    seconds = diff.total_seconds()
+    
+    if seconds < 60:
+        return "just now"
+    elif seconds < 3600:  # Less than 1 hour
+        minutes = int(seconds // 60)
+        return f"{minutes} min{'s' if minutes != 1 else ''} ago"
+    elif seconds < 86400:  # Less than 1 day
+        hours = int(seconds // 3600)
+        return f"{hours} hour{'s' if hours != 1 else ''} ago"
+    elif seconds < 604800:  # Less than 1 week
+        days = int(seconds // 86400)
+        return f"{days} day{'s' if days != 1 else ''} ago"
+    elif seconds < 2419200:  # Less than 4 weeks (approx 1 month)
+        weeks = int(seconds // 604800)
+        return f"{weeks} week{'s' if weeks != 1 else ''} ago"
+    else:
+        months = int(seconds // 2419200)
+        return f"{months} month{'s' if months != 1 else ''} ago"
 
 

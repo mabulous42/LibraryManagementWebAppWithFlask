@@ -1,0 +1,8 @@
+.return-book-button {
+    background-color: rgba(0, 0, 0, 0.808);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    font-family: inherit;
+}

@@ -11,7 +11,7 @@
         "title": "The Alchemist",
         "author": "Paulo Coelho",
         "isbn": "9780061122415",
-        "available_copies": 9,
+        "available_copies": 8,
         "total_copies": 9,
         "added_at": "2025-07-12 01:30:06"
     },
@@ -19,7 +19,7 @@
         "title": "Long Walk to Freedom",
         "author": "Nelson Mandela",
         "isbn": "9780316548182",
-        "available_copies": 5,
+        "available_copies": 4,
         "total_copies": 5,
         "added_at": "2025-07-12 02:33:27"
     },
@@ -27,7 +27,7 @@
         "title": "Akin Goes to Schhol",
         "author": "Dele Giwa",
         "isbn": "3745890123467",
-        "available_copies": 7,
+        "available_copies": 6,
         "total_copies": 7,
         "added_at": "2025-07-18 21:22:21"
     },
@@ -54,5 +54,13 @@
         "available_copies": 9,
         "total_copies": 9,
         "added_at": "2025-07-18 21:25:38"
+    },
+    "9781616202416": {
+        "title": "The Book Thief",
+        "author": "Markus Zusak",
+        "isbn": "9781616202416",
+        "available_copies": 6,
+        "total_copies": 6,
+        "added_at": "2025-08-02 19:00:30"
     }
 }

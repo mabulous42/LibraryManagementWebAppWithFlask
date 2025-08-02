@@ -29,12 +29,11 @@
 {% block content %}
 <div class="inner-left">
     <div class="inner-content-up">
-        <a href="{{ url_for('manage_books')}}" class="view-link">
+        <a href="{{ url_for('library_books')}}" class="view-link">
             <div class="borrow-book">
                 <i class="icofont-book"></i>
                 <div class="x">
                     <h3>Borrow <br> Book</h3>
-                    <!-- <p>{{ library_books|length }}</p> -->
                 </div>
             </div>
         </a>
@@ -77,7 +76,7 @@
                                         <h3>Book ISBN</h3>
                                     </td>
                                     <td>
-                                        <h3>Borrowed Date</h3>
+                                        <h3>Borrowed</h3>
                                     </td>
                                     <td>
                                         <h3>Return Date</h3>
@@ -99,9 +98,11 @@
                             </tbody>
                         </table>
                         <div class="view-more-div">
-                            <div class="view-more-btn">
-                                <button>View All</button>
-                            </div>
+                            <a href="{{ url_for('user_borrowed_books')}}">
+                                <div class="view-more-btn">
+                                    <button>View All</button>
+                                </div>
+                            </a>
                         </div>
                 </div>
             </div>

@@ -9,15 +9,13 @@
 }
 
 .borrowed-book-details-div {
-    background-color: white;
     width: 100%;
     height: 95%;
+    overflow: auto;
 }
 
 .table-head-wrapper {
-    width: inherit;
-    height: inherit;
-    overflow: auto;
+    background-color: white;
 }
 
 .no-borrow-book-text {

@@ -1,4 +1,4 @@
-{% extends "admin_base.html" %}
+{% extends "user_base.html" %}
 
 
 {% block head %}
@@ -7,6 +7,8 @@
 {% block other_css %}
 <link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="borrowed_books_history.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="view_borrowed_books.css" )}}">
+
 {% endblock other_css %}
 
 {# Page Title #}
@@ -36,28 +38,31 @@
                         <thead>
                             <tr>
                                 <td><h3>S/N</h3></td>
-                                <td><h3>Library User Name</h3></td>
-                                <td><h3>User ID</h3></td>
                                 <td><h3>Title</h3></td>
                                 <td><h3>ISBN</h3></td>
                                 <td><h3>Borrowed</h3></td>
                                 <td><h3>Return Date</h3></td>
                                 <td><h3>Returned</h3></td>
-                                <td><h3>Returned Date</h3></td>
+                                <td><h3>Action</h3></td>
                             </tr>
                         </thead>
                         <tbody>
                             {% for borrow in borrowed_books_data %}
+                            {% if borrow.return_status == False %}
                             <tr>
                                 <td>{{loop.index}}</td>
-                                <td>{{borrow.name}}</td>
-                                <td>{{borrow.user_id}}</td>
                                 <td>{{borrow.title}}</td>
                                 <td>{{borrow.isbn}}</td>
                                 <td>{{borrow.borrowed_date}}</td>
                                 <td>{{borrow.return_date}}</td>                               
-                                <td>{{ 'Yes' if borrow.return_status == True else 'No' }}</td>                           
+                                <td>{{ 'Yes' if borrow.return_status == 'true' else 'No' }}</td>                               
+                                <td>
+                                    <a href="{{ url_for('user_return_book', user_id = user.user_id, isbn = borrow.isbn) }}">
+                                        <input type="button" value="Return Book" class="return-book-button">
+                                    </a>
+                                </td>                               
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
