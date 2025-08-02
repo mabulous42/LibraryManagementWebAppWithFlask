@@ -64,7 +64,7 @@
                                 <h4>Borrowed Books</h4>
                                 {% if user.borrowed_books %}
                                 {% for book in user.borrowed_books %}
-                                <p>{{ book }}</p>
+                                <p>{{ book.isbn }}</p>
                                 {% endfor %}
                                 {% else %}
                                 <p>No borrowed books</p>
