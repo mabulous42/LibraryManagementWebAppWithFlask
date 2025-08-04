@@ -191,10 +191,9 @@ def user_borrowed_books():
                     'isbn': borrowed['isbn'],
                     'borrowed_date': borrowed['borrowed_date'],
                     'return_date': borrowed['return_date'][:10],
-                    'return_status': borrowed['returned'],
-                    'actual_return_date': borrowed['actual_return_date']
+                    'return_status': borrowed['returned']
                 }
-                borrowed_books_data.append(data)
+            
 
     # # Sorting by the datetime (most recent first)
     borrowed_books_data.sort(
@@ -570,7 +569,12 @@ def borrowed_books_history():
                         'return_date': borrowed['return_date'][:10],
                         'return_status': borrowed['returned']
                     }
+
                     borrowed_books_data.append(data)
+
+                if borrowed['returned'] == True:
+                    data['actual_return_date'] = borrowed['actual_return_date'][:10]
+
 
     # Sorting by the datetime (most recent first)
     borrowed_books_data.sort(

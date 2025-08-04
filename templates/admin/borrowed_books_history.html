@@ -43,7 +43,7 @@
                                 <td><h3>Borrowed</h3></td>
                                 <td><h3>Return Date</h3></td>
                                 <td><h3>Returned</h3></td>
-                                <td><h3>Returned Date</h3></td>
+                                <td><h3>Returned At</h3></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +57,7 @@
                                 <td>{{borrow.borrowed_date}}</td>
                                 <td>{{borrow.return_date}}</td>                               
                                 <td>{{ 'Yes' if borrow.return_status == True else 'No' }}</td>                           
+                                <td>{{borrow.actual_return_date if borrow.actual_return_date != null else '-'}}</td>                               
                             </tr>
                             {% endfor %}
                         </tbody>
