@@ -48,21 +48,26 @@
                         </thead>
                         <tbody>
                             {% for borrow in borrowed_books_data %}
-                            {% if borrow.return_status == False %}
                             <tr>
                                 <td>{{loop.index}}</td>
                                 <td>{{borrow.title}}</td>
                                 <td>{{borrow.isbn}}</td>
                                 <td>{{borrow.borrowed_date}}</td>
                                 <td>{{borrow.return_date}}</td>                               
-                                <td>{{ 'Yes' if borrow.return_status == 'true' else 'No' }}</td>                               
+                                <td>{{ 'Yes' if borrow.return_status == True else 'No' }}</td>                                
                                 <td>
+                                    {% if borrow.return_status == True %}
+                                    <input type="button" value="Return Book" class="disabled-return-button" disabled>
+                                    {% else %}
                                     <a href="{{ url_for('user_return_book', user_id = user.user_id, isbn = borrow.isbn) }}">
                                         <input type="button" value="Return Book" class="return-book-button">
                                     </a>
+                                    {% endif %}
+
+
+
                                 </td>                               
                             </tr>
-                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

@@ -6,3 +6,12 @@
     color: white;
     font-family: inherit;
 }
+
+.disabled-return-button {
+    background-color: rgba(185, 180, 180, 0.808);
+    padding: 10px;
+    cursor: disabled;
+    border-radius: 5px;
+    color: white;
+    font-family: inherit;
+}

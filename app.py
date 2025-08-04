@@ -193,6 +193,7 @@ def user_borrowed_books():
                     'return_date': borrowed['return_date'][:10],
                     'return_status': borrowed['returned']
                 }
+                borrowed_books_data.append(data)
             
 
     # # Sorting by the datetime (most recent first)
@@ -207,7 +208,7 @@ def user_borrowed_books():
 
     # borrowed_books_data.sort(key=lambda book: book['borrowed_date'])
         
-    # print ('borrowed_book: ', borrowed_books_data)
+    print ('borrowed_book: ', borrowed_books_data)
 
     return render_template('user/view_borrowed_books.html', 
                            user = user, 

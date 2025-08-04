@@ -17,6 +17,12 @@
                 "return_date": "16-08-2025 21:57:48",
                 "returned": true,
                 "actual_return_date": "03-08-2025 00:16:46"
+            },
+            {
+                "isbn": "9780316548182",
+                "borrowed_date": "04-08-2025 18:01:36",
+                "return_date": "18-08-2025 18:01:36",
+                "returned": false
             }
         ],
         "registered_at": "2025-07-06 23:10:52"
