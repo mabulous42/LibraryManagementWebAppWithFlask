@@ -14,7 +14,7 @@
 
 {# Page Title #}
 {% block title %}
-<title>{{ user_first_name}} - Mustyl Library</title>
+<title>Borrow Library Books</title>
 {% endblock title %}
 
 {% endblock head %}
@@ -35,55 +35,13 @@
             {{ form.hidden_tag()}}
             <div class="search-input-div">
                 <i class="icofont-search-1"></i>
-                {{ form.title(class="input") }}
+                {{ form.isbn(class="input") }}
             </div>
             <div class="search-button-parent">
                 {{ form.submit(class_="search-button") }}
             </div>
         </form>
-        <div class="display-search-result-parent">
-            <div class="display-search-div">
-                {% if books | length < 1 %} <!-- <h3>No users found matching your search criteria</h3> -->
-                    {% else %}
-                    {% for book in books %}
-                    <a href="#">
-                        <div class="display-result-div">
-                            <div>
-                                <div>
-                                    <h4>ISBN: </h4>
-                                    <p>{{ book.isbn }}</p>
-                                </div>
-                                <div>
-                                    <h4>TITLE: </h4>
-                                    <p>{{ book.title }}</p>
-                                </div>
-                                <div>
-                                    <h4>AUTHOR: </h4>
-                                    <p>{{ book.author }}</p>
-                                </div>
-                            </div>
-                            <div class="right-flex">
-                                <div>
-                                    <h4>Available Copies</h4>
-                                    <p>{{ book.available_copies }}</p>
-                                </div>
-                                <div class="borrow-btn">
-                                    {% if book.available_copies == 0 %}
-                                    <input type="button" value="Out of Stock" class="btn btn-disabled" disabled>
-                                    {% else %}
-                                    <a href="{{ url_for('borrow_books', isbn=book.isbn, user_id=user.user_id) }}">
-                                        <input type="button" value="Borrow Book" class="btn">
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="separator-line"></div>
-                    {% endfor %}
-                    {% endif%}
-            </div>
-        </div>
+        
     </div>
 </div>
 <div class="inner-right">

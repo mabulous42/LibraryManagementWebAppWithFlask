@@ -23,6 +23,12 @@
                 "borrowed_date": "04-08-2025 18:01:36",
                 "return_date": "18-08-2025 18:01:36",
                 "returned": false
+            },
+            {
+                "isbn": "9780590353427",
+                "borrowed_date": "11-08-2025 15:24:33",
+                "return_date": "25-08-2025 15:24:33",
+                "returned": false
             }
         ],
         "registered_at": "2025-07-06 23:10:52"

@@ -94,3 +94,8 @@ class SearchBookForm(FlaskForm):
     title = StringField(validators=[InputRequired(), Length(min=1, max=30)],
                            render_kw={"placeholder": "Search Books..."})
     submit = SubmitField('Search Book')
+
+class BorrowBookForm(FlaskForm):
+    isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
+                           render_kw={"placeholder": "Enter the book ISBN here"})
+    submit = SubmitField('Borrow Book')

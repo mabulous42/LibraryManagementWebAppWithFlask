@@ -1,7 +1,7 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
 from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book
@@ -221,32 +221,26 @@ def user_borrowed_books():
 @login_required
 def library_books():
     user = current_user
-    form = SearchBookForm()
-
-    user_name = user.name.split()
-    user_first_name = user_name[0]
+    form = BorrowBookForm()
 
     books = []
 
     if form.validate_on_submit():
-        title = form.title.data
-        books = search_books(library, title)
+        isbn = form.isbn.data
 
-        for book in books:
-            print(book)
+        try:
+            borrow_book(library, user.user_id, isbn)
+            save_books(library)
+            save_users(library)
+            flash("Book borrowed successfully!", "success")
+        except Exception as e:
+            flash(f"Error borrowing book: {str(e)}", "error")
 
-        return render_template('user/library_books.html', 
-                               active_page = 'library_books',  
-                               form=form, 
-                               books = books,
-                               user = user,
-                               user_first_name = user_first_name
-                               ) 
+        return redirect(url_for("library_books"))
 
     return render_template("user/library_books.html", 
                            active_page = 'library_books', 
-                           user = user, 
-                           user_first_name = user_first_name,
+                           user = user,
                            form = form,
                            books = books
                            )
@@ -277,6 +271,35 @@ def user_return_book(user_id, isbn):
     save_users(library)
 
     return redirect(url_for('user_borrowed_books'))
+
+@app.route('/user/search_books', methods=['GET', 'POST'])
+@login_required
+def user_search_books():
+    user = current_user
+    form = SearchBookForm()
+
+    books = []
+
+    if form.validate_on_submit():
+        title = form.title.data
+        books = search_books(library, title)
+
+        for book in books:
+            print(book)
+
+        return render_template('user/user_search_book.html', 
+                               active_page = 'user_search_books',  
+                               form=form, 
+                               books = books,
+                               user = user
+                               ) 
+
+    return render_template("user/user_search_book.html", 
+                           active_page = 'user_search_books', 
+                           user = user,
+                           form = form,
+                           books = books
+                           )
 
 # Admin Features
 @app.route('/adminDashboard', methods=['GET', 'POST'])

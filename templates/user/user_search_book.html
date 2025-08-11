@@ -1,0 +1,98 @@
+{% extends "user_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="adminDashboard.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="userDashboard.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="search_users.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="library_books.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Search Book</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Search Book</h1>
+</div>
+{% endblock page_head %}
+
+{# User main content container #}
+{% block content %}
+<div class="inner-left">
+    <div class="search-div-modal">
+        <form action="" method="post">
+            {{ form.hidden_tag()}}
+            <div class="search-input-div">
+                <i class="icofont-search-1"></i>
+                {{ form.title(class="input") }}
+            </div>
+            <div class="search-button-parent">
+                {{ form.submit(class_="search-button") }}
+            </div>
+        </form>
+        <div class="display-search-result-parent">
+            <div class="display-search-div">
+                {% if books | length < 1 %} <!-- <h3>No users found matching your search criteria</h3> -->
+                    {% else %}
+                    {% for book in books %}
+                    <a href="#">
+                        <div class="display-result-div">
+                            <div>
+                                <div>
+                                    <h4>ISBN: </h4>
+                                    <p>{{ book.isbn }}</p>
+                                </div>
+                                <div>
+                                    <h4>TITLE: </h4>
+                                    <p>{{ book.title }}</p>
+                                </div>
+                                <div>
+                                    <h4>AUTHOR: </h4>
+                                    <p>{{ book.author }}</p>
+                                </div>
+                            </div>
+                            <div class="right-flex">
+                                <div>
+                                    <h4>Available Copies</h4>
+                                    <p>{{ book.available_copies }}</p>
+                                </div>
+                                <div class="borrow-btn">
+                                    {% if book.available_copies == 0 %}
+                                    <input type="button" value="Out of Stock" class="btn btn-disabled" disabled>
+                                    {% else %}
+                                    <a href="{{ url_for('borrow_books', isbn=book.isbn, user_id=user.user_id) }}">
+                                        <input type="button" value="Borrow Book" class="btn">
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="separator-line"></div>
+                    {% endfor %}
+                    {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="inner-right">
+    <div class="inner-right-down">
+        <div class="image-banner-div">
+            <img src="{{url_for("static",
+                filename="images/promo-flyer-banner-with-electronic-ebook-reader-stack-of-books-bow-plant-world-book-day-book-heap-bookstore-bookshop.jpg"
+                )}}" alt="Library Logo" class="banner">
+        </div>
+    </div>
+</div>
+{% endblock content %}
