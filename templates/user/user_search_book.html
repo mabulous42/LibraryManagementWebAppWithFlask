@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{url_for("static", filename="adminDashboard.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="userDashboard.css" )}}">
 <link rel="stylesheet" href="{{url_for("static", filename="search_users.css" )}}">
-<link rel="stylesheet" href="{{url_for("static", filename="library_books.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="user_search_book.css" )}}">
 {% endblock other_css %}
 
 {# Page Title #}
@@ -41,11 +41,40 @@
                 {{ form.submit(class_="search-button") }}
             </div>
         </form>
+       
+        <div class="books-div-overflow-handling">
+            <div class="display-all-books-div">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>ISBN</th>
+                            <th>TITLE</th>
+                            <th>AUTHOR</th>
+                            <th>AVAILABLE COPIES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in library_books %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ book.isbn }}</td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.available_copies }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        {% if search_made %}
         <div class="display-search-result-parent">
             <div class="display-search-div">
-                {% if books | length < 1 %} <!-- <h3>No users found matching your search criteria</h3> -->
+                {% if searched_books | length < 1 %} <h3>No book(s) found matching your search criteria</h3>
                     {% else %}
-                    {% for book in books %}
+                    {% for book in searched_books %}
                     <a href="#">
                         <div class="display-result-div">
                             <div>
@@ -67,7 +96,7 @@
                                     <h4>Available Copies</h4>
                                     <p>{{ book.available_copies }}</p>
                                 </div>
-                                <div class="borrow-btn">
+                                <!-- <div class="borrow-btn">
                                     {% if book.available_copies == 0 %}
                                     <input type="button" value="Out of Stock" class="btn btn-disabled" disabled>
                                     {% else %}
@@ -75,7 +104,7 @@
                                         <input type="button" value="Borrow Book" class="btn">
                                     </a>
                                     {% endif %}
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </a>
@@ -84,6 +113,7 @@
                     {% endif%}
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 <div class="inner-right">

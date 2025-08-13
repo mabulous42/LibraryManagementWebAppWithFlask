@@ -223,6 +223,9 @@ def library_books():
     user = current_user
     form = BorrowBookForm()
 
+    user_name = user.name.split()
+    user_first_name = user_name[0]
+
     books = []
 
     if form.validate_on_submit():
@@ -242,7 +245,8 @@ def library_books():
                            active_page = 'library_books', 
                            user = user,
                            form = form,
-                           books = books
+                           books = books,
+                           user_first_name = user_first_name
                            )
 
 
@@ -277,28 +281,46 @@ def user_return_book(user_id, isbn):
 def user_search_books():
     user = current_user
     form = SearchBookForm()
+    library_books = load_books(library)
+    library_books = [book.to_dict() for book in library_books.values()]
 
-    books = []
+    library_books.sort(key=lambda book: book['title'])
+
+    search_made = False
+
+    user_name = user.name.split()
+    user_first_name = user_name[0]
+
+    searched_books = []
 
     if form.validate_on_submit():
         title = form.title.data
-        books = search_books(library, title)
+        searched_books = search_books(library, title)
+        search_made = True
 
-        for book in books:
+        for book in searched_books:
             print(book)
 
         return render_template('user/user_search_book.html', 
                                active_page = 'user_search_books',  
                                form=form, 
-                               books = books,
-                               user = user
-                               ) 
+                               searched_books = searched_books,
+                               user = user,
+                               user_first_name = user_first_name,
+                               library_books = library_books,
+                               search_made = search_made
+                               )
+
+    print(search_made) 
 
     return render_template("user/user_search_book.html", 
                            active_page = 'user_search_books', 
                            user = user,
                            form = form,
-                           books = books
+                           searched_books = searched_books,
+                           user_first_name = user_first_name,
+                           library_books = library_books,
+                           search_made = search_made
                            )
 
 # Admin Features
