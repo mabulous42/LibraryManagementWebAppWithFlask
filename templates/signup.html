@@ -44,7 +44,11 @@
                         </div>
                         <div class="password-input-div">
                             <i class="icofont-ui-password"></i>
-                            {{ form.password(class="password") }}                 
+                            <div id="tuggle-button">
+                                <i class="icofont-eye-open" onclick="showAndHidePassword()"></i>
+                            </div>
+                            {{ form.password(class="password", id="user-password") }}  
+                                           
                         </div>
                         <div class="signup-btn">
                             {{ form.submit(class_="btn") }}
@@ -74,4 +78,5 @@
 {# <div class="loader-overlay">
     <div class="spinner"></div>
 </div> #}
+<script src="{{ url_for('static', filename='project.js') }}"></script>
 {% endblock%}

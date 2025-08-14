@@ -119,6 +119,16 @@ h5 {
     outline: none;
 }
 
+#tuggle-button {
+    position: absolute;
+    right: 0;
+    top: 0.7rem;
+    padding: 15px;
+    color: black;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+}
+
 .signup-btn {
     margin: 10px;
 }
