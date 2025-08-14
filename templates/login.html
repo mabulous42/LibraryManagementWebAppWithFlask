@@ -36,7 +36,11 @@
                         </div>
                         <div class="password-input-div">
                             <i class="icofont-ui-password"></i>
-                            {{ form.password(class="password") }}  
+                            <div id="tuggle-button">                                
+                                <i class="icofont-eye-blocked" onclick="showPassword()" id="show-password"></i>
+                                <i class="icofont-eye" onclick="hidePassword()" id="hide-password"></i>                                
+                            </div>
+                            {{ form.password(class="password", id="user-password") }}  
                         </div>
                         <div class="login-btn">
                         {{ form.submit(class_="btn") }}
@@ -58,4 +62,5 @@
         <small>2025 © Mustyl Library</small>
     </div>
 </main>
+<script src="{{ url_for('static', filename='project.js') }}"></script>
 {% endblock %}
