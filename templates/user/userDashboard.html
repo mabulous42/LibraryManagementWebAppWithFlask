@@ -57,7 +57,7 @@
     <div class="inner-content-down">
         <div class="wrap-inner-content-down">
             <div class="borrowed-header">
-                <h2>Borrowed Books</h2>
+                <h2>Recent Borrowed Books</h2>
             </div>
             {% if borrowed_books_data | length < 1 %} <h4 class="no-borrow-book-text">You don't have any borrowed book(s)</h4>
                 {% else %}
@@ -84,7 +84,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for borrow in borrowed_books_data[:3] %}
+                                {% for borrow in borrowed_books_data[:2] %}
+                                {% if not borrow.return_status %}
                                 <tr>
                                     <td>{{loop.index}}</td>
                                     <td>{{borrow.title}}</td>
@@ -92,6 +93,7 @@
                                     <td>{{borrow.borrowed_date}}</td>
                                     <td>{{borrow.return_date}}</td>
                                 </tr>
+                                {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>

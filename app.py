@@ -140,14 +140,15 @@ def userDashboard():
     for borrowed in user.borrowed_books:
         for book in library_books:
             if borrowed['isbn'] == book['isbn']:
-                data = {
-                    'title': book['title'],
-                    'isbn': borrowed['isbn'],
-                    'borrowed_date': borrowed['borrowed_date'],
-                    'return_date': borrowed['return_date'][:10],
-                    'return_status': borrowed['returned']
-                }
-                borrowed_books_data.append(data)
+                if borrowed['returned'] == False:
+                    data = {
+                        'title': book['title'],
+                        'isbn': borrowed['isbn'],
+                        'borrowed_date': borrowed['borrowed_date'],
+                        'return_date': borrowed['return_date'][:10],
+                        'return_status': borrowed['returned']
+                    }
+                    borrowed_books_data.append(data)
 
     # # Sorting by the datetime (most recent first)
     borrowed_books_data.sort(
@@ -262,6 +263,16 @@ def borrow_books(user_id, isbn):
         flash(f"Error borrowing book: {str(e)}", "error")
 
     return redirect(url_for("library_books"))
+
+@app.route('/user/return_books', methods=['GET', 'POST'])
+@login_required
+def return_books():
+    form = BorrowBookForm()
+
+    return render_template('/user/return_book.html',
+                           active_page = 'return_books',
+                           form = form
+                           )
 
 @app.route('/user/return_book/<user_id>/<isbn>')
 @login_required

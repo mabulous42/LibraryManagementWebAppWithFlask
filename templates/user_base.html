@@ -42,12 +42,14 @@
                             <p>Borrow Book</p>
                         </div>
                     </a>
-                    <div class="each-feature {{ 'active' if active_page == 'lend_approval' else '' }}">
-                        <div class="icon-div">
-                            <i class="icofont-triangle"></i>
+                    <a href="{{ url_for('return_books') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'return_books' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-triangle"></i>
+                            </div>
+                            <p>Return Book</p>
                         </div>
-                        <p>Return Book</p>
-                    </div>
+                    </a>
                     <a href="{{ url_for('user_search_books') }}" class="a-link">
                         <div class="each-feature {{ 'active' if active_page == 'user_search_books' else '' }}">
                             <div class="icon-div">
@@ -61,7 +63,7 @@
                             <div class="icon-div">
                                 <i class="icofont-ebook"></i>
                             </div>
-                            <p>Borrowed Books</p>
+                            <p>Borrowed Books History</p>
                         </div>
                     </a>
                     <div class="each-feature">

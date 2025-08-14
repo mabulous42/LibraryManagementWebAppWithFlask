@@ -28,7 +28,27 @@
                 "isbn": "9780590353427",
                 "borrowed_date": "11-08-2025 15:24:33",
                 "return_date": "25-08-2025 15:24:33",
+                "returned": true,
+                "actual_return_date": "14-08-2025 14:58:40"
+            },
+            {
+                "isbn": "3745890123467",
+                "borrowed_date": "14-08-2025 14:52:08",
+                "return_date": "28-08-2025 14:52:08",
                 "returned": false
+            },
+            {
+                "isbn": "9781616202415",
+                "borrowed_date": "14-08-2025 14:57:00",
+                "return_date": "28-08-2025 14:57:00",
+                "returned": false
+            },
+            {
+                "isbn": "9780590353427",
+                "borrowed_date": "14-08-2025 14:59:23",
+                "return_date": "28-08-2025 14:59:23",
+                "returned": true,
+                "actual_return_date": "14-08-2025 15:35:02"
             }
         ],
         "registered_at": "2025-07-06 23:10:52"

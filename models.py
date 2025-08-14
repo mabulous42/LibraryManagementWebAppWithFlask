@@ -228,10 +228,10 @@ class Library:
         # the user_id is used to check if the user exist and the book isbn to check if the book exist in the User and Book collection respectively
         if user_id in self.users and isbn in self.books:
             user = self.users[user_id] # getting the user details into user
-            if len(user.borrowed_books) > 5:
-                print(f"This user {user_id} have reached the maximum number of books that he/she can borrow (5)")
-            elif any(b['isbn'] == isbn for b in user.borrowed_books):
-                print("You cannot borrow the same book that you have already borrowed")
+            if len(user.borrowed_books) > 10:
+                print(f"This user {user_id} have reached the maximum number of books that he/she can borrow (10)")
+            elif any(b['isbn'] == isbn and b['returned'] == False for b in user.borrowed_books):
+                print("You cannot borrow the same book that you are still owing")
             else:
                 book = self.books[isbn] # getting the book details into book
                 if book.available_copies > 0: # checking if there is at least a copy or more copies of book available to borrow
