@@ -57,7 +57,9 @@
                                 <td>{{ 'Yes' if borrow.return_status == True else 'No' }}</td>                                
                                 <td>
                                     {% if borrow.return_status == True %}
-                                    <input type="button" value="Return Book" class="disabled-return-button" disabled>
+                                    <a href="{{ url_for('borrow_books', user_id = user.user_id, isbn = borrow.isbn) }}">
+                                        <input type="button" value="Borrow Again" class="book-book-button">
+                                    </a>
                                     {% else %}
                                     <a href="{{ url_for('user_return_book', user_id = user.user_id, isbn = borrow.isbn) }}">
                                         <input type="button" value="Return Book" class="return-book-button">

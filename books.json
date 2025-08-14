@@ -51,7 +51,7 @@
         "title": "The Hobbit",
         "author": "J.R.R. Tolkien",
         "isbn": "9780547928227",
-        "available_copies": 9,
+        "available_copies": 8,
         "total_copies": 9,
         "added_at": "2025-07-18 21:25:38"
     },
@@ -59,7 +59,7 @@
         "title": "The Book Thief",
         "author": "Markus Zusak",
         "isbn": "9781616202416",
-        "available_copies": 6,
+        "available_copies": 5,
         "total_copies": 6,
         "added_at": "2025-08-02 19:00:30"
     }

@@ -295,7 +295,7 @@ def borrow_books(user_id, isbn):
     except Exception as e:
         flash(f"Error borrowing book: {str(e)}", "error")
 
-    return redirect(url_for("library_books"))
+    return redirect(url_for("user_borrowed_books"))
 
 @app.route('/user/return_books', methods=['GET', 'POST'])
 @login_required
