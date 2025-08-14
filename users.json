@@ -9,7 +9,8 @@
                 "isbn": "9780061122415",
                 "borrowed_date": "02-08-2025 19:26:01",
                 "return_date": "16-08-2025 19:26:01",
-                "returned": false
+                "returned": true,
+                "actual_return_date": "14-08-2025 17:13:11"
             },
             {
                 "isbn": "9781616202415",
@@ -22,7 +23,8 @@
                 "isbn": "9780316548182",
                 "borrowed_date": "04-08-2025 18:01:36",
                 "return_date": "18-08-2025 18:01:36",
-                "returned": false
+                "returned": true,
+                "actual_return_date": "14-08-2025 17:25:08"
             },
             {
                 "isbn": "9780590353427",
@@ -35,13 +37,15 @@
                 "isbn": "3745890123467",
                 "borrowed_date": "14-08-2025 14:52:08",
                 "return_date": "28-08-2025 14:52:08",
-                "returned": false
+                "returned": true,
+                "actual_return_date": "14-08-2025 17:32:01"
             },
             {
                 "isbn": "9781616202415",
                 "borrowed_date": "14-08-2025 14:57:00",
                 "return_date": "28-08-2025 14:57:00",
-                "returned": false
+                "returned": true,
+                "actual_return_date": "14-08-2025 18:00:31"
             },
             {
                 "isbn": "9780590353427",
@@ -49,6 +53,39 @@
                 "return_date": "28-08-2025 14:59:23",
                 "returned": true,
                 "actual_return_date": "14-08-2025 15:35:02"
+            },
+            {
+                "isbn": "9781616202416",
+                "borrowed_date": "14-08-2025 16:09:05",
+                "return_date": "28-08-2025 16:09:05",
+                "returned": true,
+                "actual_return_date": "14-08-2025 17:02:23"
+            },
+            {
+                "isbn": "9780547928227",
+                "borrowed_date": "14-08-2025 17:02:04",
+                "return_date": "28-08-2025 17:02:04",
+                "returned": true,
+                "actual_return_date": "14-08-2025 17:21:46"
+            },
+            {
+                "isbn": "9780061120084",
+                "borrowed_date": "14-08-2025 17:22:39",
+                "return_date": "28-08-2025 17:22:39",
+                "returned": true,
+                "actual_return_date": "14-08-2025 18:03:09"
+            },
+            {
+                "isbn": "3745890123467",
+                "borrowed_date": "14-08-2025 18:30:36",
+                "return_date": "28-08-2025 18:30:36",
+                "returned": false
+            },
+            {
+                "isbn": "9780061120084",
+                "borrowed_date": "14-08-2025 23:31:27",
+                "return_date": "28-08-2025 23:31:27",
+                "returned": false
             }
         ],
         "registered_at": "2025-07-06 23:10:52"

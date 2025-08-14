@@ -37,7 +37,7 @@
                 </div>
             </div>
         </a>
-        <a href="#" class="view-link">
+        <a href="{{ url_for('return_books')}}" class="view-link">
             <div class="return-book">
                 <i class="icofont-book-alt"></i>
                 <div class="x">
@@ -84,8 +84,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for borrow in borrowed_books_data[:2] %}
-                                {% if not borrow.return_status %}
+                                {% for borrow in borrowed_books_data[:3] %}
                                 <tr>
                                     <td>{{loop.index}}</td>
                                     <td>{{borrow.title}}</td>
@@ -93,7 +92,6 @@
                                     <td>{{borrow.borrowed_date}}</td>
                                     <td>{{borrow.return_date}}</td>
                                 </tr>
-                                {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>

@@ -99,3 +99,8 @@ class BorrowBookForm(FlaskForm):
     isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
                            render_kw={"placeholder": "Enter the book ISBN here"})
     submit = SubmitField('Borrow Book')
+
+class ReturnBookForm(FlaskForm):
+    isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
+                           render_kw={"placeholder": "Enter the book ISBN here"})
+    submit = SubmitField('Return Book')

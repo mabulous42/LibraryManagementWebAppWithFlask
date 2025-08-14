@@ -1,0 +1,14 @@
+
+.inner-content-down {
+    height: 80%;
+    margin-top: 10px;
+}
+
+.wrap-inner-content-down {
+    height: 90%;
+}
+
+.borrowed-book-details-div {
+    height: 90%;
+    overflow: auto;
+}

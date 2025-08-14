@@ -1,7 +1,7 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm, ReturnBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary
 from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book
@@ -218,36 +218,69 @@ def user_borrowed_books():
                            borrowed_books_data = borrowed_books_data
                            )
 
+
 @app.route('/user/library_books', methods=['GET', 'POST'])
 @login_required
 def library_books():
     user = current_user
     form = BorrowBookForm()
 
+    library_books = load_books(library)
+    library_books = [book.to_dict() for book in library_books.values()]
+
     user_name = user.name.split()
     user_first_name = user_name[0]
+
+    borrowed_books_data = []
 
     books = []
 
     if form.validate_on_submit():
         isbn = form.isbn.data
 
+
         try:
             borrow_book(library, user.user_id, isbn)
             save_books(library)
             save_users(library)
             flash("Book borrowed successfully!", "success")
+            return redirect(url_for("library_books"))
         except Exception as e:
             flash(f"Error borrowing book: {str(e)}", "error")
 
-        return redirect(url_for("library_books"))
+    for borrowed in user.borrowed_books:
+        for book in library_books:
+            if borrowed['isbn'] == book['isbn']:
+                if borrowed['returned'] == False:
+                    data = {
+                        'title': book['title'],
+                        'isbn': borrowed['isbn'],
+                        'borrowed_date': borrowed['borrowed_date'],
+                        'return_date': borrowed['return_date'][:10],
+                        'return_status': borrowed['returned']
+                    }
+                    borrowed_books_data.append(data)
+
+    # # Sorting by the datetime (most recent first)
+    borrowed_books_data.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in borrowed_books_data:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+        
+    print ('borrowed_book: ', borrowed_books_data)
+
 
     return render_template("user/library_books.html", 
                            active_page = 'library_books', 
                            user = user,
                            form = form,
                            books = books,
-                           user_first_name = user_first_name
+                           user_first_name = user_first_name,
+                           borrowed_books_data = borrowed_books_data
                            )
 
 
@@ -267,11 +300,66 @@ def borrow_books(user_id, isbn):
 @app.route('/user/return_books', methods=['GET', 'POST'])
 @login_required
 def return_books():
-    form = BorrowBookForm()
+    form = ReturnBookForm()
+
+    library_books = load_books(library)
+    library_books = [book.to_dict() for book in library_books.values()]
+
+    user = current_user
+    print(f"User authenticated: {user.is_authenticated}")
+    print(f"User ID: {user.id}")
+    print(f"User object: {user}")
+
+    full_name = user.name.strip()
+    name_parts = full_name.split()
+
+    user_first_name = name_parts[0]
+
+    if form.validate_on_submit():
+        isbn = form.isbn.data
+
+        try:
+            return_book(library, user.user_id, isbn)
+            save_books(library)
+            save_users(library)
+            flash("Book Returned successfully!", "success")
+            return redirect(url_for('return_books'))
+        except Exception as e:
+            flash(f"Error Returning book: {str(e)}", "error")
+
+    borrowed_books_data = []   
+
+    for borrowed in user.borrowed_books:
+        for book in library_books:
+            if borrowed['isbn'] == book['isbn']:
+                if borrowed['returned'] == True:
+                    data = {
+                        'title': book['title'],
+                        'isbn': borrowed['isbn'],
+                        'borrowed_date': borrowed['borrowed_date'][:10],
+                        'return_date': borrowed['actual_return_date'],
+                        'return_status': borrowed['returned']
+                    }
+                    borrowed_books_data.append(data)
+
+    # # Sorting by the datetime (most recent first)
+    borrowed_books_data.sort(
+        key=lambda book: datetime.strptime(book['return_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in borrowed_books_data:
+        book['return_date'] = time_ago(book['return_date'])
+        
+    print ('borrowed_book: ', borrowed_books_data)
 
     return render_template('/user/return_book.html',
                            active_page = 'return_books',
-                           form = form
+                           form = form,
+                           borrowed_books_data = borrowed_books_data,
+                           user = user,
+                           user_first_name = user_first_name
                            )
 
 @app.route('/user/return_book/<user_id>/<isbn>')
@@ -629,8 +717,8 @@ def borrowed_books_history():
 
                     borrowed_books_data.append(data)
 
-                if borrowed['returned'] == True:
-                    data['actual_return_date'] = borrowed['actual_return_date'][:10]
+                    if borrowed['returned'] == True:
+                        data['actual_return_date'] = borrowed['actual_return_date'][:10]
 
 
     # Sorting by the datetime (most recent first)
