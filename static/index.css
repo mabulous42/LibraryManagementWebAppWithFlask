@@ -72,7 +72,7 @@ main {
     background-color: green;
     text-align: center;
     color: white;
-    padding: 0.75rem 6rem;
+    padding: 0.75rem 3rem;
     font-size: 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -80,6 +80,22 @@ main {
 
 .continue-btn button:hover {
     background-color: rgb(50, 173, 50);
+}
+
+.admin-btn {
+    text-align: center;
+    margin-top: 10px;
+    
+}
+
+.admin-login-button {
+    background-color: black;
+    color: white;
+    padding: 0.75rem 3rem;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Roboto Slab", serif;
 }
 
 

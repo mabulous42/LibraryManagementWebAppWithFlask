@@ -92,7 +92,11 @@ def signup():
     return render_template("signup.html", form=form)
 
 
+@app.route("/admin_login", methods=['GET', 'POST'])
+def admin_login():
+    form = LoginForm()
 
+    return render_template('/admin/admin_login.html', form = form)
 
 
 @app.route("/login", methods=['GET', 'POST'])

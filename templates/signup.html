@@ -16,10 +16,11 @@
 
 {% block body%}
 <main>
-    <div class="library-logo">
-        <img src="{{url_for("static", filename="images/Mustyl_library_logo-removebg-preview.png" )}}" alt="Library Logo"
-            class="logo-img">
-    </div>
+    <a href="{{url_for('home')}}">
+        <div class="library-logo">
+            <img src="{{url_for('static', filename='images/Mustyl_library_logo-removebg-preview.png')}}" alt="" class="logo-img">
+        </div>
+    </a>
     <div class="signup-modal-div">
         <div class="signup">
             <div class="signup-detals-space">

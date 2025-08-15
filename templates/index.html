@@ -15,8 +15,13 @@
                 <p>Your gateway to knowledge, research, and limitless learning. Explore books, manage resources, and
                     connect with a world of information, all in one place.</p>
                 <div class="continue-btn">
-                    <a href="{{url_for('signup')}}">
-                        <button>GET STARTED</button>
+                    <a href="{{url_for('login')}}">
+                        <button>GET STARTED AS A USER</button>
+                    </a>
+                </div>
+                <div class="admin-btn">
+                    <a href="{{ url_for('admin_login') }}">
+                        <button class="admin-login-button">ADMIN LOGIN</button>
                     </a>
                 </div>
             </div>
