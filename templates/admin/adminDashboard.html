@@ -62,64 +62,68 @@
                 <h2>Borrowed Books</h2>
             </div>
             <div class="borrowed-book-details-div">
-                {% if borrowed_books_data | length < 1 %}
-                <h3 class="no-borrow-book-text">No book(s) borrowed from the library</h3>
-                {% else %}
-                <div class="table-head-wrapper">
-                    <table class="custom-table">
-                        <thead>
-                            <tr>
-                                <td>
-                                    <h3>S/N</h3>
-                                </td>
-                                <td>
-                                    <h3>User ID</h3>
-                                </td>
-                                <td>
-                                    <h3>Book Title</h3>
-                                </td>
-                                <td>
-                                    <h3>Book ISBN</h3>
-                                </td>
-                                <td>
-                                    <h3>Return Date</h3>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for borrow in borrowed_books_data[:3] %}
-                            <tr>
-                                <td>{{loop.index}}</td>
-                                <td>{{borrow.user_id}}</td>
-                                <td>{{borrow.title}}</td>
-                                <td>{{borrow.isbn}}</td>
-                                <td>{{borrow.return_date}}</td>                               
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="view-more-div">
-                        <a href="{{url_for('borrowed_books_history')}}">
-                            <div class="view-more-btn">
-                                <button class="">View All</button>
-                            </div>
-                        </a>
+                {% if borrowed_books_data | length < 1 %} <h3 class="no-borrow-book-text">No book(s) borrowed from the
+                    library</h3>
+                    {% else %}
+                    <div class="table-head-wrapper">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <h3>S/N</h3>
+                                    </td>
+                                    <td>
+                                        <h3>User ID</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Book Title</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Book ISBN</h3>
+                                    </td>
+                                    <td>
+                                        <h3>Return Date</h3>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for borrow in borrowed_books_data[:3] %}
+                                <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td>{{borrow.user_id}}</td>
+                                    <td>{{borrow.title}}</td>
+                                    <td>{{borrow.isbn}}</td>
+                                    <td>{{borrow.return_date}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="view-more-div">
+                            <a href="{{url_for('borrowed_books_history')}}">
+                                <div class="view-more-btn">
+                                    <button class="">View All</button>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                {% endif %}
+                    {% endif %}
             </div>
         </div>
     </div>
 </div>
 <div class="inner-right">
     <div class="inner-right-up">
-        <div class="lend-request-div">
-            <i class="icofont-address-book"></i>
-            <div class="x">
-                <h3>Lend <br>Requests</h3>
-                <p>0</p>
+            <div class="lend-request-div">
+                <a href="">
+                    <div class="borrowed-books">
+                        <i class="icofont-address-book"></i>
+                        <div class="x">
+                            <h3>Borrowed <br>Books</h3>
+                            <p>0</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
     </div>
     <div class="inner-right-down">
         <div class="image-banner-div">

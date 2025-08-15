@@ -96,7 +96,16 @@ def signup():
 def admin_login():
     form = LoginForm()
 
-    return render_template('/admin/admin_login.html', form = form)
+    if form.validate_on_submit():
+        admin_email = form.email.data
+        admin_password = form.password.data
+
+        if admin_email == ADMIN_EMAIL and admin_password == ADMIN_PASSWORD:
+            login_user(admin_user)
+            flash('Admin login successful!', 'success')
+            return redirect(url_for('adminDashboard'))
+
+    return render_template('admin/admin_login.html', form = form)
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -107,11 +116,6 @@ def login():
         user = library.get_user_email(form.email.data)
         admin_email = form.email.data
         admin_password = form.password.data
-
-        if admin_email == ADMIN_EMAIL and admin_password == ADMIN_PASSWORD:
-            login_user(admin_user)
-            flash('Admin login successful!', 'success')
-            return redirect(url_for('adminDashboard'))
 
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
@@ -442,6 +446,7 @@ def adminDashboard():
     library_books = [book.to_dict() for book in library_books.values()]
 
     borrowed_books_data = []
+    unreturned_books = []
 
     for user in library_users:
         for borrowed in user['borrowed_books']:
@@ -457,8 +462,19 @@ def adminDashboard():
                         'return_status': borrowed['returned']
                     }
                     borrowed_books_data.append(data)
+                if borrowed['isbn'] == book['isbn'] and borrowed['returned'] == True:
+                        data_unreturned = {
+                            'title': book['title'],
+                            'isbn': borrowed['isbn'],
+                            'borrowed_date': borrowed['borrowed_date'],
+                            'return_date': borrowed['return_date'][:10],
+                            'return_status': borrowed['returned']
+                        }
+                        unreturned_books.append(data_unreturned)
 
-    # # Sorting by the datetime (most recent first)
+            
+
+    # # Sorting orrowed books history (both return and unreturned) by the datetime (most recent first)
     borrowed_books_data.sort(
         key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
         reverse=True
@@ -468,6 +484,20 @@ def adminDashboard():
     for book in borrowed_books_data:
         book['borrowed_date'] = time_ago(book['borrowed_date'])
 
+    # borrowed_books_data.sort(key=lambda book: book['borrowed_date'])
+        
+    print ('borrowed_book: ', borrowed_books_data)
+
+    # # Sorting borrowed books (unreturned only) by the datetime (most recent first)
+    unreturned_books.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in unreturned_books:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+
     # borrowed_books_data.sort(key=lambda book: book['borrowed_date']) 
 
     return render_template('admin/adminDashboard.html', 
@@ -475,7 +505,8 @@ def adminDashboard():
                            library_users = library_users,
                            library_books = library_books,
                            active_page='adminDashboard',
-                           borrowed_books_data = borrowed_books_data                          
+                           borrowed_books_data = borrowed_books_data,
+                           unreturned_books = unreturned_books                         
                            )
 
 @app.route('/admin/add_books', methods=['GET', 'POST'])

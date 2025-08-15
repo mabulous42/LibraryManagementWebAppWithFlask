@@ -24,6 +24,15 @@
     margin-bottom: 20px;
 }
 
+.lend-request-div a {
+    text-decoration: none;
+    color: black;
+}
+
+.borrowed-books {
+    display: flex;
+}
+
 .book i,
 .lend-request-div i {
     color: rgb(44, 43, 43);
