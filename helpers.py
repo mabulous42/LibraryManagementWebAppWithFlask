@@ -1,6 +1,6 @@
 # functions
 import json
-from models import Book, Library, User, digitalLibrary
+from models import Book, Library, User, digitalLibrary, EBook
 from datetime import datetime
 
 # function to add a book to the library
@@ -127,36 +127,36 @@ def load_books(library):
 # Save books to books.json
 def save_ebooks(digitalLibrary):
     try:
-        with open('books.json', 'w') as book_file:
-            books_dict = {}
-            for isbn, book in digitalLibrary.books.items():
-                books_dict[isbn] = book.to_dict()
-            json.dump(books_dict, book_file, indent=4)
-        print("Book data saved.")
+        with open('ebooks.json', 'w') as ebook_file:
+            ebooks_dict = {}
+            for isbn, ebook in digitalLibrary.ebooks.items():
+                ebooks_dict[isbn] = ebook.to_dict()
+            json.dump(ebooks_dict, ebook_file, indent=4)
+        print("eBook data saved.")
     except Exception as e:
         print(f"Failed to save books: {e}")
 
 # Load books from books.json
 def load_ebooks(digitalLibrary):
     try:
-        with open('books.json', 'r') as book_file:
-            books_dict = json.load(book_file)
+        with open('ebooks.json', 'r') as ebook_file:
+            ebooks_dict = json.load(ebook_file)
             
             # Clear existing users
-            digitalLibrary.books = {}
+            digitalLibrary.ebooks = {}
             
             # Load from dictionary structure
-            for isbn, book_data in books_dict.items():
-                book = Book.from_dict(book_data)
-                digitalLibrary.books[isbn] = book
+            for isbn, ebook_data in ebooks_dict.items():
+                ebook = EBook.from_dict(ebook_data)
+                digitalLibrary.ebooks[isbn] = ebook
                 
         print("Book data loaded.")
-        return digitalLibrary.books
+        return digitalLibrary.ebooks
     except FileNotFoundError:
-        print("No book data found.")
+        print("No ebook data found.")
         return {}
     except Exception as e:
-        print(f"Failed to load books: {e}")
+        print(f"Failed to load ebooks: {e}")
         return {}
 
 def time_ago(date_string):

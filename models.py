@@ -341,24 +341,4 @@ class digitalLibrary(Library):
         else:
             print("eBook not available.")
 
-    # function to convert book object into dictionary data when loading from json file
-    def to_dict(self):
-        return {
-            "title": self.title,
-            "author": self.author,
-            "isbn": self.isbn,
-            "format": self.format,
-            "added_at": self.added_at,
-            "file_path": self.file_path
-        }
-
-    # function to convert book dictionary into object when saving into json file
-    @staticmethod
-    def from_dict(data):
-        ebook = Book(data["title"], data["author"], data["isbn"])
-        ebook.format = data["format"]
-        ebook.added_at = data['added_at']
-        ebook.file_path = data["file_path"]
-
-        return ebook 
         

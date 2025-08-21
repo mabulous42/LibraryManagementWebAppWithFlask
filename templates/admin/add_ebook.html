@@ -1,0 +1,93 @@
+{% extends "admin_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="add_books.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Add eBook</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Add eBook</h1>
+</div>
+{% endblock page_head %}
+
+{% block content %}
+<div class="inner-left">
+    <div class="add-book-modal">
+        <a href="{{ url_for('adminDashboard') }}" class="close-modal-a">
+            <div class="close-modal">
+                <i class="icofont-close-squared-alt"></i>
+            </div>
+        </a>
+        <div class="add-book-form-div">
+            <form action="" method="POST">
+                {{ form.hidden_tag()}}
+                <div class="each-input-div">
+                    <label for="title">
+                        <h3>TITLE</h3>
+                    </label>
+                    <div class="input-field-div">
+                        {{ form.title(class="input") }}
+                    </div>
+                </div>
+                <div class="each-input-div">
+                    <label for="author">
+                        <h3>AUTHOR</h3>
+                    </label>
+                    <div class="input-field-div">
+                        {{ form.author(class="input") }}
+                    </div>
+                </div>
+                <div class="each-input-div">
+                    <label for="isbn">
+                        <h3>ISBN</h3>
+                    </label>
+                    <div class="input-field-div">
+                        {{ form.isbn(class="input") }}
+                    </div>
+                </div>
+                <div class="each-input-div">
+                    <label for="copies">
+                        <h3>FORMAT</h3>
+                    </label>
+                    <div class="input-field-div">
+                        {{ form.format(class="input") }}
+                    </div>
+                </div>
+                <div class="each-input-div">
+                    <label for="copies">
+                        <h3>BOOK URL</h3>
+                    </label>
+                    <div class="input-field-div">
+                        {{ form.file_path(class="input") }}
+                    </div>
+                </div>
+                <div class="add-book-btn-div">
+                    {{ form.submit(class_="btn") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="inner-right">
+    <div class="inner-right-down">
+        <div class="image-banner-div">
+            <img src="{{url_for("static", filename="images/vintagereading16.webp" )}}" alt="Library Logo"
+                class="banner">
+        </div>
+    </div>
+</div>
+{% endblock content %}

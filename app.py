@@ -3,8 +3,8 @@ from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
 from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm, ReturnBookForm
 from flask_bcrypt import Bcrypt
-from models import User, Book, Library, AdminUser, digitalLibrary
-from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book
+from models import User, Book, Library, AdminUser, digitalLibrary, EBook
+from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book, save_ebooks
 from datetime import datetime
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from functools import wraps
@@ -441,9 +441,13 @@ def adminDashboard():
 
     library_users = load_users(library)
     library_books = load_books(library)
+    library_ebooks = load_ebooks(dglibrary)
 
     library_users = [user.to_dict() for user in library_users.values()]
     library_books = [book.to_dict() for book in library_books.values()]
+    library_ebooks = [ebook.to_dict() for ebook in library_ebooks.values()]
+
+    print('Ebook', library_ebooks)
 
     borrowed_books_data = []
     unreturned_books = []
@@ -507,7 +511,8 @@ def adminDashboard():
                            library_books = library_books,
                            active_page='adminDashboard',
                            borrowed_books_data = borrowed_books_data,
-                           unreturned_books = unreturned_books                         
+                           unreturned_books = unreturned_books,
+                           library_ebooks = library_ebooks                        
                            )
 
 
@@ -832,6 +837,7 @@ def borrowed_books_history():
 @admin_required
 def add_ebooks():
     form = AddeBookForm()
+    admin_user = current_user
 
     if form.validate_on_submit():
         title = form.title.data
@@ -841,21 +847,25 @@ def add_ebooks():
         file_path = form.file_path.data
 
         # creating and instance of class Book to add new book
-        new_book = Book(title, author, isbn, format)
+        new_ebook = EBook(title, author, isbn, format, file_path)
         
 
         # adding a new book, using the add_book function from helper.py
-        add_book(library, new_book)
+        # add_book(dglibrary, new_ebook)
+        dglibrary.add_ebook(new_ebook)
 
         # saving the added book to json storage   
-        save_books(library) 
+        save_ebooks(dglibrary)
 
         flash('Book added successfully!', 'success')
         return redirect(url_for('adminDashboard'))
     flash('Book ISBN Already Exist', 'fail')
 
 
-    return render_template("admin/add_books.html", form=form)
+    return render_template("admin/add_ebook.html", 
+                           form=form,
+                           admin_user = admin_user
+                           )
 
 
 @app.route("/logout", methods=['GET', 'POST'])
