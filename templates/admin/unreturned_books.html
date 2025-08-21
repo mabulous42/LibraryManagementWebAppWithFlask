@@ -1,0 +1,75 @@
+{% extends "admin_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="borrowed_books_history.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Borrowed Books History</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>Borrowed Books</h1>
+</div>
+{% endblock page_head %}
+
+{% block content %}
+<div class="inner-left">
+    <div class="inner-left-a">
+        {% if unreturned_books | length < 1 %}
+        <h3 class="no-borrow-book-text">No book(s) borrowed from the library</h3>
+        {% else %}
+        <div class="borrowed-book-details-div">
+                <div class="table-head-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <td><h3>S/N</h3></td>
+                                <td><h3>Library User Name</h3></td>
+                                <td><h3>User ID</h3></td>
+                                <td><h3>Title</h3></td>
+                                <td><h3>ISBN</h3></td>
+                                <td><h3>Borrowed</h3></td>
+                                <td><h3>Return Date</h3></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for borrow in unreturned_books %}
+                            <tr>
+                                <td>{{loop.index}}</td>
+                                <td>{{borrow.name}}</td>
+                                <td>{{borrow.user_id}}</td>
+                                <td>{{borrow.title}}</td>
+                                <td>{{borrow.isbn}}</td>
+                                <td>{{borrow.borrowed_date}}</td>
+                                <td>{{borrow.return_date}}</td>                            
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    <!-- <div class="inner-left-b">B</div> -->
+</div>
+<!-- <div class="inner-right">
+    <div class="inner-right-down">
+        <div class="image-banner-div">
+            <img src="{{url_for("static", filename="images/vintagereading16.webp" )}}" alt="Library Logo"
+                class="banner">
+        </div>
+    </div>
+</div> -->
+{% endblock content %}

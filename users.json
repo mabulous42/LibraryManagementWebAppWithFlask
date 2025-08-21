@@ -107,7 +107,14 @@
         "user_id": "LU01660",
         "email": "ayo@gmail.com",
         "password": "$2b$12$cwjhqlMplGidhnZ6LmX7VOUoayjyUPzMS.R4ikSoId4miy9QX2HZS",
-        "borrowed_books": [],
+        "borrowed_books": [
+            {
+                "isbn": "9781616202415",
+                "borrowed_date": "19-08-2025 14:11:49",
+                "return_date": "02-09-2025 14:11:49",
+                "returned": false
+            }
+        ],
         "registered_at": "2025-07-06 23:11:39"
     },
     "LU0840": {

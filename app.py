@@ -462,19 +462,20 @@ def adminDashboard():
                         'return_status': borrowed['returned']
                     }
                     borrowed_books_data.append(data)
-                if borrowed['isbn'] == book['isbn'] and borrowed['returned'] == True:
-                        data_unreturned = {
+                    
+                if borrowed['isbn'] == book['isbn'] and borrowed['returned'] == False:
+                        data_unreturned_books = {
                             'title': book['title'],
                             'isbn': borrowed['isbn'],
                             'borrowed_date': borrowed['borrowed_date'],
                             'return_date': borrowed['return_date'][:10],
                             'return_status': borrowed['returned']
                         }
-                        unreturned_books.append(data_unreturned)
+                        unreturned_books.append(data_unreturned_books)
 
             
 
-    # # Sorting orrowed books history (both return and unreturned) by the datetime (most recent first)
+    # # Sorting borrowed books history (both return and unreturned) by the datetime (most recent first)
     borrowed_books_data.sort(
         key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
         reverse=True
@@ -486,7 +487,7 @@ def adminDashboard():
 
     # borrowed_books_data.sort(key=lambda book: book['borrowed_date'])
         
-    print ('borrowed_book: ', borrowed_books_data)
+    print ('unreturned_books: ', unreturned_books)
 
     # # Sorting borrowed books (unreturned only) by the datetime (most recent first)
     unreturned_books.sort(
@@ -507,6 +508,55 @@ def adminDashboard():
                            active_page='adminDashboard',
                            borrowed_books_data = borrowed_books_data,
                            unreturned_books = unreturned_books                         
+                           )
+
+
+@app.route('/admin/borrowed_books', methods=['GET', 'POST'])
+@login_required
+def unreturned_books():
+
+    library_books = load_books(library)
+    library_users = load_users(library)
+
+    library_users = [user.to_dict() for user in library_users.values()]
+    library_books = [book.to_dict() for book in library_books.values()]
+
+    unreturned_books = []
+
+    for user in library_users:
+        for borrowed in user['borrowed_books']:
+            for book in library_books:
+                if borrowed['isbn'] == book['isbn'] and borrowed['returned'] == False:
+                        data_unreturned_books = {
+                            'name': user['name'],
+                            'user_id': user['user_id'],
+                            'title': book['title'],
+                            'isbn': borrowed['isbn'],
+                            'borrowed_date': borrowed['borrowed_date'],
+                            'return_date': borrowed['return_date'][:10],
+                        }
+                        unreturned_books.append(data_unreturned_books)
+        
+    # # Sorting borrowed books (unreturned only) by the datetime (most recent first)
+    unreturned_books.sort(
+        key=lambda book: datetime.strptime(book['borrowed_date'], '%d-%m-%Y %H:%M:%S'), 
+        reverse=True
+    )
+        
+    # Now converting to "time ago" format
+    for book in unreturned_books:
+        book['borrowed_date'] = time_ago(book['borrowed_date'])
+
+    
+
+
+
+    return render_template('admin/unreturned_books.html',
+                           admin_user = admin_user,
+                           library_users = library_users,
+                           library_books = library_books,
+                           active_page='unreturned_books',
+                           unreturned_books = unreturned_books 
                            )
 
 @app.route('/admin/add_books', methods=['GET', 'POST'])

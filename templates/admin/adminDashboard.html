@@ -114,12 +114,12 @@
 <div class="inner-right">
     <div class="inner-right-up">
             <div class="lend-request-div">
-                <a href="">
+                <a href="{{url_for('unreturned_books')}}">
                     <div class="borrowed-books">
                         <i class="icofont-address-book"></i>
                         <div class="x">
                             <h3>Borrowed <br>Books</h3>
-                            <p>0</p>
+                            <p>{{ unreturned_books | length }}</p>
                         </div>
                     </div>
                 </a>
