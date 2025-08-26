@@ -99,15 +99,9 @@
                                     <h4>Available Copies</h4>
                                     <p>{{ book.file_path }}</p>
                                 </div>
-                                <!-- <div class="borrow-btn">
-                                    {% if book.available_copies == 0 %}
-                                    <input type="button" value="Out of Stock" class="btn btn-disabled" disabled>
-                                    {% else %}
-                                    <a href="{{ url_for('borrow_books', isbn=book.isbn, user_id=user.user_id) }}">
-                                        <input type="button" value="Borrow Book" class="btn">
-                                    </a>
-                                    {% endif %}
-                                </div> -->
+                                <div class="read-btn-div">
+                                    <a href="{{ url_for('read_ebooks', isbn = book.isbn) }}" target="_blank" class="read_ebook_btn">Read ebook</a>
+                                </div>
                             </div>
                         </div>
                     </a>
