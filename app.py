@@ -1,7 +1,7 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm, ReturnBookForm, UpdateEbookForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm, ReturnBookForm, UpdateEbookForm, SearcheBookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary, EBook
 from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book, save_ebooks
@@ -430,6 +430,53 @@ def user_search_books():
                            search_made = search_made
                            )
 
+@app.route('/user/all_ebooks/', methods=['GET', 'POST'])
+@login_required
+def all_ebooks():
+    user = current_user
+    form = SearcheBookForm()
+    library_ebooks = load_ebooks(dglibrary)
+    library_ebooks = [ebook.to_dict() for ebook in library_ebooks.values()]
+
+    library_ebooks.sort(key=lambda ebook: ebook['title'])
+
+    search_made = False
+
+    user_name = user.name.split()
+    user_first_name = user_name[0]
+
+    searched_ebooks = []
+
+    if form.validate_on_submit():
+        title = form.title.data
+        searched_ebooks = dglibrary.search_ebooks(title)
+        search_made = True
+
+        for ebook in searched_ebooks:
+            print(ebook)
+
+
+
+    return render_template('user/all_ebooks.html', 
+                           library_ebooks = library_ebooks,
+                           search_made = search_made,
+                           searched_ebooks = searched_ebooks,
+                           form = form,
+                           user_first_name = user_first_name,
+                           active_page = 'all_ebooks',
+                           user = user
+                           )
+
+@app.route('/user/read_ebooks/<isbn>', methods=['GET', 'POST'])
+@login_required
+def read_ebooks(isbn):
+    load_ebooks(dglibrary)
+    ebook = dglibrary.read_ebook(isbn)
+    print('Read this: ', ebook)
+
+    return redirect(ebook.file_path)
+
+
 # Admin Features
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 @login_required
@@ -518,6 +565,7 @@ def adminDashboard():
 
 @app.route('/admin/borrowed_books', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def unreturned_books():
 
     library_books = load_books(library)
@@ -563,6 +611,8 @@ def unreturned_books():
                            active_page='unreturned_books',
                            unreturned_books = unreturned_books 
                            )
+
+
 
 @app.route('/admin/add_books', methods=['GET', 'POST'])
 @login_required

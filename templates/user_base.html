@@ -66,12 +66,14 @@
                             <p>Borrowed Books History</p>
                         </div>
                     </a>
-                    <div class="each-feature">
+                    <a href="{{ url_for('all_ebooks') }}" class="a-link">
+                    <div class="each-feature {{ 'active' if active_page == 'all_ebooks' else '' }}">
                         <div class="icon-div">
                             <i class="icofont-read-book"></i>
                         </div>
                         <p>Read eBooks</p>
                     </div>
+                    </a>
                     <a href="{{url_for('logout')}}" class="sign-out">
                         <div class="each-feature">
                             <div class="icon-div">

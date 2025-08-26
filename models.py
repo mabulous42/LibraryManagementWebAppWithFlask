@@ -336,7 +336,9 @@ class digitalLibrary(Library):
     def read_ebook(self, isbn):
         # Checks if the given `isbn` exists in the `ebooks` dictionary
         if isbn in self.ebooks:
+            ebook = self.ebooks[isbn]
             print(f"Opening eBook file at: {self.ebooks[isbn]}")
+            return ebook
         else:
             print("eBook not available.")
 
@@ -362,5 +364,12 @@ class digitalLibrary(Library):
             ebook.title = new_title
             ebook.author = new_author
             ebook.file_path = new_file_path
+
+    def search_ebooks(self, title):
+        result = [] # just incase there are more than one books matching the search
+        for ebook in self.ebooks.values():
+            if title.lower() in ebook.title.lower():
+                result.append(ebook) # this saves the matching book(s)
+        return result # this returned all the matching books
 
         

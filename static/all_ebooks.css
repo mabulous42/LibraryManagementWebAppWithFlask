@@ -1,0 +1,8 @@
+.read_ebook_btn {
+    background-color: greenyellow;
+    color: black;
+    font-family: inherit;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
