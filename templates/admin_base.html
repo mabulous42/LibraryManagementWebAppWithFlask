@@ -38,7 +38,23 @@
                             <div class="icon-div">
                                 <i class="icofont-plus-circle"></i>
                             </div>
-                            <p>Add Book</p>
+                            <p>Add Physical Book</p>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('add_ebooks') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'add_ebooks' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-plus-circle"></i>
+                            </div>
+                            <p>Add eBook</p>
+                        </div>
+                    </a>
+                    <a href="{{ url_for('manage_ebooks') }}" class="a-link">
+                        <div class="each-feature {{ 'active' if active_page == 'manage_ebooks' else '' }}">
+                            <div class="icon-div">
+                                <i class="icofont-notebook"></i>
+                            </div>
+                            <p>Manage eBook</p>
                         </div>
                     </a>
                     <a href="{{ url_for('manage_users') }}" class="a-link">

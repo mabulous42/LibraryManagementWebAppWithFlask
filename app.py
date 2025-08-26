@@ -1,7 +1,7 @@
 import json, os
 from numpy import random
 from flask import Flask, render_template, url_for, request, redirect, flash, abort
-from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm, ReturnBookForm
+from forms import SignupForm, LoginForm, AddBookForm, AddeBookForm, UpdateUserForm, UpdateBookForm, SearchUserForm, SearchBookForm, BorrowBookForm, ReturnBookForm, UpdateEbookForm
 from flask_bcrypt import Bcrypt
 from models import User, Book, Library, AdminUser, digitalLibrary, EBook
 from helpers import register_user, load_books, load_users, save_books, save_users, add_book, load_ebooks, delete_user, get_user_by_id, edit_user, remove_book, get_book_by_isbn, edit_book, search_users, search_books, borrow_book, time_ago, return_book, save_ebooks
@@ -837,17 +837,16 @@ def borrowed_books_history():
 @admin_required
 def add_ebooks():
     form = AddeBookForm()
-    admin_user = current_user
+
 
     if form.validate_on_submit():
         title = form.title.data
         author = form.author.data
         isbn = form.isbn.data
-        format = form.format.data
         file_path = form.file_path.data
 
         # creating and instance of class Book to add new book
-        new_ebook = EBook(title, author, isbn, format, file_path)
+        new_ebook = EBook(title, author, isbn, file_path)
         
 
         # adding a new book, using the add_book function from helper.py
@@ -864,7 +863,68 @@ def add_ebooks():
 
     return render_template("admin/add_ebook.html", 
                            form=form,
+                           admin_user = admin_user,
+                           active_page = 'add_ebooks'
+                           )
+
+@app.route('/admin/manage_ebooks', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def manage_ebooks():
+    library_ebooks = load_ebooks(dglibrary)
+    library_ebooks = [ebook.to_dict() for ebook in library_ebooks.values()]
+
+    print(library_ebooks)
+
+
+
+    return render_template('admin/manage_ebooks.html', 
+                           library_ebooks = library_ebooks,
+                           active_page = 'manage_ebooks',
                            admin_user = admin_user
+                           )
+
+@app.route('/admin/remove_ebook/<isbn>')
+@login_required
+@admin_required
+def remove_ebooks(isbn):
+    load_ebooks(dglibrary)
+    dglibrary.remove_ebook(isbn)
+    save_ebooks(dglibrary)
+
+    return redirect(url_for('manage_ebooks'))
+
+
+@app.route('/admin/edit_ebooks/<isbn>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_ebooks(isbn):
+    load_ebooks(dglibrary)
+    ebook = dglibrary.get_ebook_by_isbn(isbn)
+    print(ebook)
+
+    form = UpdateEbookForm()
+
+    if form.validate_on_submit():
+
+        new_isbn = form.isbn.data
+        new_title = form.title.data
+        new_author = form.author.data
+        new_file_path = form.file_path.data
+
+        dglibrary.edit_ebook(ebook.isbn, new_isbn, new_title, new_author, new_file_path)
+
+        save_ebooks(dglibrary)
+
+        flash('eBook Details Updated successfully!', 'success')
+        return redirect(url_for('manage_ebooks'))
+    flash('eBook Details Already Exist', 'fail')
+
+
+    return render_template('admin/edit_ebook.html',
+                           admin_user = admin_user,
+                           form = form,
+                           ebook = ebook
                            )
 
 

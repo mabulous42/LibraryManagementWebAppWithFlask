@@ -1,18 +1,30 @@
 {
-    "1625347829384": {
-        "title": "Don't Let Him In",
-        "author": "Lisa Jewell",
-        "isbn": "1625347829384",
-        "format": "pdf",
-        "file_path": "https://libro.eb20.net/Reader/rdr.aspx?b=211442756",
-        "added_at": "2025-08-21 13:52:03"
+    "1235678456789": {
+        "title": "The Salt Path",
+        "author": "Raynor Winn",
+        "isbn": "1235678456789",
+        "file_path": "https://www.amigoreader.com/reader/fulfill.aspx?b=13146360",
+        "added_at": "2025-08-26 15:42:31"
     },
-    "1625635473920": {
-        "title": "Project Hail Mary",
-        "author": "Andy Weir",
-        "isbn": "1625635473920",
-        "format": "pdf",
-        "file_path": "https://libro.eb20.net/Reader/rdr.aspx?b=210098299",
-        "added_at": "2025-08-21 14:01:08"
+    "6383864930940": {
+        "title": "Four Letters Of Love",
+        "author": "Niall Williams",
+        "isbn": "6383864930940",
+        "file_path": "https://www.amigoreader.com/reader/fulfill.aspx?b=4806752",
+        "added_at": "2025-08-26 15:43:07"
+    },
+    "5467892309876": {
+        "title": "The Penguin Lessons",
+        "author": "Tom Michell",
+        "isbn": "5467892309876",
+        "file_path": "https://www.amigoreader.com/reader/fulfill.aspx?b=13146139",
+        "added_at": "2025-08-26 15:48:44"
+    },
+    "2126700934567": {
+        "title": "Conclave",
+        "author": "Robert Harris",
+        "isbn": "2126700934567",
+        "file_path": "https://www.amigoreader.com/reader/fulfill.aspx?b=11521114",
+        "added_at": "2025-08-26 15:50:07"
     }
 }

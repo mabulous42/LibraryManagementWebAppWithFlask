@@ -67,6 +67,7 @@ main {
     /* background-color: red; */
     width: 90%;
     padding: 15px 0;
+    overflow: auto;
 }
 
 .each-feature.active,

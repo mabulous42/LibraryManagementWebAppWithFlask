@@ -98,6 +98,13 @@
                 "borrowed_date": "14-08-2025 23:41:47",
                 "return_date": "28-08-2025 23:41:47",
                 "returned": false
+            },
+            {
+                "isbn": "9780061122415",
+                "borrowed_date": "21-08-2025 16:07:09",
+                "return_date": "04-09-2025 16:07:09",
+                "returned": true,
+                "actual_return_date": "21-08-2025 16:07:48"
             }
         ],
         "registered_at": "2025-07-06 23:10:52"

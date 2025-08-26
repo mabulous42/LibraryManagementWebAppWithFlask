@@ -1,0 +1,68 @@
+{% extends "admin_base.html" %}
+
+
+{% block head %}
+
+
+{% block other_css %}
+<link rel="stylesheet" href="{{url_for("static", filename="admin_base.css" )}}">
+<link rel="stylesheet" href="{{url_for("static", filename="manage_books.css" )}}">
+{% endblock other_css %}
+
+{# Page Title #}
+{% block title %}
+<title>Manage eBooks</title>
+{% endblock title %}
+
+{% endblock head %}
+
+
+{# admin page title #}
+{% block page_head %}
+<div class="navbar-text-div">
+    <h1>All eBooks</h1>
+</div>
+{% endblock page_head %}
+
+{% block content %}
+<div class="inner-left">
+    <div class="display-all-books-div">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>ISBN</th>
+                    <th>TITLE</th>
+                    <th>AUTHOR</th>
+                    <th>URL</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ebook in library_ebooks %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ ebook.isbn }}</td>
+                    <td>{{ ebook.title }}</td>
+                    <td>{{ ebook.author }}</td>
+                    <td>{{ ebook.file_path[:20] }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_ebooks', isbn = ebook.isbn) }}" class="custom-btn custom-btn-primary">Edit eBook</a>
+                        <a href="{{ url_for('remove_ebooks', isbn = ebook.isbn) }}" class="custom-btn custom-btn-danger">Remove eBook</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="inner-right">
+
+    <div class="inner-right-down">
+       <div class="image-banner-div">
+            <img src="{{url_for("static", filename="images/creative-poster-collage-young-woman-holding-book-miniature-suspender-businesswoman-time-to-read-bookstore-sales-adv.webp" )}}" alt="Library Logo"
+                class="banner">
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -133,6 +133,8 @@ class Library:
         # condition to check if a different book with the same isbn is not present in the list
         if new_book.isbn in self.books:
             print('Ooooops! Book with this ISBN already exist')
+        elif new_book.isbn in self.ebooks:
+            print('Ooooops! Book with this ISBN already exist')
         else:
             self.books[new_book.isbn] = new_book
             print(f"Book with ISBN: {new_book.isbn} has been addedd successfully.")
@@ -286,23 +288,21 @@ class Library:
                 print(user)
 
 class EBook:
-    def __init__(self, title, author, isbn, format, file_path):
+    def __init__(self, title, author, isbn, file_path):
         self.title = title
         self.author = author
         self.isbn = isbn
-        self.format = format
         self.file_path = file_path
         self.added_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def __str__(self):
-        return f"EBook: '{self.title}' by {self.author} | Format: {self.format} | ISBN: {self.isbn}"
+        return f"EBook: '{self.title}' by {self.author} | ISBN: {self.isbn}"
 
     def to_dict(self):
         return {
             "title": self.title,
             "author": self.author,
             "isbn": self.isbn,
-            "format": self.format,
             "file_path": self.file_path,
             "added_at": self.added_at
         }
@@ -313,7 +313,6 @@ class EBook:
             title=data["title"],
             author=data["author"],
             isbn=data["isbn"],
-            format=data["format"],
             file_path=data["file_path"]
         )
         ebook.added_at = data.get("added_at", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -326,7 +325,7 @@ class digitalLibrary(Library):
         self.ebooks = {} # adding new attribute to the digital library
         
     # digitalLibrary methods
-    # additional methods to add ebook to the diitalLibrary
+    # additional methods to add ebook to the digitalLibrary
     def add_ebook(self, ebook):
         if ebook.isbn in self.ebooks:
             print(f"EBook with ISBN {ebook.isbn} already exists.")
@@ -340,5 +339,28 @@ class digitalLibrary(Library):
             print(f"Opening eBook file at: {self.ebooks[isbn]}")
         else:
             print("eBook not available.")
+
+    # methods to remove book using their isbn from the dictionary of books
+    def remove_ebook(self, isbn):
+        if isbn in self.ebooks:
+            self.ebooks.pop(isbn)
+            print(f"eBook with ISBN: {isbn} has been removed successfully.")
+        else:
+            print(f"eBook with ISBN: {isbn} was not found in the book collection")
+
+    def get_ebook_by_isbn(self, isbn):
+        if isbn in self.ebooks:
+            ebook = self.ebooks[isbn]
+            return ebook
+        else:
+            return "eBook not found"
+        
+    def edit_ebook(self, isbn, new_isbn, new_title, new_author, new_file_path):
+        if isbn in self.ebooks:
+            ebook = self.ebooks[isbn]
+            ebook.isbn = new_isbn
+            ebook.title = new_title
+            ebook.author = new_author
+            ebook.file_path = new_file_path
 
         

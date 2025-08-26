@@ -27,8 +27,8 @@
         "title": "Akin Goes to School",
         "author": "Dele Giwa",
         "isbn": "3745890123467",
-        "available_copies": 5,
-        "total_copies": 7,
+        "available_copies": 7,
+        "total_copies": 9,
         "added_at": "2025-07-18 21:22:21"
     },
     "9780061120084": {
@@ -62,5 +62,13 @@
         "available_copies": 5,
         "total_copies": 6,
         "added_at": "2025-08-02 19:00:30"
+    },
+    "1625347829384": {
+        "title": "Vampire",
+        "author": "Allen",
+        "isbn": "1625347829384",
+        "available_copies": 5,
+        "total_copies": 5,
+        "added_at": "2025-08-21 18:33:20"
     }
 }

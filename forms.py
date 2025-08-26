@@ -59,11 +59,21 @@ class AddeBookForm(FlaskForm):
                            render_kw={"placeholder": "Enter the eBook Author"})
     isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
                            render_kw={"placeholder": "Enter the eBook 13-digits ISBN"})
-    format = StringField(validators=[InputRequired()],
-                           render_kw={"placeholder": "Enter the eBook format"})
     file_path = StringField(validators=[InputRequired()],
                            render_kw={"placeholder": "Enter the eBook file path"})
     submit = SubmitField('Add eBook')
+
+
+class UpdateEbookForm(FlaskForm):
+    title = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook Title"})
+    author = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook Author"})
+    isbn = StringField(validators=[InputRequired(), Length(min=13, max=13)],
+                           render_kw={"placeholder": "Enter the eBook 13-digits ISBN"})
+    file_path = StringField(validators=[InputRequired()],
+                           render_kw={"placeholder": "Enter the eBook file path"})
+    submit = SubmitField('Update eBook')
 
 class UpdateUserForm(FlaskForm):
     firstName = StringField(validators=[InputRequired(), Length(min=2, max=20)],
